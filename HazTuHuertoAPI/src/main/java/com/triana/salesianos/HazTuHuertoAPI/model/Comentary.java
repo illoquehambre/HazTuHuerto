@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Comentary {
 
     @Id@GeneratedValue
-    private Long id;//Hay que cambiarlo por un UUID
+    private Long id;
 
     @ManyToOne
     private Post post;
