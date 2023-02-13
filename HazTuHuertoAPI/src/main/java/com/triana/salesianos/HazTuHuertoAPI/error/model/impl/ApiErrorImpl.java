@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @Builder
 @NoArgsConstructor @AllArgsConstructor
-public class    ApiErrorImpl implements ApiError {
+public class ApiErrorImpl implements ApiError {
 
     private HttpStatus status;
     private String message;

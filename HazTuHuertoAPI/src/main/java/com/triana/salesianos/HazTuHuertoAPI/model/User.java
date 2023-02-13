@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Table(name="user_entity")
 @EntityListeners(AuditingEntityListener.class)
+@Entity
 @Getter@Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,7 +41,7 @@ public class User implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private String fullName, username, password, verifyPassword;
+    private String fullName, username, password;
 
     private String avatar;
 
@@ -53,7 +54,7 @@ public class User implements UserDetails {
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi
     private List<Post> posts;
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Unidi
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Unidi???
     private List<Post> favPosts;
 
     @OneToMany

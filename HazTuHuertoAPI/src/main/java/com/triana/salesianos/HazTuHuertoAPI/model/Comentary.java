@@ -1,10 +1,12 @@
 package com.triana.salesianos.HazTuHuertoAPI.model;
 
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 @Entity(name="Comentary")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class Comentary {
     @ManyToOne
     private Post post;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     //Plantear función de likes

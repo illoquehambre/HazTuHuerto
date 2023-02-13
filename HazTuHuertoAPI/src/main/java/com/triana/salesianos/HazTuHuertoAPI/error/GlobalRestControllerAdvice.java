@@ -90,12 +90,13 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
                                 .message(message)
                                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                                 .subErrors(subErrors.stream()
-                                            .map(ApiValidationSubError::fromObjectError)
-                                            .collect(Collectors.toList())
+                                        .map(ApiValidationSubError::fromObjectError)
+                                        .collect(Collectors.toList())
                                 )
                                 .build()
                 );
 
     }
+
 
 }
