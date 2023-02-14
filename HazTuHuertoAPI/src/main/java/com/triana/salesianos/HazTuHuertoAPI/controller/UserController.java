@@ -129,4 +129,18 @@ public class UserController {
         return null;
     }
 
+    //VerUnUsuarioPorID(GET by Id)
+    //VerTodosLosUsuarios
+    //VerTodasLasPreguntasDETodosLosUsuarios
+    //FiltraPreguntasPorEtiquetas(SearchCriteria??)
+    //DarLike/Dislike pregunta/respuesta(4)
+    //VerTodasLasPreguntasDEUnUsuario(GET)
+    //VerTodasLasREspuestasDEUnUsuario(GET)
+    //Publicas pregunta (POST)
+    //EliminarPregunta(DELETE)
+    //ResponderPregunta(POST)
+    //EliminarRespuesta(DELETE)
+    //VerTodasLasRespuestasDeUnaPregunta
+
+
 }

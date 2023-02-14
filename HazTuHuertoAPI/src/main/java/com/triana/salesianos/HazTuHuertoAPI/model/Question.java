@@ -13,7 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Post {
+public class Question {
+
+    private String title, content, urlImg;
 
     @Id@GeneratedValue
     private Long id;//Hay que cambiarlo por un UUID
@@ -22,11 +24,14 @@ public class Post {
     @JoinColumn(name = "owner_id", foreignKey = @ForeignKey(name= "FK_USER_POST"))
     private User publisher;
 
-    @OneToMany
-    private List<User> likes;
+    @ManyToMany
+    private List<User> likes;//unidi, ¿bajo acoplamiento?
+    @ManyToMany
+    private List<User> dislikes;//unidi, ¿bajo acoplamiento?
+
 
     @OneToMany
-    private  List<Comentary> comentaries;
+    private  List<Answer> answers;
 
 
 }

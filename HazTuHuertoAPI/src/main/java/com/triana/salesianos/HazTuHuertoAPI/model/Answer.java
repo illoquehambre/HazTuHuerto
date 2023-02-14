@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name="Comentary")
 @EntityListeners(AuditingEntityListener.class)
@@ -12,17 +13,22 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Comentary {
+public class Answer {
+
+
+    private String content, urlImg;
 
     @Id@GeneratedValue
     private Long id;
 
     @ManyToOne
-    private Post post;
+    private Question question;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    //Plantear función de likes
-    //Plantear sobre la posibilidad de comentar en un comentario
+    @ManyToMany
+    private List<User> likes;//unidi, ¿bajo acoplamiento?
+    @ManyToMany
+    private List<User> dislikes;//unidi, ¿bajo acoplamiento?
 }

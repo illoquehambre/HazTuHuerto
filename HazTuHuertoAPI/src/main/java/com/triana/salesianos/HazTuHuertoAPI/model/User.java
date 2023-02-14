@@ -41,10 +41,9 @@ public class User implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private String fullName, username, password;
+    private String fullName, username, password,avatar, email;
 
-    private String avatar;
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -52,28 +51,17 @@ public class User implements UserDetails {
     private LocalDateTime resgistrationDate;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi
-    private List<Post> posts;
+    private List<Question> publishedQuestions;
+
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi
+    private List<Answer> publishedAnswers;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Unidi???
-    private List<Post> favPosts;
+    private List<Question> favPosts;//Lo vamos a dejar por ahora
 
-    @OneToMany
-    private List<Comentary> comentaries;
+    //Escalable conforme recibe likes en preguntas o respuestas.
+    private int reputation;
 
-    @ElementCollection
-    private List<User> followers;
-    @ElementCollection
-    private List<User> follows;
-
-
-    public void toFollow(User userToFollow){
-        if(!userToFollow.followers.contains(this)&&!this.follows.contains(userToFollow)){
-            userToFollow.followers.add(this);
-            this.follows.add(userToFollow);
-        }else{
-            //Aqui se lanzaría una excepcion pa indidcar que ya lo sigues
-        }
-    }
 
 
     @Builder.Default
