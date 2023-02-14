@@ -1,6 +1,7 @@
 package com.triana.salesianos.HazTuHuertoAPI.controller;
 
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.*;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.access.JwtProvider;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshToken;
@@ -107,43 +108,21 @@ public class UserController {
     @PutMapping("/user/changePassword")
     public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
                                                        @AuthenticationPrincipal User loggedUser) {
+        //Esto debería funcionar pero hay que revisarlo porque no me fio un carajo
+        User modified = userService.editPassword(loggedUser.getId(), changePasswordRequest);
 
-        // Este código es mejorable.
-        // La validación de la contraseña nueva se puede hacer con un validador.
-        // La gestión de errores se puede hacer con excepciones propias
-        try {
-            if (userService.passwordMatch(loggedUser, changePasswordRequest.getOldPassword())) {
-                Optional<User> modified = userService.editPassword(loggedUser.getId(), changePasswordRequest.getNewPassword());
-                if (modified.isPresent())
-                    return ResponseEntity.ok(UserResponse.fromUser(modified.get()));
-            } else {
-                // Lo ideal es que esto se gestionara de forma centralizada
-                // Se puede ver cómo hacerlo en la formación sobre Validación con Spring Boot
-                // y la formación sobre Gestión de Errores con Spring Boot
-                throw new RuntimeException();
-            }
-        } catch (RuntimeException ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password Data Error");
-        }
-
-        return null;
+        return ResponseEntity.ok(UserResponse.fromUser(modified));
     }
 
 
     //VerTodosLosUsuarios
     @GetMapping("/user")
-    public ResponseEntity <List<UserResponse>> findAll() {
+    public List<UserResponse> findAll() {
 
-        List<UserResponse> userResponseList = new ArrayList<>();
-
-        userService.findAll().forEach(aportacion -> {
-            userResponseList.add(UserResponse.fromUser(aportacion));
-        });
-
-        if (userResponseList.isEmpty())
-            return ResponseEntity.notFound().build();
-        else
-            return ResponseEntity.ok(userResponseList);
+        return userService.findAll()
+                .stream()
+                .map(UserResponse::fromUser)
+                .toList();
 
     }
     //VerUnUsuarioPorID(GET by Id)

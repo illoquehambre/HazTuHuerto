@@ -2,16 +2,18 @@ package com.triana.salesianos.HazTuHuertoAPI.service;
 
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.ChangePasswordRequest;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.CreateUserRequest;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.EditUser;
 import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import javax.persistence.EntityNotFoundException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -41,40 +43,53 @@ public class UserService {
     }
 
     public List<User> findAll() {
+
+        List<User> result = userRepository.findAll();
+
+        if (result.isEmpty())
+            throw new EntityNotFoundException("No users with this search criteria");
+
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(UUID id) {
-        return userRepository.findById(id);
+    public User findById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No user with id: " + id));
+
     }
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findFirstByUsername(username);
     }
 
-    public Optional<User> edit(User user) {
+    public User edit(UUID id, EditUser editUser) {
 
         // El username no se puede editar
         // La contraseña se edita en otro método
 
-        return userRepository.findById(user.getId())
+        return userRepository.findById(id)
                 .map(u -> {
-                    u.setAvatar(user.getAvatar());
-                    u.setFullName(user.getFullName());
+                    u.setAvatar(editUser.getAvatar());
+                    u.setFullName(editUser.getFullName());
                     return userRepository.save(u);
-                }).or(() -> Optional.empty());
+                }).orElseThrow(() ->new EntityNotFoundException("No user with id: " + id));
 
     }
 
-    public Optional<User> editPassword(UUID userId, String newPassword) {
+    public User editPassword(UUID userId, ChangePasswordRequest changePassword) {
 
         // Aquí no se realizan comprobaciones de seguridad. Tan solo se modifica
 
         return userRepository.findById(userId)
                 .map(u -> {
-                    u.setPassword(passwordEncoder.encode(newPassword));
-                    return userRepository.save(u);
-                }).or(() -> Optional.empty());
+                    if(Objects.equals(u.getPassword(), passwordEncoder.encode(changePassword.getNewPassword()))){
+                        u.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+                        return userRepository.save(u);
+                    }else{
+                        //Esto debería ser una excepción personalizada indicando que als contraseñas no cionciden
+                        throw new EntityNotFoundException("No user with id: " + userId);
+                    }
+                }).orElseThrow(() ->new EntityNotFoundException("No user with id: " + userId));
 
     }
 

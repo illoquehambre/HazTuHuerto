@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
+public class AnswerService {
 }
