@@ -148,7 +148,7 @@ public class UserController {
     }
     //VerUnUsuarioPorID(GET by Id)
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{name}")
     public ResponseEntity <UserDetails> findUserByName (@PathVariable String name) {
 
         Optional<User> user = userService.findByUsername(name);
@@ -159,6 +159,8 @@ public class UserController {
             return ResponseEntity.ok().body(UserDetails.fromUser(user.get()));
 
     }
+
+    //LogOut
 
 
 
