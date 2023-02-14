@@ -9,6 +9,7 @@ import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenReq
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,13 +17,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,7 +43,7 @@ public class UserController {
     // Más adelante podemos manejar la seguridad de acceso a esta petición
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<UserResponse> createUserWithAdminRole(@RequestBody CreateUserRequest createUserRequest) {
+    public ResponseEntity<UserResponse> createUserWithAdminRole(@Valid   @RequestBody CreateUserRequest createUserRequest) {
         User user = userService.createUserWithAdminRole(createUserRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(UserResponse.fromUser(user));
@@ -129,18 +129,41 @@ public class UserController {
         return null;
     }
 
-    //VerUnUsuarioPorID(GET by Id)
+
     //VerTodosLosUsuarios
-    //VerTodasLasPreguntasDETodosLosUsuarios
-    //FiltraPreguntasPorEtiquetas(SearchCriteria??)
-    //DarLike/Dislike pregunta/respuesta(4)
-    //VerTodasLasPreguntasDEUnUsuario(GET)
-    //VerTodasLasREspuestasDEUnUsuario(GET)
-    //Publicas pregunta (POST)
-    //EliminarPregunta(DELETE)
-    //ResponderPregunta(POST)
-    //EliminarRespuesta(DELETE)
-    //VerTodasLasRespuestasDeUnaPregunta
+    @GetMapping("/user")
+    public ResponseEntity <List<UserResponse>> findAll() {
+
+        List<UserResponse> userResponseList = new ArrayList<>();
+
+        userService.findAll().forEach(aportacion -> {
+            userResponseList.add(UserResponse.fromUser(aportacion));
+        });
+
+        if (userResponseList.isEmpty())
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.ok(userResponseList);
+
+    }
+    //VerUnUsuarioPorID(GET by Id)
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity <UserDetails> findUserByName (@PathVariable String name) {
+
+        Optional<User> user = userService.findByUsername(name);
+
+        if (user.isEmpty())
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.ok().body(UserDetails.fromUser(user.get()));
+
+    }
+
+
+
+
+
 
 
 }
