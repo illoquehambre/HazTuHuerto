@@ -1,7 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.controller;
 
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.*;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.access.JwtProvider;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshToken;
@@ -10,7 +9,6 @@ import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenReq
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,12 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -128,18 +123,13 @@ public class UserController {
     //VerUnUsuarioPorID(GET by Id)
 
     @GetMapping("/user/{name}")
-    public ResponseEntity <UserDetails> findUserByName (@PathVariable String name) {
+    public UserDetailsDto findUserByName (@PathVariable String name) {
 
-        Optional<User> user = userService.findByUsername(name);
-
-        if (user.isEmpty())
-            return ResponseEntity.notFound().build();
-        else
-            return ResponseEntity.ok().body(UserDetails.fromUser(user.get()));
+        return UserDetailsDto.fromUser(userService.findByUsername(name));
 
     }
 
-    //LogOut
+    //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)
 
 
 

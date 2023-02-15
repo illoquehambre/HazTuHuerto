@@ -7,20 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class UserDetails extends UserResponse{
+public class UserDetailsDto extends UserResponse{
 
 
     private List<Question> publishedQuestions;
@@ -35,9 +28,9 @@ public class UserDetails extends UserResponse{
 
 
 
-    public static UserDetails fromUser(User user) {
+    public static UserDetailsDto fromUser(User user) {
 
-        return UserDetails.builder()
+        return UserDetailsDto.builder()
                 .id(user.getId().toString())
                 .username(user.getUsername())
                 .avatar(user.getAvatar())

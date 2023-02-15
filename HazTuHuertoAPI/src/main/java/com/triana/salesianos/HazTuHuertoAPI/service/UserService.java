@@ -58,8 +58,9 @@ public class UserService {
 
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findFirstByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findFirstByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("No user with name: " + username));
     }
 
     public User edit(UUID id, EditUser editUser) {

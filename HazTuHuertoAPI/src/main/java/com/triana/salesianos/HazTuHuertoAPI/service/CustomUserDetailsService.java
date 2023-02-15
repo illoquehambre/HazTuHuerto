@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
-
+//Pa que sirve esto??
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userService.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("No user with username: " +  username));
+        return userService.findByUsername(username);
     }
 }

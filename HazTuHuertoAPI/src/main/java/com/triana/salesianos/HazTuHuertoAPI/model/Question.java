@@ -31,9 +31,6 @@ public class Question {
 
     @ManyToMany
     private List<User> likes;//unidi, ¿bajo acoplamiento?
-    @ManyToMany
-    private List<User> dislikes;//unidi, ¿bajo acoplamiento?
-
 
     @OneToMany
     private  List<Answer> answers;

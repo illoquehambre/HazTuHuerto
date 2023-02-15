@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface QuestionRepository extends JpaRepository <Question, Long> {
 
-    List<Question> findAllByPublisher(String publisher);
+    List<Question> findAllByPublisherUsername(String publisher);
 }
