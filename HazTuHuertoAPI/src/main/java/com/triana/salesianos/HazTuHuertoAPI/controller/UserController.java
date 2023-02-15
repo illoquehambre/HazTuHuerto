@@ -44,7 +44,7 @@ public class UserController {
     // Más adelante podemos manejar la seguridad de acceso a esta petición
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<UserResponse> createUserWithAdminRole(@Valid   @RequestBody CreateUserRequest createUserRequest) {
+    public ResponseEntity<UserResponse> createUserWithAdminRole(@Valid @RequestBody CreateUserRequest createUserRequest) {
         User user = userService.createUserWithAdminRole(createUserRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(UserResponse.fromUser(user));
