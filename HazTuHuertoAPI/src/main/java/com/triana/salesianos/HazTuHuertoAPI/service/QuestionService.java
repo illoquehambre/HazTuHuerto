@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.service;
 
+import com.triana.salesianos.HazTuHuertoAPI.model.Answer;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.CreateQuestion;
@@ -61,5 +62,10 @@ public class QuestionService {
         // Prevenimos errores al intentar borrar algo que no existe
         if (questionRepository.existsById(id))
             questionRepository.deleteById(id);
+    }
+
+    public void addAnswer(Question question, Answer answer){
+        question.getAnswers().add(answer);
+        questionRepository.save(question);
     }
 }

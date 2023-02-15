@@ -63,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
 
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);//¿¿Qué hace esta linea??
 
         } catch (JwtTokenException ex) {
             log.info("Authentication error using token JWT: " + ex.getMessage());

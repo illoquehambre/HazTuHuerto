@@ -47,7 +47,7 @@ public class User implements UserDetails {
     private LocalDate birthDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime resgistrationDate;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi

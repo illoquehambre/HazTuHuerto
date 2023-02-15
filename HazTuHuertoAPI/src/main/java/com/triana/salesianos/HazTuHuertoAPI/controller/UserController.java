@@ -128,7 +128,7 @@ public class UserController {
         return UserDetailsDto.fromUser(userService.findByUsername(name));
 
     }
-
+    //Modifcar datos usuario (PUT)
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)
 
 

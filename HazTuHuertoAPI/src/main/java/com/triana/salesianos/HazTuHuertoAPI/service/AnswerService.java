@@ -61,12 +61,13 @@ public class AnswerService {
                 Answer.builder()
                         .content(newAnswer.getContent())
                         .urlImg(newAnswer.getUrlImg())
-                        .createdAt(LocalDateTime.now())
                         .publisher(user)
                         .question(question)
                         .build());
 
     }
+
+
 
     public void deleteById(Long id) {
         // Prevenimos errores al intentar borrar algo que no existe

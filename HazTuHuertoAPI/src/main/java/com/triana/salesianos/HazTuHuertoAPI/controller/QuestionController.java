@@ -37,7 +37,7 @@ public class QuestionController {
     }
 
     //VerTodasLasPreguntasDEUnUsuario(GET)
-    @GetMapping("/question/{userName}")
+    @GetMapping("/question/user/{userName}")
     public List<QuestionResponse> findQuestListByUser(@PathVariable String userName) {
 
             return questionService.findByUserName(userName)

@@ -5,6 +5,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.Answer;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class AnswerResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     protected LocalDateTime createdAt;
 
-    private User publisher;
+    private UserResponse publisher;
     //Esto será calculable entre likes y dislikes de alguna manera
     private Question question;
 
@@ -32,7 +33,7 @@ public class AnswerResponse {
         return AnswerResponse.builder()
                 .id(answer.getId().toString())
                 .content(answer.getContent())
-                .publisher(answer.getPublisher())
+                .publisher(UserResponse.fromUser(answer.getPublisher()))
                 .createdAt(answer.getCreatedAt())
                 .question(answer.getQuestion())
                 .build();

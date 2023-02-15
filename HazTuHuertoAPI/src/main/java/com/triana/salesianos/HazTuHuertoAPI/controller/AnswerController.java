@@ -34,7 +34,7 @@ public class AnswerController {
 
     //VerTodasLasREspuestasDEUnUsuario(GET)
 
-    @GetMapping("/answer/{name}")
+    @GetMapping("/answer/user/{name}")
     public List<AnswerResponse> findByuserName(@PathVariable String name) {
 
         return answerService.findAllByUserName(name)
@@ -45,12 +45,12 @@ public class AnswerController {
     }
 
     //ResponderPregunta(POST)
-    @PostMapping("/answer/question/{id}")
+    @PostMapping("/answer/question/{questId}")
     public ResponseEntity<AnswerResponse> register(@Valid @RequestBody CreateAnswer newAnswer,
-                                                    @AuthenticationPrincipal User user, @PathVariable Long id){
-        Question quest = questionService.findById(id);
+                                                    @AuthenticationPrincipal User user, @PathVariable Long questId){
+        Question quest = questionService.findById(questId);
         Answer created = answerService.save(newAnswer, user, quest);
-
+        questionService.addAnswer(quest, created);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -77,7 +77,7 @@ public class AnswerController {
 
     //EliminarRespuesta(DELETE)
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/answer/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         answerService.deleteById(id);
 
