@@ -38,6 +38,15 @@ public class AnswerService {
 
         return answerRepository.findAll();
     }
+    public List<Answer> findAllByUserName(String name) {
+
+        List<Answer> result = answerRepository.findAllByPublisherUsername(name);
+
+        if (result.isEmpty())
+            throw new EntityNotFoundException("No questions with this search criteria");
+
+        return answerRepository.findAll();
+    }
 
 
     public Answer findById(Long id) {

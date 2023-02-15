@@ -26,18 +26,18 @@ import java.util.List;
 public class AnswerController {
 
 
-    //VerTodasLasREspuestasDEUnUsuario(GET)
+
 
     private final QuestionService questionService;
     private final UserService userService;
     private final AnswerService answerService;
 
-    //VerTodasLasPreguntasDETodosLosUsuarios
+    //VerTodasLasREspuestasDEUnUsuario(GET)
 
-    @GetMapping("/answer")
-    public List<AnswerResponse> findAll() {
+    @GetMapping("/answer/{name}")
+    public List<AnswerResponse> findByuserName(@PathVariable String name) {
 
-        return answerService.findAll()
+        return answerService.findAllByUserName(name)
                 .stream()
                 .map(AnswerResponse::fromAnswer)
                 .toList();
