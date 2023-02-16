@@ -61,9 +61,9 @@ public class UserService {
     }
 
     public PageDto<UserResponse> search(List<SearchCriteria> params, Pageable pageable) {
-        UserSpecificationBuilder personSpecificationBuilder =
+        UserSpecificationBuilder userSpecificationBuilder =
                 new UserSpecificationBuilder(params);
-        Specification<User> spec =  personSpecificationBuilder.build();
+        Specification<User> spec =  userSpecificationBuilder.build();
 
         Page<UserResponse> pageUserResponse = userRepository.findAll(spec, pageable).map(UserResponse::fromUser);
         if(pageUserResponse.isEmpty())

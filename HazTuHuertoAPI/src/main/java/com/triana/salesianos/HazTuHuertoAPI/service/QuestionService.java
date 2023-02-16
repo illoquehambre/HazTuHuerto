@@ -3,12 +3,21 @@ package com.triana.salesianos.HazTuHuertoAPI.service;
 import com.triana.salesianos.HazTuHuertoAPI.model.Answer;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.CreateQuestion;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.UserResponse;
 import com.triana.salesianos.HazTuHuertoAPI.repository.QuestionRepository;
 import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
+import com.triana.salesianos.HazTuHuertoAPI.search.spec.QuestionSpecificationBuilder;
+import com.triana.salesianos.HazTuHuertoAPI.search.spec.UserSpecificationBuilder;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +62,16 @@ public class QuestionService {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No user with id: " + id));
 
+    }
+    public PageDto<QuestionResponse> search(List<SearchCriteria> params, Pageable pageable) {
+        QuestionSpecificationBuilder questionSpecificationBuilder =
+                new QuestionSpecificationBuilder(params);
+        Specification<Question> spec =  questionSpecificationBuilder.build();
+
+        Page<QuestionResponse> pageQuestionResponse = questionRepository.findAll(spec, pageable).map(QuestionResponse::fromQuestion);
+        if(pageQuestionResponse.isEmpty())
+            throw new EntityNotFoundException("No questions with this search criteria");
+        return new PageDto<>(pageQuestionResponse);
     }
 
     public Question save(CreateQuestion newQuest, User user) {

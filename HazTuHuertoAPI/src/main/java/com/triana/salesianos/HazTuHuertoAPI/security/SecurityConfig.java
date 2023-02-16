@@ -88,8 +88,11 @@ public class SecurityConfig {
                                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .and()
                                 .authorizeRequests()
-                                .antMatchers("/note/**").hasRole("USER")
+                                .antMatchers("/question/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/answer/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/auth/register/admin").hasRole("ADMIN")
+                                .antMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated();
 
 

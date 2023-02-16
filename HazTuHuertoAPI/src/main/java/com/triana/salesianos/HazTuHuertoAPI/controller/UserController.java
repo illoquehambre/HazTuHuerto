@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -136,6 +137,15 @@ public class UserController {
 
     }
     //Modifcar datos usuario (PUT) (profile)
+
+    @PutMapping("/user/{id}")
+    public UserResponse editDetails(@PathVariable UUID id, @Valid @RequestBody EditUser editUser) {
+
+        User edited = userService.edit(id, editUser);
+
+        return UserResponse.fromUser(edited);
+
+    }
 
     //Eliminar un usuario (Tiene sentido eliminar un usuario??)En vez de eliminarlo podemos desabilitar la cuenta para el usuario
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)

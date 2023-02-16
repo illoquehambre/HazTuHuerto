@@ -2,13 +2,18 @@ package com.triana.salesianos.HazTuHuertoAPI.controller;
 
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.CreateQuestion;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
 import com.triana.salesianos.HazTuHuertoAPI.repository.QuestionRepository;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.service.QuestionService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -30,17 +35,17 @@ public class QuestionController {
     //VerTodasLasPreguntasDETodosLosUsuarios
 
     @GetMapping("/question")
-    public List<QuestionResponse> findAll() {
+    public PageDto<QuestionResponse> findAll(@RequestParam(value = "search", defaultValue = "") String search,
+                                             @PageableDefault(size = 20, page = 0) Pageable pageable) {
 
-        return questionService.findAll()
-                .stream()
-                .map(QuestionResponse::fromQuestion)
-                .toList();
+        List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
+
+        return questionService.search(params, pageable);
 
     }
 
     //VerTodasLasPreguntasDEUnUsuario(GET)
-    @GetMapping("/question/user/{userName}")
+    @GetMapping("/question/user/{userName}")//Imnplementar con search criteria??
     public List<QuestionResponse> findQuestListByUser(@PathVariable String userName) {
 
             return questionService.findByUserName(userName)
@@ -107,22 +112,5 @@ public class QuestionController {
     }
 
 
-    @PostMapping("/question/{id}/like"){
-        public ResponseEntity<QuestionDetails> register(@Valid @RequestBody CreateQuestion newQuest, @AuthenticationPrincipal User user) {
-
-            Question created = questionService.save(newQuest, user);
-
-            URI createdURI = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(created.getId()).toUri();
-
-            return ResponseEntity
-                    .created(createdURI)
-                    .body(QuestionDetails.fromQuestion(created));
-
-
-        }
-    }
 
 }
