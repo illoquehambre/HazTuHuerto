@@ -112,4 +112,11 @@ public class UserService {
         return passwordEncoder.matches(clearPassword, user.getPassword());
     }
 
+    public boolean checkUserLiked(UUID userId, Long questionId) {
+        return userRepository.checkUserLiked(userId,questionId);
+    }
+
+
+
+
 }

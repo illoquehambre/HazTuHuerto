@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="Answer")
@@ -36,9 +37,18 @@ public class Answer {
     private User publisher;
 
     @ManyToMany
-    private List<User> likes;//unidi, ¿bajo acoplamiento?
+    @Builder.Default
+    private List<User> likes=new ArrayList<>();//unidi, ¿bajo acoplamiento?
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     @CreatedDate
     protected LocalDateTime createdAt;
+
+    @PreRemove
+    public void preRemoveAnswer() {
+        question.getAnswers().remove(this);
+        this.publisher = null;
+        likes=null;
+        question=null;
+    }
 }

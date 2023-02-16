@@ -29,7 +29,6 @@ public class AnswerController {
 
 
     private final QuestionService questionService;
-    private final UserService userService;
     private final AnswerService answerService;
 
     //VerTodasLasREspuestasDEUnUsuario(GET)
@@ -50,7 +49,8 @@ public class AnswerController {
                                                     @AuthenticationPrincipal User user, @PathVariable Long questId){
         Question quest = questionService.findById(questId);
         Answer created = answerService.save(newAnswer, user, quest);
-        questionService.addAnswer(quest, created);
+        questionService.addAnswer(quest, created, user);
+
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

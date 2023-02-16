@@ -5,6 +5,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.CreateQuestion;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
+import com.triana.salesianos.HazTuHuertoAPI.repository.QuestionRepository;
 import com.triana.salesianos.HazTuHuertoAPI.service.QuestionService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -23,6 +25,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserService userService;
+    private final QuestionRepository questionRepository;
 
     //VerTodasLasPreguntasDETodosLosUsuarios
 
@@ -77,6 +80,7 @@ public class QuestionController {
 
     @DeleteMapping("/question/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
+
         questionService.deleteById(id);
 
         return ResponseEntity.noContent().build();
@@ -84,5 +88,16 @@ public class QuestionController {
 
     //FiltraPreguntasPorEtiquetas(SearchCriteria??)
     //DarLike/Dislike (vamo a dejar esto pal final)
+    @GetMapping("/question/{id}/like")
+    public QuestionDetails likePost(@AuthenticationPrincipal User user, @PathVariable Long id) {
+
+        Question found = questionService.findById(id);
+        Question modified = questionService.likeQuestion(user,found);
+
+        return QuestionDetails.fromQuestion(modified);
+
+
+    }
+
 
 }

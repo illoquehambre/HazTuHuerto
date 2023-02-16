@@ -122,13 +122,15 @@ public class UserController {
     }
     //VerUnUsuarioPorID(GET by Id)
 
-    @GetMapping("/user/{name}")
+    @GetMapping("/user/{name}")//Debe ser GEt???
     public UserDetailsDto findUserByName (@PathVariable String name) {
 
         return UserDetailsDto.fromUser(userService.findByUsername(name));
 
     }
-    //Modifcar datos usuario (PUT)
+    //Modifcar datos usuario (PUT) (profile)
+
+    //Eliminar un usuario (Tiene sentido eliminar un usuario??)En vez de eliminarlo podemos desabilitar la cuenta para el usuario
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)
 
 
