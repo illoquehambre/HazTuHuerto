@@ -29,8 +29,9 @@ public class AnswerController {
 
 
     private final QuestionService questionService;
-    private final UserService userService;
     private final AnswerService answerService;
+
+    private final UserService userService;
 
     //VerTodasLasREspuestasDEUnUsuario(GET)
 
@@ -50,7 +51,8 @@ public class AnswerController {
                                                     @AuthenticationPrincipal User user, @PathVariable Long questId){
         Question quest = questionService.findById(questId);
         Answer created = answerService.save(newAnswer, user, quest);
-        questionService.addAnswer(quest, created);
+        questionService.addAnswer(quest, created, user);
+
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -78,8 +80,9 @@ public class AnswerController {
     //EliminarRespuesta(DELETE)
 
     @DeleteMapping("/answer/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        answerService.deleteById(id);
+    public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
+        if(userService.checkUserLoged(user.getId(), id))
+            answerService.deleteById(id);
 
         return ResponseEntity.noContent().build();
     }

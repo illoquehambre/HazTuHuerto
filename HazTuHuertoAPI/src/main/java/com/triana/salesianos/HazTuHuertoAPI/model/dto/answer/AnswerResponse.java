@@ -26,7 +26,7 @@ public class AnswerResponse {
 
     private UserResponse publisher;
     //Esto será calculable entre likes y dislikes de alguna manera
-    private Question question;
+    private QuestionResponse question;
 
     public static AnswerResponse fromAnswer(Answer answer) {
 
@@ -35,7 +35,7 @@ public class AnswerResponse {
                 .content(answer.getContent())
                 .publisher(UserResponse.fromUser(answer.getPublisher()))
                 .createdAt(answer.getCreatedAt())
-                .question(answer.getQuestion())
+                .question(QuestionResponse.fromQuestion(answer.getQuestion()))
                 .build();
     }
 

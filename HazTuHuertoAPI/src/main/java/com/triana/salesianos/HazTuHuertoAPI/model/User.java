@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class User implements UserDetails {
 
 
@@ -43,21 +44,17 @@ public class User implements UserDetails {
 
     private String fullName, username, password,avatar, email;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate birthDate;
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @CreatedDate
-    private LocalDateTime resgistrationDate;
+    @OneToMany( cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//Bidi
+    @Builder.Default
+    private List<Question> publishedQuestions=new ArrayList<>();
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi
-    private List<Question> publishedQuestions;
-
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi
-    private List<Answer> publishedAnswers;
+    @Builder.Default
+    private List<Answer> publishedAnswers=new ArrayList<>();
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Unidi???
-    private List<Question> favPosts;//Lo vamos a dejar por ahora
+    @Builder.Default
+    private List<Question> favPosts=new ArrayList<>();//Lo vamos a dejar por ahora
 
     //Escalable conforme recibe likes en preguntas o respuestas.
     private int reputation;
@@ -76,6 +73,7 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<UserRole> roles;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @CreatedDate
     private LocalDateTime createdAt;
 

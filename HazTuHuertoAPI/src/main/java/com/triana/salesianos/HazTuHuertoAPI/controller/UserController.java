@@ -1,7 +1,10 @@
 package com.triana.salesianos.HazTuHuertoAPI.controller;
 
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.*;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.access.JwtProvider;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshToken;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenException;
@@ -9,6 +12,9 @@ import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenReq
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -112,23 +118,26 @@ public class UserController {
 
     //VerTodosLosUsuarios
     @GetMapping("/user")
-    public List<UserResponse> findAll() {
+    public PageDto<UserResponse> findAll(@RequestParam(value = "search", defaultValue = "") String search,
+                                      @PageableDefault(size = 20, page = 0) Pageable pageable) {
 
-        return userService.findAll()
-                .stream()
-                .map(UserResponse::fromUser)
-                .toList();
+        List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
+
+        return userService.search(params, pageable);
+
 
     }
     //VerUnUsuarioPorID(GET by Id)
 
-    @GetMapping("/user/{name}")
+    @GetMapping("/user/{name}")//Debe ser GEt???
     public UserDetailsDto findUserByName (@PathVariable String name) {
 
         return UserDetailsDto.fromUser(userService.findByUsername(name));
 
     }
-    //Modifcar datos usuario (PUT)
+    //Modifcar datos usuario (PUT) (profile)
+
+    //Eliminar un usuario (Tiene sentido eliminar un usuario??)En vez de eliminarlo podemos desabilitar la cuenta para el usuario
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)
 
 

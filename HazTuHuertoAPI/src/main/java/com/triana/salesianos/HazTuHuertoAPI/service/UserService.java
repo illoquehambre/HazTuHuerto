@@ -2,11 +2,18 @@ package com.triana.salesianos.HazTuHuertoAPI.service;
 
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.ChangePasswordRequest;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.CreateUserRequest;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.EditUser;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.UserResponse;
 import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
+import com.triana.salesianos.HazTuHuertoAPI.search.spec.UserSpecificationBuilder;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +35,7 @@ public class UserService {
                 .password(passwordEncoder.encode(createUserRequest.getPassword()))
                 .avatar(createUserRequest.getAvatar())
                 .fullName(createUserRequest.getFullName())
+                .email(createUserRequest.getEmail())
                 .roles(roles)
                 .build();
 
@@ -50,6 +58,17 @@ public class UserService {
             throw new EntityNotFoundException("No users with this search criteria");
 
         return userRepository.findAll();
+    }
+
+    public PageDto<UserResponse> search(List<SearchCriteria> params, Pageable pageable) {
+        UserSpecificationBuilder personSpecificationBuilder =
+                new UserSpecificationBuilder(params);
+        Specification<User> spec =  personSpecificationBuilder.build();
+
+        Page<UserResponse> pageUserResponse = userRepository.findAll(spec, pageable).map(UserResponse::fromUser);
+        if(pageUserResponse.isEmpty())
+            throw new EntityNotFoundException("No users with this search criteria");
+        return new PageDto<>(pageUserResponse);
     }
 
     public User findById(UUID id) {
@@ -111,5 +130,16 @@ public class UserService {
     public boolean passwordMatch(User user, String clearPassword) {
         return passwordEncoder.matches(clearPassword, user.getPassword());
     }
+
+    public boolean checkUserLiked(UUID userId, Long questionId) {
+        return userRepository.checkUserLiked(userId,questionId);
+    }
+
+    public boolean checkUserLoged(UUID userId, Long questionId) {
+        return userRepository.checkUserLoged(userId,questionId);
+    }
+
+
+
 
 }
