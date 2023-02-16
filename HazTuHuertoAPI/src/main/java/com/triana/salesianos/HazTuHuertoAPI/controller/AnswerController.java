@@ -31,6 +31,8 @@ public class AnswerController {
     private final QuestionService questionService;
     private final AnswerService answerService;
 
+    private final UserService userService;
+
     //VerTodasLasREspuestasDEUnUsuario(GET)
 
     @GetMapping("/answer/user/{name}")
@@ -78,8 +80,9 @@ public class AnswerController {
     //EliminarRespuesta(DELETE)
 
     @DeleteMapping("/answer/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        answerService.deleteById(id);
+    public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
+        if(userService.checkUserLoged(user.getId(), id))
+            answerService.deleteById(id);
 
         return ResponseEntity.noContent().build();
     }

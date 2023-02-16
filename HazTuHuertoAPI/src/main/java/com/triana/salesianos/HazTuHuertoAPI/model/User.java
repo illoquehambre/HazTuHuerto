@@ -44,9 +44,6 @@ public class User implements UserDetails {
 
     private String fullName, username, password,avatar, email;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate birthDate;
-
     @OneToMany( cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//Bidi
     @Builder.Default
     private List<Question> publishedQuestions=new ArrayList<>();

@@ -79,7 +79,15 @@ public class QuestionController {
     //EliminarPregunta(DELETE)
 
     @DeleteMapping("/question/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
+        //Question quest=questionService.findById(id);
+        if(userService.checkUserLoged(user.getId(), id))
+            questionService.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping("/admin/question/{id}")
+    public ResponseEntity<?> adminDelete(@PathVariable Long id) {
 
         questionService.deleteById(id);
 
@@ -95,7 +103,6 @@ public class QuestionController {
         Question modified = questionService.likeQuestion(user,found);
 
         return QuestionDetails.fromQuestion(modified);
-
 
     }
 
