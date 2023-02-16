@@ -85,4 +85,22 @@ public class QuestionController {
     //FiltraPreguntasPorEtiquetas(SearchCriteria??)
     //DarLike/Dislike (vamo a dejar esto pal final)
 
+    @PostMapping("/question/{id}/like"){
+        public ResponseEntity<QuestionDetails> register(@Valid @RequestBody CreateQuestion newQuest, @AuthenticationPrincipal User user) {
+
+            Question created = questionService.save(newQuest, user);
+
+            URI createdURI = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(created.getId()).toUri();
+
+            return ResponseEntity
+                    .created(createdURI)
+                    .body(QuestionDetails.fromQuestion(created));
+
+
+        }
+    }
+
 }
