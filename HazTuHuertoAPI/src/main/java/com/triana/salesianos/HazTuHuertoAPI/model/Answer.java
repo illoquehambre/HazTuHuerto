@@ -44,11 +44,5 @@ public class Answer {
     @CreatedDate
     protected LocalDateTime createdAt;
 
-    @PreRemove
-    public void preRemoveAnswer() {
-        question.getAnswers().remove(this);
-        this.publisher = null;
-        likes=null;
-        question=null;
-    }
+
 }

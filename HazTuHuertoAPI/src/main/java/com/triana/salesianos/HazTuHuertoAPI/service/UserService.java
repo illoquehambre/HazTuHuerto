@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.service;
 
+import com.triana.salesianos.HazTuHuertoAPI.exception.NoMatchPasswordException;
 import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
@@ -98,20 +99,18 @@ public class UserService {
 
     }
 
-    public User editPassword(UUID userId, ChangePasswordRequest changePassword) {
+    public User editPassword(User user, ChangePasswordRequest changePassword) throws NoMatchPasswordException {
 
         // Aquí no se realizan comprobaciones de seguridad. Tan solo se modifica
 
-        return userRepository.findById(userId)
-                .map(u -> {
-                    if(Objects.equals(u.getPassword(), passwordEncoder.encode(changePassword.getNewPassword()))){
-                        u.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
-                        return userRepository.save(u);
-                    }else{
-                        //Esto debería ser una excepción personalizada indicando que als contraseñas no cionciden
-                        throw new EntityNotFoundException("No user with id: " + userId);
-                    }
-                }).orElseThrow(() ->new EntityNotFoundException("No user with id: " + userId));
+        if(passwordEncoder.matches(changePassword.getOldPassword(), user.getPassword())){
+            user.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+            return userRepository.save(user);
+        }else{
+            //Esto debería ser una excepción personalizada indicando que als contraseñas no cionciden
+            throw new NoMatchPasswordException();
+        }
+
 
     }
 
@@ -137,9 +136,13 @@ public class UserService {
         return userRepository.checkUserLiked(userId,questionId);
     }
 
-    public boolean checkUserLoged(UUID userId, Long questionId) {
-        return userRepository.checkUserLoged(userId,questionId);
+    public boolean checkUserLogedInAnswer(UUID userId, Long answerId) {
+        return userRepository.checkUserLogedInAnswer(userId,answerId);
     }
+    public boolean checkUserLogedInQuestion(UUID userId, Long questionId) {
+        return userRepository.checkUserLogedInQuestion(userId,questionId);
+    }
+
 
 
 

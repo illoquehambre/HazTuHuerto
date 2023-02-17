@@ -88,8 +88,12 @@ public class AnswerService {
     }
 
     public void deleteById(Long id) {
-        // Prevenimos errores al intentar borrar algo que no existe
-        if (answerRepository.existsById(id))
+        //Esto es una gitanada, perdón
+        if (answerRepository.existsById(id)){
+            Answer answer =  this.findById(id);
+            answer.getQuestion().getAnswers().remove(answer);
             answerRepository.deleteById(id);
+        }
+
     }
 }

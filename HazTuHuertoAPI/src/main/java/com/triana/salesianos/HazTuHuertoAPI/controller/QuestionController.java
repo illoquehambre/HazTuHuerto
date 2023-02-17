@@ -86,7 +86,7 @@ public class QuestionController {
     @DeleteMapping("/question/{id}")
     public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
         //Question quest=questionService.findById(id);
-        if(userService.checkUserLoged(user.getId(), id))
+        if(userService.checkUserLogedInQuestion(user.getId(), id))
             questionService.deleteById(id);
 
         return ResponseEntity.noContent().build();
@@ -101,7 +101,7 @@ public class QuestionController {
 
     //FiltraPreguntasPorEtiquetas(SearchCriteria??)
     //DarLike/Dislike (vamo a dejar esto pal final)
-    @GetMapping("/question/{id}/like")
+    @PostMapping("/question/{id}/like")
     public QuestionDetails likePost(@AuthenticationPrincipal User user, @PathVariable Long id) {
 
         Question found = questionService.findById(id);

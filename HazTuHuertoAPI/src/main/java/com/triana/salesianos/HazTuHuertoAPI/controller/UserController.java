@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.controller;
 
+import com.triana.salesianos.HazTuHuertoAPI.exception.NoMatchPasswordException;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.*;
@@ -104,9 +105,9 @@ public class UserController {
 
     @PutMapping("/user/changePassword")
     public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
-                                                       @AuthenticationPrincipal User loggedUser) {
+                                                       @AuthenticationPrincipal User loggedUser) throws NoMatchPasswordException {
         //Esto debería funcionar pero hay que revisarlo porque no me fio un carajo
-        User modified = userService.editPassword(loggedUser.getId(), changePasswordRequest);
+        User modified = userService.editPassword(loggedUser, changePasswordRequest);
 
         return ResponseEntity.ok(UserResponse.fromUser(modified));
     }
@@ -125,7 +126,7 @@ public class UserController {
     }
     //VerUnUsuarioPorID(GET by Id)
 
-    @GetMapping("/user/{name}")//Debe ser GEt???
+    @GetMapping("/user/{name}")
     public UserDetailsDto findUserByName (@PathVariable String name) {
 
         return UserDetailsDto.fromUser(userService.findByUsername(name));
@@ -134,8 +135,9 @@ public class UserController {
     //Modifcar datos usuario (PUT) (profile)
 
     @PutMapping("/user/{id}")
-    public UserResponse editDetails(@PathVariable UUID id, @RequestPart("file") MultipartFile file,
-                                   @Valid @RequestPart("editUser") EditUser editUser) {
+    public UserResponse editDetails(@PathVariable UUID id,
+                                    @RequestPart("file") MultipartFile file,
+                                    @Valid @RequestPart("editUser") EditUser editUser) {
 
         User edited = userService.edit(id, editUser, file);
 

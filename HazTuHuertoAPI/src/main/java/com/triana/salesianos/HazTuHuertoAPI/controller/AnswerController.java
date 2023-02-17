@@ -98,7 +98,7 @@ public class AnswerController {
     @DeleteMapping("/answer/{id}")
     public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
         //if(user.equals(answerService.findById(id).getPublisher()))
-        if(userService.checkUserLoged(user.getId(), id))
+        if(userService.checkUserLogedInAnswer(user.getId(), id))
             answerService.deleteById(id);
 
         return ResponseEntity.noContent().build();
