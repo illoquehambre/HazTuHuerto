@@ -104,7 +104,7 @@ public class UserController {
 
 
     @PutMapping("/user/changePassword")
-    public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
+    public ResponseEntity<UserResponse> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest,
                                                        @AuthenticationPrincipal User loggedUser) throws NoMatchPasswordException {
         //Esto debería funcionar pero hay que revisarlo porque no me fio un carajo
         User modified = userService.editPassword(loggedUser, changePasswordRequest);
@@ -146,6 +146,13 @@ public class UserController {
     }
 
     //Eliminar un usuario (Tiene sentido eliminar un usuario??)En vez de eliminarlo podemos desabilitar la cuenta para el usuario
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> adminDelete(@PathVariable UUID id) {
+        userService.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)
 
 
