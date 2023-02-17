@@ -35,8 +35,6 @@ public class CreateUserRequest {
     private String password;
     @NotEmpty(message = "{createUserRequest.password.notempty}")
     private String verifyPassword;
-    @URL(message = "{createUserRequest.avatar.url}")
-    private String avatar;
     @NotEmpty(message = "{createUserRequest.fullname.notempty}")
     private String fullName;
    // @UniqueEmail(message = "{createUserRequest.email.unique}")

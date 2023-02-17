@@ -6,10 +6,6 @@ import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.*;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.access.JwtProvider;
-import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshToken;
-import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenException;
-import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenRequest;
-import com.triana.salesianos.HazTuHuertoAPI.security.jwt.refresh.RefreshTokenService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,7 +31,7 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
-    private final RefreshTokenService refreshTokenService;
+
 
     @PostMapping("/auth/register")
     public ResponseEntity<UserResponse> createUserWithUserRole(@Valid @RequestBody CreateUserRequest createUserRequest) {
@@ -75,16 +71,14 @@ public class UserController {
 
         User user = (User) authentication.getPrincipal();
 
-        // Eliminamos el token (si existe) antes de crearlo, ya que cada usuario debería tener solamente un token de refresco simultáneo
-        refreshTokenService.deleteByUser(user);
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(JwtUserResponse.of(user, token, refreshToken.getToken()));
+                .body(JwtUserResponse.of(user, token));
 
 
     }
-
+/*
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
         String refreshToken = refreshTokenRequest.getRefreshToken();
@@ -105,7 +99,7 @@ public class UserController {
                 .orElseThrow(() -> new RefreshTokenException("Refresh token not found"));
 
     }
-
+*/
 
 
     @PutMapping("/user/changePassword")

@@ -42,8 +42,9 @@ public class User implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private String fullName, username, password,avatar, email;
-
+    private String fullName, username, password, email;
+    @Builder.Default
+    private String avatar="./uploads/monke2.jpg";
     @OneToMany( cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//Bidi
     @Builder.Default
     private List<Question> publishedQuestions=new ArrayList<>();
@@ -68,7 +69,7 @@ public class User implements UserDetails {
     @Builder.Default
     private boolean credentialsNonExpired = true;
     @Builder.Default
-    private boolean enabled = true;
+    private boolean enabled = true;//Con esta vamos a bajar una cuenta 
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<UserRole> roles;
