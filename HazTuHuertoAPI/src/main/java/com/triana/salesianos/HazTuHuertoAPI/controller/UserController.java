@@ -23,6 +23,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -139,9 +140,10 @@ public class UserController {
     //Modifcar datos usuario (PUT) (profile)
 
     @PutMapping("/user/{id}")
-    public UserResponse editDetails(@PathVariable UUID id, @Valid @RequestBody EditUser editUser) {
+    public UserResponse editDetails(@PathVariable UUID id, @RequestPart("file") MultipartFile file,
+                                   @Valid @RequestPart("editUser") EditUser editUser) {
 
-        User edited = userService.edit(id, editUser);
+        User edited = userService.edit(id, editUser, file);
 
         return UserResponse.fromUser(edited);
 

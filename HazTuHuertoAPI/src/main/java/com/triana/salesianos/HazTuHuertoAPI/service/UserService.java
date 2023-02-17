@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.service;
 
+import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
@@ -18,8 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
@@ -28,12 +31,13 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final StorageService storageService;
 
+    @Transactional
     public User createUser(CreateUserRequest createUserRequest, EnumSet<UserRole> roles) {
         User user =  User.builder()
                 .username(createUserRequest.getUsername())
                 .password(passwordEncoder.encode(createUserRequest.getPassword()))
-                .avatar(createUserRequest.getAvatar())
                 .fullName(createUserRequest.getFullName())
                 .email(createUserRequest.getEmail())
                 .roles(roles)
@@ -82,14 +86,12 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException("No user with name: " + username));
     }
 
-    public User edit(UUID id, EditUser editUser) {
+    public User edit(UUID id, EditUser editUser, MultipartFile file) {
 
-        // El username no se puede editar
-        // La contraseña se edita en otro método
-
+        String filename = storageService.store(file);
         return userRepository.findById(id)
                 .map(u -> {
-                    u.setAvatar(editUser.getAvatar());
+                    u.setAvatar(filename);
                     u.setFullName(editUser.getFullName());
                     return userRepository.save(u);
                 }).orElseThrow(() ->new EntityNotFoundException("No user with id: " + id));

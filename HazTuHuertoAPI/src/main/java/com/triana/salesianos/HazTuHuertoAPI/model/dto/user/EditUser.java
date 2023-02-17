@@ -17,6 +17,4 @@ public class EditUser {
     @NotEmpty(message = "{userDto.fullname.notempty}")
     private String fullName;
 
-    @URL(message = "{userDto.avatar.url}")
-    private String avatar;
 }
