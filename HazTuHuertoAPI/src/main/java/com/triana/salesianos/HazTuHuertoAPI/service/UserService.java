@@ -13,6 +13,8 @@ import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
 import com.triana.salesianos.HazTuHuertoAPI.search.spec.UserSpecificationBuilder;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.Filter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.*;
@@ -33,6 +36,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final StorageService storageService;
+    private final EntityManager entityManager;
 
     @Transactional
     public User createUser(CreateUserRequest createUserRequest, EnumSet<UserRole> roles) {
@@ -65,15 +69,43 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public PageDto<UserResponse> search(List<SearchCriteria> params, Pageable pageable) {
-        UserSpecificationBuilder userSpecificationBuilder =
-                new UserSpecificationBuilder(params);
+    public PageDto<UserResponse> searchBanned(List<SearchCriteria> params, Pageable pageable) {//Funciona
+        //Search criteria
+        UserSpecificationBuilder userSpecificationBuilder = new UserSpecificationBuilder(params);
         Specification<User> spec =  userSpecificationBuilder.build();
+        //SoftDelete
+        Session session = entityManager.unwrap(Session.class);//Se debería hacer un try catch?
+        Filter filter = session.enableFilter("bannedProductFilter");
+        filter.setParameter("isBanned", true);
 
+        //Pageable
         Page<UserResponse> pageUserResponse = userRepository.findAll(spec, pageable).map(UserResponse::fromUser);
+        session.disableFilter("bannedProductFilter");
         if(pageUserResponse.isEmpty())
             throw new EntityNotFoundException("No users with this search criteria");
         return new PageDto<>(pageUserResponse);
+    }
+//Deberia fusionar ambos search y hacer comprobaciones de si el usuario logueado es admin???
+    public PageDto<UserResponse> search(List<SearchCriteria> params, Pageable pageable) {
+        //Search criteria
+        UserSpecificationBuilder userSpecificationBuilder = new UserSpecificationBuilder(params);
+        Specification<User> spec =  userSpecificationBuilder.build();
+        //SoftDelete
+        Session session = entityManager.unwrap(Session.class);//Se debería hacer un try catch?
+        Filter filter = session.enableFilter("bannedProductFilter");
+        filter.setParameter("isBanned", false);
+        //Pageable
+        Page<UserResponse> pageUserResponse = userRepository.findAll(spec, pageable).map(UserResponse::fromUser);
+
+        if(pageUserResponse.isEmpty())
+            throw new EntityNotFoundException("No users with this search criteria");
+        return new PageDto<>(pageUserResponse);
+    }
+
+    public User bannUser(UUID id){
+        User user = this.findById(id);
+        user.setBanned(!user.isBanned());
+        return userRepository.save(user);
     }
 
     public User findById(UUID id) {

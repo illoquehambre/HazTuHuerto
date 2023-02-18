@@ -6,6 +6,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.CreateQuestion;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.EditUser;
 import com.triana.salesianos.HazTuHuertoAPI.repository.QuestionRepository;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
@@ -17,6 +18,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -65,9 +67,11 @@ public class QuestionController {
     //Publicas pregunta (POST)
 
     @PostMapping("/question")
-    public ResponseEntity<QuestionDetails> register(@Valid @RequestBody CreateQuestion newQuest, @AuthenticationPrincipal User user) {
+    public ResponseEntity<QuestionDetails> register(@RequestPart("file") MultipartFile file,
+                                                    @Valid @RequestPart("newQuest") CreateQuestion newQuest,
+                                                    @AuthenticationPrincipal User user) {
 
-        Question created = questionService.save(newQuest, user);
+        Question created = questionService.save(newQuest, user, file);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

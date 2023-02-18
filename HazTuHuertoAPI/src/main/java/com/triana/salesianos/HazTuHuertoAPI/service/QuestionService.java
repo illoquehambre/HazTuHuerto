@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.service;
 
+import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.model.Answer;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -35,6 +37,7 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
     private final UserRepository userRepository;
+    private final StorageService storageService;
 
     @Autowired
     private EntityManager entityManager;
@@ -74,13 +77,13 @@ public class QuestionService {
         return new PageDto<>(pageQuestionResponse);
     }
 
-    public Question save(CreateQuestion newQuest, User user) {
-
+    public Question save(CreateQuestion newQuest, User user, MultipartFile file) {
+        String filename = storageService.store(file);
         return questionRepository.save(
                 Question.builder()
                         .title(newQuest.getTitle())
                         .content(newQuest.getContent())
-                        .urlImg(newQuest.getUrlImg())
+                        .urlImg(filename)
                         .createdAt(LocalDateTime.now())
                         .publisher(user)
                         .build());
@@ -109,9 +112,13 @@ public class QuestionService {
 
                 lista.remove(lista.indexOf(user)+1);
                 question.setLikes((new HashSet<>(lista)));
+                user.setReputation(user.getReputation()-1);
+                userRepository.save(user);
 
             }else{
                 question.getLikes().add(user);
+                user.setReputation(user.getReputation()+1);
+                userRepository.save(user);
             }
        return  questionRepository.save(question);
     }

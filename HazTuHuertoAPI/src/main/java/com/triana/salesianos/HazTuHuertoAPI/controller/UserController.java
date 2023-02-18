@@ -116,7 +116,7 @@ public class UserController {
     //VerTodosLosUsuarios
     @GetMapping("/user")
     public PageDto<UserResponse> findAll(@RequestParam(value = "search", defaultValue = "") String search,
-                                      @PageableDefault(size = 20, page = 0) Pageable pageable) {
+                                        @PageableDefault(size = 20, page = 0) Pageable pageable) {
 
         List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
 
@@ -124,8 +124,28 @@ public class UserController {
 
 
     }
-    //VerUnUsuarioPorID(GET by Id)
 
+    //VerTodosLosUsuariosBaneados
+    @GetMapping("/admin/user")//deberia devolver otro tipod e dto que muestre el atributo isbanned?
+    public PageDto<UserResponse> findAllBanned(@RequestParam(value = "search", defaultValue = "") String search,
+                                         @PageableDefault(size = 20, page = 0) Pageable pageable) {
+        List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
+        return userService.searchBanned(params, pageable);
+
+    }
+    //Banear/Desbanear un usuario
+    //Tiene sentido que esta petición sea PUT???Está bien no pasarle requestBody?
+    @PutMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned?
+    public UserResponse bannUser(@PathVariable UUID id) {
+
+        User banned = userService.bannUser(id);
+
+        return UserResponse.fromUser(banned);
+
+    }
+
+
+    //VerUnUsuarioPorID(GET by Id)
     @GetMapping("/user/{name}")
     public UserDetailsDto findUserByName (@PathVariable String name) {
 
@@ -150,7 +170,6 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> adminDelete(@PathVariable UUID id) {
         userService.deleteById(id);
-
         return ResponseEntity.noContent().build();
     }
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)

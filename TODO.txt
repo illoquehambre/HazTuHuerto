@@ -1,0 +1,23 @@
+- Crear Readme
+***********************************************************************************************************
+					BACKEND
+***********************************************************************************************************
+		Cosas que no me van saliendo
+
+			Cosas a gestionar 
+
+- Decidir si quitar atributos de usuario de Luismi (ivestigar si hacen algo)
+- Revisar Dto's de respuesta de cada petición
+- Revisar Errores de respuesta y excepciones lanzadas. Crear excepciones personalizadas de ser necesario.
+- Documentación
+- Revisar comentario propios
+- Dejar bonito el postman
+- ¿Admin buscar un usuario específico baneado? Implementar filtro del softDelate en findbyname
+- Pedir a alguien que intente petardear el proyecto
+
+
+***********************************************************************************************************
+					FRONTEND
+***********************************************************************************************************
+
+-Voy a llorar
