@@ -8,6 +8,16 @@ import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.security.jwt.access.JwtProvider;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,12 +38,32 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@OpenAPIDefinition(info = @Info(title ="Haz-Tu-Huerto"))
+@Tag(name = "User", description = "This class implements Restcontrollers for the Entity User")
 public class UserController {
     private final UserService userService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
 
-
+    @Operation(summary = "This method creates a new user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha creado una nueva aportacion",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                     {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+    })
     @PostMapping("/auth/register")
     public ResponseEntity<UserResponse> createUserWithUserRole(@Valid @RequestBody CreateUserRequest createUserRequest) {
         User user = userService.createUserWithUserRole(createUserRequest);
@@ -42,7 +72,25 @@ public class UserController {
     }
 
     // Más adelante podemos manejar la seguridad de acceso a esta petición
-
+    @Operation(summary = "This method creates a new admin user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha creado una nueva aportacion",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                     {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+    })
     @PostMapping("/auth/register/admin")
     public ResponseEntity<UserResponse> createUserWithAdminRole(@Valid @RequestBody CreateUserRequest createUserRequest) {
         User user = userService.createUserWithAdminRole(createUserRequest);
@@ -50,7 +98,28 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(UserResponse.fromUser(user));
     }
 
-
+    @Operation(summary = "This method do a login in a user account already created")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha creado una nueva aportacion",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                     {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+            @ApiResponse(responseCode = "404",
+                    description = "The user account was not found",
+                    content = @Content),
+    })
     @PostMapping("/auth/login")
     public ResponseEntity<JwtUserResponse> login(@RequestBody LoginRequest loginRequest) {
 
@@ -102,18 +171,69 @@ public class UserController {
     }
 */
 
-
+    @Operation(summary = "This method change the current password of an user account")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "The operation was succesfully",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                    {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
+                    content = @Content),
+    })
     @PutMapping("/user/changePassword")
-    public ResponseEntity<UserResponse> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest,
+    public UserResponse changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest,
                                                        @AuthenticationPrincipal User loggedUser) throws NoMatchPasswordException {
         //Esto debería funcionar pero hay que revisarlo porque no me fio un carajo
         User modified = userService.editPassword(loggedUser, changePasswordRequest);
 
-        return ResponseEntity.ok(UserResponse.fromUser(modified));
+        return UserResponse.fromUser(modified);
     }
 
 
     //VerTodosLosUsuarios
+    @Operation(summary = "This method list all users not banned")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "At least one User was found",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                 "content": [
+                                                     {
+                                                         "id": "1b257813-0195-43ab-9a3c-f1b08ab4c5a9",
+                                                         "username": "Programer12",
+                                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                                         "fullName": "Paquito programador",
+                                                         "createdAt": "12/12/2022 00:00:00"
+                                                     }
+                                                 ],
+                                                 "last": true,
+                                                 "first": true,
+                                                 "totalPages": 1,
+                                                 "totalElements": 1
+                                             }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "Any users were found",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
+                    content = @Content),
+    })
     @GetMapping("/user")
     public PageDto<UserResponse> findAll(@RequestParam(value = "search", defaultValue = "") String search,
                                         @PageableDefault(size = 20, page = 0) Pageable pageable) {
@@ -126,6 +246,39 @@ public class UserController {
     }
 
     //VerTodosLosUsuariosBaneados
+    @Operation(summary = "This method list all users banned")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "At least one User was found",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                 "content": [
+                                                     {
+                                                         "id": "1b257813-0195-43ab-9a3c-f1b08ab4c5a9",
+                                                         "username": "Programer12",
+                                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                                         "fullName": "Paquito programador",
+                                                         "createdAt": "12/12/2022 00:00:00"
+                                                     }
+                                                 ],
+                                                 "last": true,
+                                                 "first": true,
+                                                 "totalPages": 1,
+                                                 "totalElements": 1
+                                             }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "Any users were found",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
+                    content = @Content),
+    })
     @GetMapping("/admin/user")//deberia devolver otro tipod e dto que muestre el atributo isbanned?
     public PageDto<UserResponse> findAllBanned(@RequestParam(value = "search", defaultValue = "") String search,
                                          @PageableDefault(size = 20, page = 0) Pageable pageable) {
@@ -135,6 +288,28 @@ public class UserController {
     }
     //Banear/Desbanear un usuario
     //Tiene sentido que esta petición sea PUT???Está bien no pasarle requestBody?
+    @Operation(summary = "This methos bann or unbann a user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "The operation was succesfully",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                    {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "The user was not found ",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
+                    content = @Content),
+    })
     @PutMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned?
     public UserResponse bannUser(@PathVariable UUID id) {
 
@@ -146,6 +321,32 @@ public class UserController {
 
 
     //VerUnUsuarioPorID(GET by Id)
+    @Operation(summary = "This method find a user by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "the user was successfully found",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserDetailsDto.class)),
+                            examples = @ExampleObject(value = """
+                                    {
+                                         "id": "c0a83801-866a-18f6-8186-6a9707d60001",
+                                         "username": "illo",
+                                         "avatar": "monke2.jpg",
+                                         "fullName": "illo que hambre",
+                                         "createdAt": "19/02/2023 17:52:08",
+                                         "publishedQuestions": [],
+                                         "publishedAnswers": [],
+                                         "favPosts": [],
+                                         "reputation": 0
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "The user was not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
+                    content = @Content),
+    })
     @GetMapping("/user/{name}")
     public UserDetailsDto findUserByName (@PathVariable String name) {
 
@@ -153,7 +354,31 @@ public class UserController {
 
     }
     //Modifcar datos usuario (PUT) (profile)
-
+    @Operation(summary = "This method upload a user profile")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "The operation was succesfully",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                    {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "The user was not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "The data sended was not correct",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
+                    content = @Content),
+    })
     @PutMapping("/user/{id}")
     public UserResponse editDetails(@PathVariable UUID id,
                                     @RequestPart("file") MultipartFile file,
@@ -165,13 +390,8 @@ public class UserController {
 
     }
 
-    //Eliminar un usuario (Tiene sentido eliminar un usuario??)En vez de eliminarlo podemos desabilitar la cuenta para el usuario
 
-    @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> adminDelete(@PathVariable UUID id) {
-        userService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
+
     //LogOut(se elimina el token de refresco)(si no hay token de refresco, no hay logout en el back)
 
 

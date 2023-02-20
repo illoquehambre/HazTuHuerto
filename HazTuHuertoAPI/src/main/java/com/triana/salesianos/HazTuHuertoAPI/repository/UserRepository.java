@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository <User, UUID>,
         JpaSpecificationExecutor<User> {
     Optional<User> findFirstByUsername(String username);
     boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
+
 
     @Query(value="SELECT CASE WHEN COUNT(q) > 0 THEN true ELSE false END FROM Question q JOIN q.likes u WHERE q.id = :questionId AND u.id = :userId")
     boolean checkUserLiked(@Param("userId") UUID userId, @Param("questionId") Long questionId);

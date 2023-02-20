@@ -13,8 +13,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class CreateAnswer {
 
-    @Size(max = 1000, min = 100)
-    @NotEmpty(message = "{createUserRequest.password.notempty}")
+    @Size(max = 1000, min = 10)
+    @NotEmpty(message = "{createAnswer.content.notempty}")
     private String content;
     @URL
     private String urlImg;

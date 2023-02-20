@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.model.dto.user;
 
+import com.triana.salesianos.HazTuHuertoAPI.validation.annotation.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @Builder
 public class EditUser {
-
+    @UniqueUsername(message = "{createUserRequest.username.unique}")
     @NotEmpty(message = "{userDto.fullname.notempty}")
     private String fullName;
 

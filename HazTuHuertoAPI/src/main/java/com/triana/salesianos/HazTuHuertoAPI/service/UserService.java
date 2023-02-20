@@ -159,6 +159,10 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 
+    public boolean emailExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
 
     public boolean passwordMatch(User user, String clearPassword) {
         return passwordEncoder.matches(clearPassword, user.getPassword());

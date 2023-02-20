@@ -1,7 +1,5 @@
 package com.triana.salesianos.HazTuHuertoAPI.model;
 
-import ch.qos.logback.core.joran.action.NOPAction;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -35,7 +33,7 @@ public class Question {
     @JsonIgnore
     private User publisher;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @CreatedDate
     protected LocalDateTime createdAt;
 
