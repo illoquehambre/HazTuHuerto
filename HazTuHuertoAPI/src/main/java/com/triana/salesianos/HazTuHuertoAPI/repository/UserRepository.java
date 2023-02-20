@@ -19,6 +19,9 @@ public interface UserRepository extends JpaRepository <User, UUID>,
     @Query(value="SELECT CASE WHEN COUNT(q) > 0 THEN true ELSE false END FROM Question q JOIN q.likes u WHERE q.id = :questionId AND u.id = :userId")
     boolean checkUserLiked(@Param("userId") UUID userId, @Param("questionId") Long questionId);
 
+
+
+
     @Query(value="SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Answer a JOIN a.publisher u WHERE a.id = :answerId AND u.id = :userId")
     boolean checkUserLogedInAnswer(@Param("userId") UUID userId, @Param("answerId") Long answerId);
 

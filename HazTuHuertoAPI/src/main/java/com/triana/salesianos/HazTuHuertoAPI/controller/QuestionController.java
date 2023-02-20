@@ -111,7 +111,7 @@ public class QuestionController {
     //FiltraPreguntasPorEtiquetas(SearchCriteria??)
     //DarLike/Dislike (vamo a dejar esto pal final)
     @PostMapping("/question/{id}/like")
-    public QuestionDetails likePost(@AuthenticationPrincipal User user, @PathVariable Long id) {
+    public QuestionDetails likePost(@AuthenticationPrincipal User user, @PathVariable Long id) {//Deberia devolver un REsponseEntity y crear una Uri
 
         Question found = questionService.findById(id);
         Question modified = questionService.likeQuestion(user,found);

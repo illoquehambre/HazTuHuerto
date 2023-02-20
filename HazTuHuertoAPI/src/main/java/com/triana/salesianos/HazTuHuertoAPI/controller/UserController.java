@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.controller;
 
+import com.triana.salesianos.HazTuHuertoAPI.exception.BannedAccountException;
 import com.triana.salesianos.HazTuHuertoAPI.exception.NoMatchPasswordException;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
@@ -123,6 +124,8 @@ public class UserController {
     @PostMapping("/auth/login")
     public ResponseEntity<JwtUserResponse> login(@RequestBody LoginRequest loginRequest) {
 
+        if(userService.findByUsername(loginRequest.getUsername()).isBanned())
+            throw new BannedAccountException();
         // Realizamos la autenticación
 
         Authentication authentication =

@@ -104,10 +104,9 @@ public class QuestionService {
     }
 
     public Question likeQuestion(User user, Question question){
-        //comprobar si esta ya añadido a la lista//Si: quitar
-        //            //No: Añadir
-        //        //Guardar
+
         List<User> lista = new ArrayList<>(question.getLikes().stream().toList());
+
             if(userRepository.checkUserLiked(user.getId(),question.getId())){
 
                 lista.remove(lista.indexOf(user)+1);

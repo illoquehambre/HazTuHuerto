@@ -3,6 +3,8 @@ package com.triana.salesianos.HazTuHuertoAPI.error;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.triana.salesianos.HazTuHuertoAPI.error.model.impl.ApiErrorImpl;
 import com.triana.salesianos.HazTuHuertoAPI.error.model.impl.ApiValidationSubError;
+import com.triana.salesianos.HazTuHuertoAPI.exception.BannedAccountException;
+import com.triana.salesianos.HazTuHuertoAPI.exception.NoMatchPasswordException;
 import com.triana.salesianos.HazTuHuertoAPI.security.errorhandling.JwtTokenException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,6 +47,15 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<?> handleNotFoundException(EntityNotFoundException exception, WebRequest request) {
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({BannedAccountException.class})
+    public ResponseEntity<?> handleBannedAccountException(BannedAccountException exception, WebRequest request) {
+        return buildApiError(exception.getMessage(), request, HttpStatus.UNAUTHORIZED);
+    }
+    @ExceptionHandler({NoMatchPasswordException.class})
+    public ResponseEntity<?> handleNoMatchPasswordException(NoMatchPasswordException exception, WebRequest request) {
+        return buildApiError(exception.getMessage(), request, HttpStatus.BAD_REQUEST);
     }
 
 
