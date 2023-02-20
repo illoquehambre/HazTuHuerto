@@ -78,12 +78,12 @@ public class QuestionService {
     }
 
     public Question save(CreateQuestion newQuest, User user, MultipartFile file) {
-        String filename = storageService.store(file);
+        String fileName = storageService.store(file);
         return questionRepository.save(
                 Question.builder()
                         .title(newQuest.getTitle())
                         .content(newQuest.getContent())
-                        .urlImg(filename)
+                        .urlImg(fileName)
                         .createdAt(LocalDateTime.now())
                         .publisher(user)
                         .build());

@@ -119,15 +119,13 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException("No user with name: " + username));
     }
 
-    public User edit(UUID id, EditUser editUser, MultipartFile file) {
+    public User edit(User u, EditUser editUser, MultipartFile file) {
 
         String filename = storageService.store(file);
-        return userRepository.findById(id)
-                .map(u -> {
-                    u.setAvatar(filename);
-                    u.setFullName(editUser.getFullName());
-                    return userRepository.save(u);
-                }).orElseThrow(() ->new EntityNotFoundException("No user with id: " + id));
+            u.setAvatar(filename);
+            u.setFullName(editUser.getFullName());
+            return userRepository.save(u);
+
 
     }
 
@@ -172,7 +170,7 @@ public class UserService {
         return userRepository.checkUserLiked(userId,questionId);
     }
 
-    public boolean checkUserLogedInAnswer(UUID userId, Long answerId) {
+    public boolean checkUserLogedInAnswer(UUID userId, Long answerId) {//Comprobar tambien si es admin para que pueda elimianr cuando quiera
         return userRepository.checkUserLogedInAnswer(userId,answerId);
     }
     public boolean checkUserLogedInQuestion(UUID userId, Long questionId) {

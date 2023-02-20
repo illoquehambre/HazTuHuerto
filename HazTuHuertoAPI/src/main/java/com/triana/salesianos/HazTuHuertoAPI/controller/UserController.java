@@ -310,7 +310,7 @@ public class UserController {
                     description = "You are not allowed to do this request",
                     content = @Content),
     })
-    @PutMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned?
+    @PutMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned? //cambiar a delete
     public UserResponse bannUser(@PathVariable UUID id) {
 
         User banned = userService.bannUser(id);
@@ -379,12 +379,12 @@ public class UserController {
                     description = "You are not allowed to do this request",
                     content = @Content),
     })
-    @PutMapping("/user/{id}")
-    public UserResponse editDetails(@PathVariable UUID id,
+    @PutMapping("/user/")
+    public UserResponse editDetails(@AuthenticationPrincipal User logguedUser,
                                     @RequestPart("file") MultipartFile file,
                                     @Valid @RequestPart("editUser") EditUser editUser) {
 
-        User edited = userService.edit(id, editUser, file);
+        User edited = userService.edit(logguedUser, editUser, file);
 
         return UserResponse.fromUser(edited);
 
