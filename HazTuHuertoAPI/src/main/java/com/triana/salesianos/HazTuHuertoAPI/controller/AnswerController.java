@@ -14,6 +14,9 @@ import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.service.AnswerService;
 import com.triana.salesianos.HazTuHuertoAPI.service.QuestionService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -28,6 +31,8 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@OpenAPIDefinition(info = @Info(title ="Haz-Tu-Huerto"))
+@Tag(name = "Answers", description = "This class implements Restcontrollers for the Entity Answers")
 public class AnswerController {
 
 

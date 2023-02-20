@@ -2,6 +2,7 @@ package com.triana.salesianos.HazTuHuertoAPI.model.dto.user;
 
 import com.triana.salesianos.HazTuHuertoAPI.validation.annotation.FieldsValueMatch;
 import com.triana.salesianos.HazTuHuertoAPI.validation.annotation.StrongPassword;
+import com.triana.salesianos.HazTuHuertoAPI.validation.annotation.UniqueEmail;
 import com.triana.salesianos.HazTuHuertoAPI.validation.annotation.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,8 +38,8 @@ public class CreateUserRequest {
     private String verifyPassword;
     @NotEmpty(message = "{createUserRequest.fullname.notempty}")
     private String fullName;
-   // @UniqueEmail(message = "{createUserRequest.email.unique}")
     @Email
+    @UniqueEmail(message = "{createUserRequest.email.unique}")
     @NotEmpty(message = "{createUserRequest.email.notempty}")
     private String email;
     @NotEmpty(message = "{createUserRequest.email.notempty}")

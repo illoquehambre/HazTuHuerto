@@ -1,8 +1,8 @@
 package com.triana.salesianos.HazTuHuertoAPI.model;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,7 +11,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,7 +25,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode
+@SQLDelete(sql = "UPDATE table_product SET banned = true WHERE id=?")
+@FilterDef(name = "bannedProductFilter", parameters = @ParamDef(name = "isBanned", type = "boolean"))
+@Filter(name = "bannedProductFilter", condition = "banned = :isBanned")
 public class User implements UserDetails {
 
 
@@ -44,7 +48,7 @@ public class User implements UserDetails {
 
     private String fullName, username, password, email;
     @Builder.Default
-    private String avatar="./uploads/monke2.jpg";
+    private String avatar="monke2.jpg";
     @OneToMany( cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//Bidi
     @Builder.Default
     private List<Question> publishedQuestions=new ArrayList<>();
@@ -60,6 +64,8 @@ public class User implements UserDetails {
     //Escalable conforme recibe likes en preguntas o respuestas.
     private int reputation;
 
+    private boolean banned = Boolean.FALSE;
+
 
 
     @Builder.Default
@@ -69,7 +75,7 @@ public class User implements UserDetails {
     @Builder.Default
     private boolean credentialsNonExpired = true;
     @Builder.Default
-    private boolean enabled = true;//Con esta vamos a bajar una cuenta 
+    private boolean enabled = true;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<UserRole> roles;
@@ -119,5 +125,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

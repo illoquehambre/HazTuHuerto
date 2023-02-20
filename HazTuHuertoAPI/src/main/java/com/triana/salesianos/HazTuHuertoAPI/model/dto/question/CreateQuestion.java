@@ -15,11 +15,11 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class CreateQuestion {
 
-    @NotEmpty(message = "{createUserRequest.username.notempty}")
+    @NotEmpty(message = "{createQuestion.title.notempty}")
     @Size(max = 50)
     private String title;
     @Size(max = 1000, min = 100)
-    @NotEmpty(message = "{createUserRequest.password.notempty}")
+    @NotEmpty(message = "{createQuestion.content.notempty}")
     private String content;
     @URL
     private String urlImg;
