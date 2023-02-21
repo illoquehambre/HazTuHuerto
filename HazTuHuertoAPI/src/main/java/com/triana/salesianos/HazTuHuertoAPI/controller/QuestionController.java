@@ -16,8 +16,10 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -118,6 +122,18 @@ public class QuestionController {
 
         return QuestionDetails.fromQuestion(modified);
 
+    }
+
+    @GetMapping(
+            value = "question/{id}/file",
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+    )
+    public @ResponseBody byte[] getFile(@PathVariable Long id) throws IOException {
+        Question quest=questionService.findById(id);
+        InputStream in = getClass()
+                .getResourceAsStream("/com/baeldung/produceimage/"+quest.getUrlImg());
+        assert in != null;
+        return IOUtils.toByteArray(in);
     }
 
 

@@ -96,13 +96,13 @@ export default function Signup() {
           <input type="email" id="verifyEmail" required name="verifyEmail" autoComplete="on" onChange={(e)=>setVerifyEmail(e.target.value)} ></input>
           <label>Verify Email</label>
         </div>
-        <a onClick={handleSubmit}>
+        <button type="submit">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           Submit
-        </a>
+        </button>
       </form>
     </div>
   );

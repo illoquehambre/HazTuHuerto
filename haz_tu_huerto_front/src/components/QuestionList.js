@@ -2,6 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {useLocation} from 'wouter';
 import NavBar from './NavBar.js'
+import {Link} from 'wouter';
+import "../styles/List.css";
+
 
 
 export default function QuestionList(){
@@ -51,22 +54,31 @@ export default function QuestionList(){
     return(        
         <div>
             <NavBar></NavBar>
-            {
-            <ul className="column">
-            {
-                page.map((question) => (
-                console.log(question),
-                <li key={question.id}>
-                    <ul className="column">
-                        <li>Title: {question.title}</li>
-                        <li>Content: {question.content}</li>
-                        <li>Publisher: {question.publisher.username}</li>
-                    </ul>
-                </li>
-                ))         
-            }          
-            </ul>
-            }
+
+{
+        <div class="courses-container">
+          {page.map(
+            (question) => (
+              console.log(question),
+              (
+                <div class="course" key={question.id}>
+                  <div class="course-info">
+                    <h2>{question.title}</h2>
+                    <h6>{question.content}</h6>
+                                        
+                    <p>Published at: {question.createdAt}</p>
+                    <p>Publisher: {question.publisher.username}</p>
+                    <p>Score: {question.score}</p>           
+                        <button class="btn"><Link to={`/question/${question.id}`}>Ask Question</Link></button>
+                   
+                    
+                  </div>
+                </div>
+              )
+            )
+          )}
+        </div>
+      }
         </div>
     )
         

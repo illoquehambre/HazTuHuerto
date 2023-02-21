@@ -76,13 +76,13 @@ export default function Login() {
           <input type="password" id="password" required name="password" autoComplete="on" onChange={(e)=>setPassword(e.target.value)} ></input>
           <label>Password</label>
         </div>
-        <a onClick={handleSubmit}>
+        <button type="submit">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           Submit
-        </a>
+        </button>
       </form>
     </div>
   );
