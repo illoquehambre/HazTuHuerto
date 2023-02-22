@@ -67,9 +67,7 @@ export default function UserList() {
 
   if (isLoading) {
     return (
-      <div className="App">
-        <h1>Cargando...</h1>
-      </div>
+      <div class="loader"></div>
     );
   }
   return (

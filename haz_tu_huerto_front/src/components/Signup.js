@@ -69,8 +69,7 @@ export default function Signup() {
             <button type="submit">Submit</button>
         </form>
        */
-    <div className="login-box">
-      <h2>Signup</h2>
+ 
       <form noValidate onSubmit={handleSubmit}>
         <div className="user-box">
           <input type="text" id="username" required name="username"  onChange={(e)=>setUsername(e.target.value)}></input>
@@ -104,6 +103,6 @@ export default function Signup() {
           Submit
         </button>
       </form>
-    </div>
+
   );
 }

@@ -65,8 +65,7 @@ export default function Login() {
             <button type="submit">Submit</button>
         </form>
        */
-    <div className="login-box">
-      <h2>Login</h2>
+  
       <form onSubmit={handleSubmit}>
         <div className="user-box">
           <input type="text" id="username" required name="username"  onChange={(e)=>setUsername(e.target.value)}></input>
@@ -84,6 +83,6 @@ export default function Login() {
           Submit
         </button>
       </form>
-    </div>
+  
   );
 }
