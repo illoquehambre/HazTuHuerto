@@ -20,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,7 +70,7 @@ public class QuestionService {
     public PageDto<QuestionResponse> search(List<SearchCriteria> params, Pageable pageable) {
         QuestionSpecificationBuilder questionSpecificationBuilder =
                 new QuestionSpecificationBuilder(params);
-        Specification<Question> spec =  questionSpecificationBuilder.build();
+        Specification<Question> spec =  questionSpecificationBuilder.build(); //Spec queda nulo, porque?
 
         Page<QuestionResponse> pageQuestionResponse = questionRepository.findAll(spec, pageable).map(QuestionResponse::fromQuestion);
         if(pageQuestionResponse.isEmpty())
@@ -79,6 +80,7 @@ public class QuestionService {
 
     public Question save(CreateQuestion newQuest, User user, MultipartFile file) {
         String fileName = storageService.store(file);
+
         return questionRepository.save(
                 Question.builder()
                         .title(newQuest.getTitle())
@@ -97,11 +99,13 @@ public class QuestionService {
             questionRepository.deleteById(id);
 
     }
-
+    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public void addAnswer(Question question, Answer answer, User user){
         question.getAnswers().add(answer);
+        user.getPublishedAnswers().add(answer);
 
     }
+
 
     public Question likeQuestion(User user, Question question){
 

@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -105,6 +107,10 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+    @Transactional
+    public List<Question> getPublishedQuestions() {
+        return publishedQuestions;
     }
 
     @Override

@@ -7,8 +7,7 @@ import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import java.util.List;
 
 public class QuestionSpecificationBuilder extends GenericSpecificationBuilder<Question> {
-    public QuestionSpecificationBuilder(List<SearchCriteria> params) {
-        super(params, Question.class);
+    public QuestionSpecificationBuilder(List<SearchCriteria> params) {super(params, Question.class);
     }
 
 }

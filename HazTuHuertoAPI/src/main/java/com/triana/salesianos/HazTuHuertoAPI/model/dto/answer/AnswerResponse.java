@@ -24,7 +24,7 @@ public class AnswerResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     protected LocalDateTime createdAt;
 
-    private UserResponse publisher;
+    private String publisher;
     //Esto será calculable entre likes y dislikes de alguna manera
     private QuestionResponse question;
 
@@ -33,7 +33,7 @@ public class AnswerResponse {
         return AnswerResponse.builder()
                 .id(answer.getId().toString())
                 .content(answer.getContent())
-                .publisher(UserResponse.fromUser(answer.getPublisher()))
+                .publisher(answer.getPublisher().getUsername())
                 .createdAt(answer.getCreatedAt())
                 .question(QuestionResponse.fromQuestion(answer.getQuestion()))
                 .build();

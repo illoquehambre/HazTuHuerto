@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class GenericSpecificationBuilder<T> {
 
     private List<SearchCriteria> params;
-    private Class type;
-
+    private Class type;// acá está el problema
+    //En vez de llegarle un type Question le llega un "class.com.triana..."
     public Specification<T> build() {
         List<SearchCriteria> checkedParams = params.stream()
                 .filter(p -> QueryableEntity.checkQueryParam(type, p.getKey()))

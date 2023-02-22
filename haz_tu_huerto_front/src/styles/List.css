@@ -26,11 +26,10 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
-	max-width: 100%;
-	overflow: hidden;
-	width: 700px;
-  margin: auto;
-  margin-top: 20px;
+	overflow:hidden;
+	width: 90%;
+ 	 margin: auto;
+ 	 margin-top: 20px;
   
 }
 
@@ -39,6 +38,12 @@ body {
 	margin: 0;
 	letter-spacing: 1px;
 	text-transform: uppercase;
+}
+.course p {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	font-size: small;
 }
 
 .course h2 {
@@ -61,6 +66,14 @@ body {
 	margin-top: 30px;
 	text-decoration: none;
 }
+.course-preview>img{
+	width: 100%;
+}
+.course-preview>p{
+	position: relative;
+
+
+}
 
 .course-info {
 	padding: 30px;
@@ -77,13 +90,17 @@ body {
   font-size: small;
 }
 .progress-container {
-	position: absolute;
-	top: 30px;
-	right: 30px;
-	text-align: right;
 	width: 150px;
 }
-
+.progress-container>h6{
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	text-align: left;
+	font-size: 12px;
+	opacity: 0.6;
+	letter-spacing: 1px;
+}
 .progress {
 	background-color: #ddd;
 	border-radius: 3px;
@@ -103,6 +120,10 @@ body {
 }
 
 .progress-text {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	text-align: right;
 	font-size: 10px;
 	opacity: 0.6;
 	letter-spacing: 1px;

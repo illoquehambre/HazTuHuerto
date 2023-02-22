@@ -81,7 +81,7 @@ public class QuestionController {
                                                     @AuthenticationPrincipal User user) {
 
         Question created = questionService.save(newQuest, user, file);
-
+        userService.addQuestion(created,user);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

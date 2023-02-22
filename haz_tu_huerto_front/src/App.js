@@ -8,6 +8,7 @@ import Page404 from './components/Page404'
 import UserList from './components/UserList'
 import QuestionList from './components/QuestionList'
 import Signup from './components/Signup'
+import QuestionDetails from './components/QuestionDetails'
 import './styles/App.css';
 
 function App() {
@@ -42,6 +43,10 @@ function App() {
               <Route              
                path="/signup"//Para la pagina de error
                 component={Signup}
+              />
+              <Route              
+               path="/question/:id"//Para la pagina de error
+                component={QuestionDetails}
               />
               <Route              
                path="/:rest*"//Para la pagina de error

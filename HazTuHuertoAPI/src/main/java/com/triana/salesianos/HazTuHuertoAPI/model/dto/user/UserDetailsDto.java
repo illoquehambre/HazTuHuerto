@@ -18,13 +18,13 @@ public class UserDetailsDto extends UserResponse{
 
     private List<Question> publishedQuestions;
 
-
     private List<Answer> publishedAnswers;
 
     private List<Question> favPosts;//Lo vamos a dejar por ahora
 
     //Escalable conforme recibe likes en preguntas o respuestas.
     private int reputation;
+    private String email;
 
 
 
@@ -40,6 +40,7 @@ public class UserDetailsDto extends UserResponse{
                 .publishedAnswers(user.getPublishedAnswers())
                 .favPosts(user.getFavPosts())
                 .reputation(user.getReputation())
+                .email(user.getEmail())
                 .build();
     }
 }

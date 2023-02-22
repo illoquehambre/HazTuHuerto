@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import NavBar from "./NavBar.js";
 import "../styles/List.css";
-import {Link} from 'wouter';
+import { Link } from 'wouter';
+import Picture from './Picture'
 
 
 
@@ -15,15 +16,15 @@ export default function UserList() {
   console.log(name);
   const apiUrl = `http://localhost:8080/`;
   const [img, setImg] = useState();
-
-  async function fetchImage(name){
-    const res = await fetch(apiUrl+'download/'+name, {
-        method: "GET",
-        headers: {
-          "Content-Type": "image/jpeg",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
+  
+  async function fetchImage(name) {
+    const res = await fetch(apiUrl + 'download/' + name, {
+      method: "GET",
+      headers: {
+        "Content-Type": "image/jpeg",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
     });
     const imageBlob = await res.blob();
     const imageObjectURL = URL.createObjectURL(imageBlob);
@@ -32,7 +33,7 @@ export default function UserList() {
   };
 
   useEffect(function () {
-    fetch(apiUrl+'user', {
+    fetch(apiUrl + 'user', {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,13 +54,13 @@ export default function UserList() {
       .catch((error) => {
         console.log(error);
         setLocation("/Page404");
-      });   
-      
+      });
+
     setIsLoading(false);
 
 
   }, []);
- 
+
 
 
 
@@ -74,19 +75,21 @@ export default function UserList() {
   return (
     <div>
       <NavBar></NavBar>
-           {
+      {
         <div className="courses-container">
           {page.map(
             (user) => (
-              
-              (    
+
+              (
                 <div className="course" key={user.id}>
                   <div className="course-preview">
+                    <Picture keyword={user.avatar}></Picture>
+                    {/*
                     <img src={fetch(`http://localhost:8080/download/${user.avatar}`,{
                         method: "GET",
                         headers: {
                           "Content-Type": "image/jpeg",
-                          "Accept": "*/*",
+                          "Accept": "application/json",
                           "Authorization": `Bearer ${localStorage.getItem("token")}`,
                         }
                     }).then((res) => {
@@ -100,9 +103,10 @@ export default function UserList() {
                         console.log(error);
                         setLocation("/user/Programer12");
                       })   
-                    }></img>
+                    }></img>*/}
                   </div>
                   <div className="course-info">
+                    
                     <h6>{user.fullName}</h6>
                     <h2>{user.username}</h2>
                     <p>User since: {user.createdAt}</p>

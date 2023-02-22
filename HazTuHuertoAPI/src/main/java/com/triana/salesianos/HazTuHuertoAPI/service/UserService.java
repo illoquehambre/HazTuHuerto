@@ -2,6 +2,8 @@ package com.triana.salesianos.HazTuHuertoAPI.service;
 
 import com.triana.salesianos.HazTuHuertoAPI.exception.NoMatchPasswordException;
 import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
+import com.triana.salesianos.HazTuHuertoAPI.model.Answer;
+import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
@@ -22,11 +24,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
@@ -176,7 +179,11 @@ public class UserService {
     public boolean checkUserLogedInQuestion(UUID userId, Long questionId) {
         return userRepository.checkUserLogedInQuestion(userId,questionId);
     }
+    @Transactional
+    public void addQuestion(Question question,  User user){
+        user.getPublishedQuestions().add(question);
 
+    }
 
 
 
