@@ -20,9 +20,7 @@
 					FRONTEND
 ***********************************************************************************************************
 
-Subir archivos 5  
-Perfil usuario 5
-Paginación/infinite list 4
+Subir archivos 5   
 Crear/eliminar pregunta/respuesta 4
 Editar perfil 4
 Cambiar contraseña 3
@@ -30,9 +28,8 @@ Dar like 3
 Banear Usuario 3
 Buscador 2
 Mostrar botones dependiendo de Rol 2
-Fusionar Login/signup 2
 Ordenación de listados por fecha y puntuación 2
-
+-Personalizar Search criteria para mostrar tamaño de listas
 -Poner bonito
 
 -Voy a llorar
@@ -40,7 +37,7 @@ Ordenación de listados por fecha y puntuación 2
 ********************************************************************************************************
 					Errores
 ***************************************************************************************************
-- Search criteria no va
-- No se guardan los datos de las oneToMany con User
-- Subir archivos, no pilla bien el id
-- La imagen de perfilcarga cuando quiere
+
+- Subir archivos no va (Problema de CORS)
+- La imagen de perfil carga cuando quiere (undefined)
+- Cambiar contraseña (Problema de CORS)

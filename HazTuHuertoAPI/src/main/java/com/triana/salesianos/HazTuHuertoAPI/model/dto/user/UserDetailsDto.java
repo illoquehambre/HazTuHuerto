@@ -3,12 +3,15 @@ package com.triana.salesianos.HazTuHuertoAPI.model.dto.user;
 import com.triana.salesianos.HazTuHuertoAPI.model.Answer;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +28,7 @@ public class UserDetailsDto extends UserResponse{
     //Escalable conforme recibe likes en preguntas o respuestas.
     private int reputation;
     private String email;
+    private Set<UserRole> roles;
 
 
 
@@ -41,6 +45,7 @@ public class UserDetailsDto extends UserResponse{
                 .favPosts(user.getFavPosts())
                 .reputation(user.getReputation())
                 .email(user.getEmail())
+                .roles(user.getRoles())
                 .build();
     }
 }

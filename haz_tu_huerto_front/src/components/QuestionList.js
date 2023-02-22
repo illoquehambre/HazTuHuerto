@@ -76,7 +76,7 @@ export default function QuestionList() {
                     </div>
                     
                     <h6>{question.content}</h6>
-                    <button className="btn"><Link to={`/question/${question.id}`}>Ask Question</Link></button>
+                    <button className="btn"><Link to={`/question/${question.id}`}>Details</Link></button>
 
 
                   </div>

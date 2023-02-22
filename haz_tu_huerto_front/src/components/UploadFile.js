@@ -10,6 +10,7 @@ export default function FileUploadSingle() {
         const changeHandler = (event) => {//cambiar este método para pillarlo como en login
             setSelectedFile(event.target.files[0]);
             console.log(event.target.value)//Este array está vacio pero no debería
+            console.log(event.target.files)
             setIsSelected(true);
         };
 
@@ -20,7 +21,8 @@ export default function FileUploadSingle() {
                 "fullName": "Pacooooo"
             }
             console.log(JSON.parse(JSON.stringify(name)))
-            formData.append('File', selectedFile);
+            formData.append('file', selectedFile);
+            console.log(selectedFile)
             formData.append('editUser', JSON.parse(JSON.stringify(name)) )
 
             fetch(
@@ -28,10 +30,12 @@ export default function FileUploadSingle() {
                 {
                     method: 'PUT',
                     body: formData,
+                    
                     headers: {
                     "Content-Type":"multipart/form-data",
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    "Accept": "*/*",
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    "Access-Control-Allow-Origin":"*"
                     }
                 }
             )

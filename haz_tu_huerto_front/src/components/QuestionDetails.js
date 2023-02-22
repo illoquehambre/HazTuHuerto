@@ -4,7 +4,7 @@ import { useLocation } from 'wouter';
 import NavBar from './NavBar.js'
 import { Link } from 'wouter';
 import "../styles/List.css";
-
+import AskQuestion from './modals/AskQuesquion'
 
 
 export default function QuestionDetails() {
@@ -74,7 +74,7 @@ export default function QuestionDetails() {
                         </div>
 
                         <h6>{question.content}</h6>
-                        <button className="btn"><Link to={`/question/${question.id}`}>Ask Question</Link></button>
+                        <AskQuestion id={question.id}></AskQuestion>
 
 
                     </div>

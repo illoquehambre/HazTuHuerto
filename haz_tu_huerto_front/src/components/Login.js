@@ -24,6 +24,7 @@ export default function Login() {
   const [password, setPassword] = useState();
 
   const handleSubmit = async (e) => {
+    console.log(e)
     e.preventDefault();
     const response = await loginUser({
       username,

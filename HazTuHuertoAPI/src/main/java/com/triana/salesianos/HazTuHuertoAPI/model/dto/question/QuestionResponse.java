@@ -27,6 +27,7 @@ public class QuestionResponse {
     private UserResponse publisher;
     //Esto será calculable entre likes y dislikes de alguna manera
     private int score;
+    private int answers;
 
     public static QuestionResponse fromQuestion(Question quest) {
 
@@ -37,6 +38,7 @@ public class QuestionResponse {
                 .publisher(UserResponse.fromUser(quest.getPublisher()))
                 .createdAt(quest.getCreatedAt())
                 .score(quest.getLikes().size())
+                .answers(quest.getAnswers().size())
                 .build();
     }
 

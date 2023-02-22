@@ -12,6 +12,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import Stack from '@mui/material/Stack';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { borderRadius, rgbToHex } from "@mui/system";
 const style = {
   position: "absolute",
   top: "50%",
@@ -22,30 +23,23 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  whiteSpace: 'normal',
+  flexDirection: 'column',
+  flexDirection: 'column'
 };
-const center = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+const btn ={
+    position: "absolute",
+    bottom: "5%",
+    right: "5%",
+    bgcolor: "purple",
+    color: "white",
+
 };
 
-async function createQuest(credentials) {
-  /*
-  const [selectedFile, setSelectedFile] = useState();
-  const [isSelected, setIsSelected] = useState(false);
-  const formData = new FormData();
-            const name = {
-                "title": "Pacooooo",
-                "content": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-            }
-            console.log(JSON.parse(JSON.stringify(name)))
-            formData.append('file', selectedFile);
-            console.log(selectedFile)
 
-            formData.append('newQuest', JSON.parse(JSON.stringify(name)) )
-            */
-  return fetch("http://localhost:8080/question/", {
+async function createQuest(credentials, id) {
+
+  return fetch(`http://localhost:8080/answer/question/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -53,13 +47,16 @@ async function createQuest(credentials) {
       "Authorization": `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(credentials),
-  }).then((data) => data.json());
+  }).then((data) =>{
+    data.json()
+    console.log(data)
+  } );
 
   //localStorage.setItem(JSON.stringify(result))
 }
-export default function CreateQuestion() {
+export default function CreateQuestion(id) {
   
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [open, setOpen] = React.useState(false);
@@ -69,36 +66,15 @@ export default function CreateQuestion() {
   const handleSubmit = async (e) => {
    
     const response = await createQuest({
-      title,
       content,
-    });
-    if ("token" in response) {
-      console.log(response);
-      Swal.fire({
-        icon: "success",
-        title: "oleeee",
-        text: "Welcome",
-        showConfirmButton: false,
-        timer: 2000,
-      }).then(() => {
-        const name = response["username"];
-        //localStorage.setItem('user', JSON.stringify(response['user']));
-        handleClose()
-      });
-    } else {
-      console.log(response);
-      console.log(response.status);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: response.message,
-      });
-    }
+    },id.id);
+    handleClose()
+    setLocation(location)
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button sx={btn} onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -110,18 +86,8 @@ export default function CreateQuestion() {
            New Question
           </Typography>
 
-          <FormControl center  fullWidth onSubmit={handleSubmit}>
-            <Box className="user-box">
-              <TextField
-                id="filled-textarea"
-                label="Title"
-                placeholder="Placeholder"
-                multiline="true"
-                variant="standard"
-                onChange={(e)=>setTitle(e.target.value)}
-              />
-            </Box>
-            <Box  className="user-box">
+          <FormControl sx={{width:200}} onSubmit={handleSubmit}>
+           
               <TextareaAutosize
                 id="filled-textarea"
                 minRows={3}                
@@ -131,7 +97,6 @@ export default function CreateQuestion() {
                 
                 onChange={(e)=>setContent(e.target.value)}
               />
-            </Box>
             <Stack direction="row" spacing={2}>
               <LoadingButton
                 loading={false}
