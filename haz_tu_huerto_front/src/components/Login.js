@@ -68,11 +68,11 @@ export default function Login() {
   
       <form onSubmit={handleSubmit}>
         <div className="user-box">
-          <input type="text" id="username" required name="username"  onChange={(e)=>setUsername(e.target.value)}></input>
+          <input type="text" id="logUsername" required name="username"  onChange={(e)=>setUsername(e.target.value)}></input>
           <label>Username</label>
         </div>
         <div className="user-box">
-          <input type="password" id="password" required name="password" autoComplete="on" onChange={(e)=>setPassword(e.target.value)} ></input>
+          <input type="password" id="logPassword" required name="password" autoComplete="on" onChange={(e)=>setPassword(e.target.value)} ></input>
           <label>Password</label>
         </div>
         <button type="submit">

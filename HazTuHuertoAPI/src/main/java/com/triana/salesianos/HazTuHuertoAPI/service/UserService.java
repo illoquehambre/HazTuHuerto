@@ -179,11 +179,7 @@ public class UserService {
     public boolean checkUserLogedInQuestion(UUID userId, Long questionId) {
         return userRepository.checkUserLogedInQuestion(userId,questionId);
     }
-    @Transactional
-    public void addQuestion(Question question,  User user){
-        user.getPublishedQuestions().add(question);
 
-    }
 
 
 

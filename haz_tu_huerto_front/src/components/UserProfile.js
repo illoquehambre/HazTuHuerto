@@ -7,6 +7,7 @@ import Picture from './Picture'
 import { Helmet } from "react-helmet";
 import UploadFile from './UploadFile'
 import {Link} from 'wouter';
+import CreateQuestion from './modals/CreateQuestion'
 export default function UserProfile() {
     const [location, setLocation] = useLocation();
     const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +83,6 @@ export default function UserProfile() {
                             <div className="profile-userpic">
                                 <Picture keyword={user.avatar}></Picture>
                             </div>
-
                             <div className="profile-usertitle">
                                 <div className="profile-usertitle-name">
                                     {user.username}
@@ -138,6 +138,7 @@ export default function UserProfile() {
                             </nav>
                             <div className="tab-content text-dark" id="nav-tabContent">
                                 <div className="tab-pane fade show active " id="nav-Question" role="tabpanel" aria-labelledby="nav-Question-tab">
+                                   <CreateQuestion></CreateQuestion>
                                     {
                                         <div className="courses-container">
                                             {questions.map(
@@ -146,7 +147,7 @@ export default function UserProfile() {
                                                     (
                                                         <div className="course" key={question.id}>
                                                             <div className="course-preview">
-                                                                <h6>{question.publisher.username}</h6>
+                                                                <h6>{question.publisher}</h6>
                                                                 <h3>{question.title}</h3>
                                                                 <p>Score:</p>
 
@@ -172,7 +173,9 @@ export default function UserProfile() {
                                 </div>
                                 <div className="tab-pane fade" id="nav-Answer" role="tabpanel" aria-labelledby="nav-Answer-tab">...</div>
                                 <div className="tab-pane fade" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">...</div>
-                                <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><UploadFile id={user.id}></UploadFile></div>
+                                <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <UploadFile></UploadFile>
+                                    </div>
                             </div>
                         </div>
                     </div>

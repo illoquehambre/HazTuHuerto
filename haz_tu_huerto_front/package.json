@@ -4,6 +4,11 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/lab": "^5.0.0-alpha.120",
+    "@mui/material": "^5.11.10",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,7 +17,7 @@
     "react-helmet": "^6.1.0",
     "react-scripts": "5.0.1",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.7.2",
+    "sweetalert2": "^11.4.8",
     "web-vitals": "^2.1.4",
     "wouter": "^2.10.0"
   },

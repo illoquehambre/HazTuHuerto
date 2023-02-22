@@ -99,12 +99,7 @@ public class QuestionService {
             questionRepository.deleteById(id);
 
     }
-    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
-    public void addAnswer(Question question, Answer answer, User user){
-        question.getAnswers().add(answer);
-        user.getPublishedAnswers().add(answer);
 
-    }
 
 
     public Question likeQuestion(User user, Question question){

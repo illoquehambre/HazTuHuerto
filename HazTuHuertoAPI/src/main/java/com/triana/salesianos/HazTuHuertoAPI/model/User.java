@@ -51,11 +51,11 @@ public class User implements UserDetails {
     private String fullName, username, password, email;
     @Builder.Default
     private String avatar="monke2.jpg";
-    @OneToMany( cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//Bidi
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//Bidi
     @Builder.Default
     private List<Question> publishedQuestions=new ArrayList<>();
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Bidi
+    @OneToMany(mappedBy = "publisher",cascade = CascadeType.DETACH, fetch = FetchType.LAZY)//Bidi
     @Builder.Default
     private List<Answer> publishedAnswers=new ArrayList<>();
 
@@ -144,5 +144,14 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+
+    public void addQuestion(Question question){
+        this.getPublishedQuestions().add(question);
+    }
+    public void addAnswer(Question question, Answer answer){
+        question.getAnswers().add(answer);
+        this.getPublishedAnswers().add(answer);
     }
 }

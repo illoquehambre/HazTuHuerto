@@ -1,14 +1,15 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useEffect } from "react";
 
-export default function FileUploadSingle(id) {
-    const apiUrl = `http://localhost:8080/user/${id}`
-  
+export default function FileUploadSingle() {
+    const apiUrl = `http://localhost:8080/user/`
+
         const [selectedFile, setSelectedFile] = useState();
         const [isSelected, setIsSelected] = useState(false);
-
-        const changeHandler = (event) => {
+        console.log()
+        const changeHandler = (event) => {//cambiar este método para pillarlo como en login
             setSelectedFile(event.target.files[0]);
+            console.log(event.target.value)//Este array está vacio pero no debería
             setIsSelected(true);
         };
 
@@ -25,10 +26,13 @@ export default function FileUploadSingle(id) {
             fetch(
                 apiUrl,
                 {
-                    method: 'POST',
+                    method: 'PUT',
                     body: formData,
-                    Accept: "application/json",
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    headers: {
+                    "Content-Type":"multipart/form-data",
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 }
             )
                 .then((response) => response.json())

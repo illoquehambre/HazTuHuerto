@@ -72,11 +72,11 @@ export default function Signup() {
  
       <form noValidate onSubmit={handleSubmit}>
         <div className="user-box">
-          <input type="text" id="username" required name="username"  onChange={(e)=>setUsername(e.target.value)}></input>
+          <input type="text" id="signUsername" required name="username"  onChange={(e)=>setUsername(e.target.value)}></input>
           <label>Username</label>
         </div>
         <div className="user-box">
-          <input type="password" id="password" required name="password" autoComplete="on" onChange={(e)=>setPassword(e.target.value)} ></input>
+          <input type="password" id="signPassword" required name="password" autoComplete="on" onChange={(e)=>setPassword(e.target.value)} ></input>
           <label>Password</label>
         </div>
         <div className="user-box">

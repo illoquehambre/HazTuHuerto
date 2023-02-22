@@ -8,6 +8,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.EditUser;
 import com.triana.salesianos.HazTuHuertoAPI.repository.QuestionRepository;
+import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.service.QuestionService;
@@ -42,6 +43,7 @@ public class QuestionController {
     private final QuestionService questionService;
     private final UserService userService;
     private final QuestionRepository questionRepository;
+    private final UserRepository userRepository;
 
     //VerTodasLasPreguntasDETodosLosUsuarios
 
@@ -79,9 +81,10 @@ public class QuestionController {
     public ResponseEntity<QuestionDetails> register(@RequestPart("file") MultipartFile file,
                                                     @Valid @RequestPart("newQuest") CreateQuestion newQuest,
                                                     @AuthenticationPrincipal User user) {
-
+        User userFound=userService.findById(user.getId());
         Question created = questionService.save(newQuest, user, file);
-        userService.addQuestion(created,user);
+        userFound.addQuestion(created);
+        userRepository.save(userFound);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

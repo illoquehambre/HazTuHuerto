@@ -9,6 +9,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.dto.answer.CreateAnswer;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.CreateQuestion;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
+import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteriaExtractor;
 import com.triana.salesianos.HazTuHuertoAPI.service.AnswerService;
@@ -42,6 +43,7 @@ public class AnswerController {
     private final AnswerService answerService;
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
 
     @GetMapping("/answer")
@@ -70,9 +72,11 @@ public class AnswerController {
     @PostMapping("/answer/question/{questId}")
     public ResponseEntity<AnswerResponse> register(@Valid @RequestBody CreateAnswer newAnswer,
                                                     @AuthenticationPrincipal User user, @PathVariable Long questId){
+        User foundUser = userService.findById(user.getId());
         Question quest = questionService.findById(questId);
         Answer created = answerService.save(newAnswer, user, quest);
-        questionService.addAnswer(quest, created, user);
+        foundUser.addAnswer(quest, created);
+        userRepository.save(foundUser);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
