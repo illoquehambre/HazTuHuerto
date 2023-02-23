@@ -38,6 +38,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @OpenAPIDefinition(info = @Info(title ="Haz-Tu-Huerto"))
 @Tag(name = "Question", description = "This class implements Restcontrollers for the Entity Question")
+@CrossOrigin("http://localhost:3000")
 public class QuestionController {
 
     private final QuestionService questionService;

@@ -52,6 +52,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @OpenAPIDefinition(info = @Info(title ="Haz-Tu-Huerto"))
 @Tag(name = "User", description = "This class implements Restcontrollers for the Entity User")
+@CrossOrigin("http://localhost:3000")
 public class UserController {
     private final UserService userService;
     private final AuthenticationManager authManager;

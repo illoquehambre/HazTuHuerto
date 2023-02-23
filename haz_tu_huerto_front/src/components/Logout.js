@@ -9,6 +9,7 @@ export default function Logout() {
     const [, setLocation] = useLocation();
     const logOut = async (e) => {
         e.preventDefault();
+        localStorage.removeItem('username')
         localStorage.removeItem('token')
         setLocation('/')
     };

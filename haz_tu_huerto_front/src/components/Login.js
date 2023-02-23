@@ -42,7 +42,9 @@ export default function Login() {
       }).then(() => {
         
         localStorage.setItem("token", response["token"]);
+        localStorage.setItem("username", response["username"]);
         console.log(localStorage.getItem("token"));
+        console.log(localStorage.getItem("username"));
         const name = response["username"];
         //localStorage.setItem('user', JSON.stringify(response['user']));
         setLocation(`/user/${name}`);

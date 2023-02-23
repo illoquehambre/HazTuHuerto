@@ -46,8 +46,6 @@ export default function Signup() {
         showConfirmButton: false,
         timer: 2000,        
   
-      }).then(() => {
-        setLocation('login')
       })
     } else {
       console.log(response);

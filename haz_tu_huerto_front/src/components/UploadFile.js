@@ -24,7 +24,7 @@ export default function FileUploadSingle() {
             formData.append('file', selectedFile);
             console.log(selectedFile)
             formData.append('editUser', JSON.parse(JSON.stringify(name)) )
-
+            console.log(formData.getAll())
             fetch(
                 apiUrl,
                 {
@@ -32,10 +32,11 @@ export default function FileUploadSingle() {
                     body: formData,
                     
                     headers: {
-                    "Content-Type":"multipart/form-data",
+                    "Content-Type":"multipart/form-data;boundary=-",
                     "Accept": "*/*",
                     "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                    "Access-Control-Allow-Origin":"*"
+                    "Access-Control-Allow-Origin":"*",
+                    "type": "formData"
                     }
                 }
             )

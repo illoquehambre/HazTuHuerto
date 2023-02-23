@@ -21,10 +21,6 @@ function App() {
                 component={Home}
               />
               <Route              
-                path="/login"
-                component={Login}
-              />
-              <Route              
                 path="/success"
                 component={Success}
               />
@@ -39,10 +35,6 @@ function App() {
               <Route              
                path="/question"
                 component={QuestionList}
-              />
-              <Route              
-               path="/signup"//Para la pagina de error
-                component={Signup}
               />
               <Route              
                path="/question/:id"//Para la pagina de error

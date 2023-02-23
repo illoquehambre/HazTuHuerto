@@ -16,10 +16,33 @@ async function changePassword(credentials) {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        "Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify(credentials),
     }).then((data) => data.json());
+
+}
+ function deleteQuest(id) {
+    console.log(id)
+    fetch(`http://localhost:8080/question/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+
+}
+function deleteAns(id) {
+    console.log(id)
+    fetch(`http://localhost:8080/answer/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      }
+    })
 
 }
 
@@ -31,13 +54,14 @@ export default function UserProfile() {
     const [user, setUser] = useState([])
     const [questions, setQuestions] = useState([])
     const [answers, setAnswers] = useState([])
+    const [avatar, setAvatar]=useState('monke2.jpg')
     const name = location.split('/').reverse()[0]
     console.log(name)
     const apiUrl = `http://localhost:8080/user/${name}`
 
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
-    const [verifyNewPassword, setVerifyNewPassword] = useState();
+    const [newVerifyPassword, setVerifyNewPassword] = useState();
   
     const handleSubmit = async (e) => {
       console.log(e)
@@ -45,7 +69,7 @@ export default function UserProfile() {
       const response = await changePassword({
         oldPassword,
         newPassword,
-        verifyNewPassword
+        newVerifyPassword
       });
       if ("id" in response) {
         console.log(response);
@@ -67,19 +91,34 @@ export default function UserProfile() {
         })
       }
     };
+/*
+    const deleteQuestion = async (e) => {
+        console.log(e)
+        e.preventDefault();
+        const response = await deleteQuest();
+        if ("result" in response) {
+            console.log(response);
+            console.log(response.status);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: response.message,
+      
+          });
+        } else {
+            console.log(response);
+            Swal.fire({
+              icon: 'success',
+              title: 'oleeee',
+              text: 'Welcome',
+              showConfirmButton: false,
+              timer: 2000,
 
-    function deleteQuest(id) {
-        console.log(id)
-        return fetch(`http://localhost:8080/question/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Accept": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-    
-    }
-
+          
+          })
+        }
+      };
+*/
     useEffect(function () {
         fetch(apiUrl, {
             method: 'GET',
@@ -100,6 +139,8 @@ export default function UserProfile() {
                 setUser(data)
                 setQuestions(data.publishedQuestions)
                 setAnswers(data.publishedAnswers)
+                setAvatar(data.avatar)
+                console.log(data.avatar)
                 localStorage.setItem('roles', data.roles)
                 console.log(data)
                 console.log(data.publishedQuestions)
@@ -146,7 +187,7 @@ export default function UserProfile() {
                         <div className="profile-sidebar">
 
                             <div className="profile-userpic">
-                                <Picture keyword={user.avatar}></Picture>
+                                <Picture keyword={avatar}></Picture>
                             </div>
                             <div className="profile-usertitle">
                                 <div className="profile-usertitle-name">
@@ -226,7 +267,7 @@ export default function UserProfile() {
                                                                 </div>
 
                                                                 <h6>{question.content}</h6>
-                                                                <button className="btn" onClick={deleteQuest(question.id)}>Delete</button>
+                                                                <button className="btn" onClick={()=>deleteQuest(question.id)}>Delete</button>
 
 
                                                             </div>
@@ -257,7 +298,7 @@ export default function UserProfile() {
                                                                     </div>
 
                                                                     <h6>{answer.content}</h6>
-
+                                                                    <button className="btn" onClick={()=>deleteAns(answer.id)}>Delete</button>
 
                                                                 </div>
 

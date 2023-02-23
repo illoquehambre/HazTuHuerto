@@ -18,8 +18,8 @@ export default function Picture({ keyword }) {
             method: "GET",
             headers: {
                 "Content-Type": "image/jpeg",
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
             }
         });
         const imageBlob = await res.blob();

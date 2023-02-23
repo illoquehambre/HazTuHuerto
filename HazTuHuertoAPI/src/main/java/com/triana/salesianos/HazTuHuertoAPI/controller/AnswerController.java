@@ -34,6 +34,7 @@ import java.util.List;
 @AllArgsConstructor
 @OpenAPIDefinition(info = @Info(title ="Haz-Tu-Huerto"))
 @Tag(name = "Answers", description = "This class implements Restcontrollers for the Entity Answers")
+@CrossOrigin("http://localhost:3000")
 public class AnswerController {
 
 
