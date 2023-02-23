@@ -74,7 +74,7 @@ export default function CreateQuestion(id) {
 
   return (
     <div>
-      <Button sx={btn} onClick={handleOpen}>Open modal</Button>
+      <Button sx={btn} onClick={handleOpen}>Reply</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -83,7 +83,7 @@ export default function CreateQuestion(id) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-           New Question
+           New Answer
           </Typography>
 
           <FormControl sx={{width:200}} onSubmit={handleSubmit}>

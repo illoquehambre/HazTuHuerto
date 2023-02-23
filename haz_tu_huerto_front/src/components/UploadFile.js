@@ -21,10 +21,11 @@ export default function FileUploadSingle() {
                 "fullName": "Pacooooo"
             }
             console.log(JSON.parse(JSON.stringify(name)))
-            formData.append('file', selectedFile);
+            
             console.log(selectedFile)
-            formData.append('editUser', JSON.parse(JSON.stringify(name)) )
-            console.log(formData.getAll())
+            formData.append('editUser', JSON.parse(JSON.stringify(name)))
+            formData.append('file', selectedFile);
+            console.log(formData)
             fetch(
                 apiUrl,
                 {
