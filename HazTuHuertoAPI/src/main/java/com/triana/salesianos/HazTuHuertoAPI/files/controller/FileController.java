@@ -4,6 +4,15 @@ package com.triana.salesianos.HazTuHuertoAPI.files.controller;
 import com.triana.salesianos.HazTuHuertoAPI.files.dto.FileResponse;
 import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.files.utils.MediaTypeUrlResource;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.answer.AnswerResponse;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionDetails;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -24,6 +33,20 @@ public class FileController {
 
 
     //sube varios archivos
+    @Operation(summary = "This method creates upload more than one file at once")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "The files were successfully uploaded"),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed no do this request",
+                    content = @Content),
+            @ApiResponse(responseCode = "401",
+                    description = "You are not allowed no do this request",
+                    content = @Content),
+    })
     @PostMapping("/upload/files")
     public ResponseEntity<?> upload(@RequestPart("files") MultipartFile[] files) {
 
@@ -40,6 +63,20 @@ public class FileController {
     }
 
     //sube un archivo
+    @Operation(summary = "This method upload one file")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "The files were successfully uploaded"),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed no do this request",
+                    content = @Content),
+            @ApiResponse(responseCode = "401",
+                    description = "You are not allowed no do this request",
+                    content = @Content),
+    })
     @PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestPart("file") MultipartFile file) {
 
@@ -65,6 +102,26 @@ public class FileController {
     }
 
     //pa descargar
+    @Operation(summary = "This method download a Resource")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "The files were successfully downloaded",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Resource.class))
+                    )}),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+            @ApiResponse(responseCode = "404",
+                    description = "The fileName was not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed no do this request",
+                    content = @Content),
+            @ApiResponse(responseCode = "401",
+                    description = "You are not allowed no do this request",
+                    content = @Content),
+    })
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String filename){
         MediaTypeUrlResource resource =

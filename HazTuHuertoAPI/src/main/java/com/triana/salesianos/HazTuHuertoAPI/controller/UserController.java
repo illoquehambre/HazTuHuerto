@@ -48,6 +48,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+class UserPageResponse extends PageDto<UserResponse>{}
 @RestController
 @RequiredArgsConstructor
 @OpenAPIDefinition(info = @Info(title ="Haz-Tu-Huerto"))
@@ -89,7 +90,7 @@ public class UserController {
     @Operation(summary = "This method creates a new admin user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
-                    description = "Se ha creado una nueva aportacion",
+                    description = "A new Admin user was successfully created",
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
                             examples = @ExampleObject(value = """
@@ -222,7 +223,7 @@ public class UserController {
             @ApiResponse(responseCode = "200",
                     description = "At least one User was found",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = UserPageResponse.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -267,7 +268,7 @@ public class UserController {
             @ApiResponse(responseCode = "200",
                     description = "At least one User was found",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = UserPageResponse.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -303,7 +304,7 @@ public class UserController {
 
     }
 
-    @Operation(summary = "This methos bann or unbann a user")
+    @Operation(summary = "This method bann or unbann a user. However, the quests and answers published are not being modified.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204",
                     description = "No content ",
@@ -312,6 +313,7 @@ public class UserController {
                     description = "You are not allowed to do this request",
                     content = @Content),
     })
+
     @DeleteMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned? 
     public ResponseEntity<?> bannUser(@PathVariable UUID id) {
 
@@ -391,6 +393,8 @@ public class UserController {
         return UserResponse.fromUser(edited);
 
     }
+
+    //No se llega a usar
     @GetMapping(value = "/user/{name}/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> image(@PathVariable String name) throws IOException {
         User user= userService.findByUsername(name);
