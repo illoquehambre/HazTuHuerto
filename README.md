@@ -245,4 +245,5 @@ Revisar el documento TODO.txt el cual indica todo aquello que no se ha podido ha
 [ ] Fix possible future errors
 ___
 
+<img src="https://ibb.co/Tk8gjzG" alt="meme" width="100%"/>
 
