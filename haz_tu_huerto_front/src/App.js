@@ -10,9 +10,11 @@ import QuestionList from './components/QuestionList'
 import Signup from './components/Signup'
 import QuestionDetails from './components/QuestionDetails'
 import './styles/App.css';
+import { Helmet,HelmetProvider  } from "react-helmet-async";
 
 function App() {
   return (
+    <HelmetProvider>
     <div className="App">
       <header className="App-header">
       <Switch>
@@ -48,6 +50,7 @@ function App() {
             </Switch>
       </header>
     </div>
+    </HelmetProvider>
   );
 }
 

@@ -6,6 +6,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.answer.AnswerResponse;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.UserResponse;
+import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ import java.util.List;
 @Builder
 public class QuestionDetails {
 
+
     protected String id;
 
     protected String title, content, urlImg;
@@ -28,11 +30,13 @@ public class QuestionDetails {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     protected LocalDateTime createdAt;
 
-    private String publisher;
+    protected String publisher;
     //Esto será calculable entre likes y dislikes de alguna manera
-    private int score;
+    protected int score;
 
-    private List<AnswerResponse> answers;
+    protected List<AnswerResponse> answers;
+
+    protected Boolean likedByLoguedUser;//El valor de este atributo dependerá de si el usuario logueado le ha dado o no like
 
     public static QuestionDetails fromQuestion(Question quest) {
 
@@ -44,7 +48,22 @@ public class QuestionDetails {
                 .createdAt(quest.getCreatedAt())
                 .score(quest.getLikes()==null||quest.getLikes().isEmpty()?0:quest.getLikes().size())
                 .urlImg(quest.getUrlImg())
-                .answers(quest.getAnswers().stream().map(AnswerResponse::fromAnswer).toList())//Solucionar caso de nulos(Preguntar a Antonio)
+                .answers(quest.getAnswers().stream().map(AnswerResponse::fromAnswer).toList())
+                .likedByLoguedUser(false)
+                .build();
+    }
+    public static QuestionDetails fromQuestion(Question quest,Boolean like) {
+
+        return QuestionDetails.builder()
+                .id(quest.getId().toString())
+                .title(quest.getTitle())
+                .content(quest.getContent())
+                .publisher(quest.getPublisher().getUsername())
+                .createdAt(quest.getCreatedAt())
+                .score(quest.getLikes()==null||quest.getLikes().isEmpty()?0:quest.getLikes().size())
+                .urlImg(quest.getUrlImg())
+                .answers(quest.getAnswers().stream().map(AnswerResponse::fromAnswer).toList())
+                .likedByLoguedUser(like)
                 .build();
     }
 }

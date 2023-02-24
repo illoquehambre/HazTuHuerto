@@ -9,6 +9,7 @@ import UploadFile from './UploadFile'
 import Swal from "sweetalert2";
 import { Link } from 'wouter';
 import CreateQuestion from './modals/CreateQuestion'
+import Logout from "./Logout.js";
 
 async function changePassword(credentials) {
     return fetch("http://localhost:8080/user/changePassword", {
@@ -91,73 +92,75 @@ export default function UserProfile() {
         })
       }
     };
-/*
-    const deleteQuestion = async (e) => {
-        console.log(e)
-        e.preventDefault();
-        const response = await deleteQuest();
-        if ("result" in response) {
-            console.log(response);
-            console.log(response.status);
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: response.message,
-      
-          });
-        } else {
-            console.log(response);
-            Swal.fire({
-              icon: 'success',
-              title: 'oleeee',
-              text: 'Welcome',
-              showConfirmButton: false,
-              timer: 2000,
-
-          
-          })
-        }
-      };
-*/
-    useEffect(function () {
-        fetch(apiUrl, {
+    async function getUser(){
+        return fetch(apiUrl, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
-        })
-            .then(res => {
-
-                if (res.ok) {
-                    return res.json();
+        }).then(res => {
+            console.log(res)
+            if (res.ok) 
+                return res.json()                
+            throw new Error('Something went wrong');
+        }).then((data) => {
+            setUser(data)
+            console.log(data)
+            setQuestions(data.publishedQuestions)
+            console.log(data.publishedQuestions)
+            setAnswers(data.publishedAnswers)
+            setAvatar(data.avatar)
+            console.log(data.avatar)
+            setIsLoading(false)
+            
+        }).catch((error) => {
+            console.log(error)
+            setLocation('/Page404')
+        });
+       
+    }
+    useEffect(function () {       
+        //getUser()     
+        fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
                 }
+            }).then(res => {
+                console.log(res)
+                if (res.ok) {
+                    return res.json()
+                }                                    
                 throw new Error('Something went wrong');
-            })
-            .then((data) => {
+            }).then((data) => {
                 setUser(data)
+                console.log(data)
                 setQuestions(data.publishedQuestions)
+                console.log(data.publishedQuestions)
                 setAnswers(data.publishedAnswers)
                 setAvatar(data.avatar)
                 console.log(data.avatar)
-                localStorage.setItem('roles', data.roles)
-                console.log(data)
-                console.log(data.publishedQuestions)
-            })
-            .catch((error) => {
+                setIsLoading(false)
+                
+            }).catch((error) => {
                 console.log(error)
                 setLocation('/Page404')
             });
-        setIsLoading(false)
-
-
-
-    }, [])
+           
+        }, [])
     function size(list) {
-        if (list = 'undefined')
+        console.log(list)
+        /*
+        if (list == 'undefined'){
             return '?'
+        }            
         return list.length
+        */
+       return '?'
     }
 
     if (isLoading) {
@@ -224,11 +227,20 @@ export default function UserProfile() {
                                         <i className="fa fa-globe"></i>
                                         <a href={user.email}>{user.email}</a>
                                     </div>
+                                    
 
                                 </div>
+                                
                             </div>
 
+                            <div>
 
+                                    <div className="margin-top-20 profile-desc-link">
+                                        <Logout></Logout>
+                                    </div>
+                                    
+
+                                </div>
 
                         </div>
                     </div>
@@ -320,7 +332,7 @@ export default function UserProfile() {
                                 <div className="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
                                     <form onSubmit={handleSubmit}>
                                         <div className="user-box">
-                                            <input type="password" placeholder="Old Password" id="logUsername" required name="username" onChange={(e) => setOldPassword(e.target.value)}></input>
+                                            <input type="password" placeholder="Old Password" id="logUsername" required name="username" autoComplete="on" onChange={(e) => setOldPassword(e.target.value)}></input>
                                            
                                         </div>
                                         <div className="user-box">
@@ -328,7 +340,7 @@ export default function UserProfile() {
                                             
                                         </div>
                                         <div className="user-box">
-                                            <input type="password" placeholder="Verify New Password" id="logPassword" required name="password" autoComplete="on" onChange={(e) => setVerifyNewPassword(e.target.value)} ></input>
+                                            <input type="password" placeholder="Verify New Password" id="logVerifyPassword" required name="password" autoComplete="on" onChange={(e) => setVerifyNewPassword(e.target.value)} ></input>
                                             
                                         </div>
                                         <button type="submit">

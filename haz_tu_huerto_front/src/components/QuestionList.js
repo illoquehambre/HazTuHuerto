@@ -10,13 +10,22 @@ import "../styles/List.css";
 export default function QuestionList() {
   const [location, setLocation] = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState([])
+  const [page, setPage] = useState()
+  const [quests, setQuests] = useState([])
+  const [numPage, setNumPage] = useState(0)
   const name = location.split('/').reverse()[0]
   console.log(name)
   const apiUrl = `http://localhost:8080/question`
 
+  const sum = async (e) => {
+    setNumPage(numPage + 1)
+  };
+  const res = async (e) => {
+    setNumPage(numPage - 1)
+  };
+
   useEffect(function () {
-    fetch(apiUrl, {
+    fetch(`${apiUrl}?page=${numPage}&size=3`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -32,8 +41,28 @@ export default function QuestionList() {
         throw new Error('Something went wrong');
       })
       .then((data) => {
-        setPage(data.content)
+        setPage(data)
+        setQuests(data.content)
         console.log(data.content)
+        if (data.last){
+          if(data.first){
+            document.getElementById('decrease').style.display = 'none';
+          }else{
+            document.getElementById('decrease').style.display = 'inline';
+          }
+          document.getElementById('increase').style.display = 'none';
+        }
+        else if (data.first){
+          if(!data.last){
+            document.getElementById('increase').style.display = 'inline';
+          }
+          document.getElementById('decrease').style.display = 'none';
+        }
+        else {
+          document.getElementById('decrease').style.display = 'inline';
+          document.getElementById('increase').style.display = 'inline';
+
+        }
       })
       .catch((error) => {
         console.log(error)
@@ -41,7 +70,8 @@ export default function QuestionList() {
       });
     setIsLoading(false)
 
-  }, [])
+
+  }, [numPage])
 
 
   if (isLoading) {
@@ -54,10 +84,14 @@ export default function QuestionList() {
   return (
     <div>
       <NavBar></NavBar>
-
+      <div>
+        <a id="decrease" onClick={res}>-</a>
+        <span>{numPage}</span>
+        <a id="increase" onClick={sum}>+</a>
+      </div>
       {
         <div className="courses-container">
-          {page.map(
+          {quests.map(
             (question) => (
               console.log(question),
               (
@@ -65,7 +99,7 @@ export default function QuestionList() {
                   <div className="course-preview">
                     <h6>{question.publisher.username}</h6>
                     <h3>{question.title}</h3>
-                    <p>Score:</p>
+                    <p>Score: {question.score}</p>
 
                   </div>
                   <div className="course-info">
@@ -74,10 +108,9 @@ export default function QuestionList() {
                         {question.createdAt}
                       </span>
                     </div>
-                    
+
                     <h6>{question.content}</h6>
                     <button className="btn"><Link to={`/question/${question.id}`}>Details</Link></button>
-
 
                   </div>
                 </div>

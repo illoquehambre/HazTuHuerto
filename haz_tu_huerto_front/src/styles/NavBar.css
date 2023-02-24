@@ -1,13 +1,13 @@
 .nav{
   width: 100%;
-  
+ 
 }
 
 .nav>ul {
     list-style-type: none;
     margin: 0;
     padding: 1%;
-    
+    align-items: center;
     overflow: hidden;
     background-color: #333;
     width: 100%;

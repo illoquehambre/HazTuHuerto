@@ -38,6 +38,7 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
     private final StorageService storageService;
 
     @Autowired
@@ -103,21 +104,21 @@ public class QuestionService {
 
 
     public Question likeQuestion(User user, Question question){
+        if(!userService.checkUserLogedInQuestion(user.getId(), question.getId())) {
+            List<User> lista = new ArrayList<>(question.getLikes().stream().toList());
+            if (userService.checkUserLiked(user.getId(), question.getId())) {
 
-        List<User> lista = new ArrayList<>(question.getLikes().stream().toList());
-
-            if(userRepository.checkUserLiked(user.getId(),question.getId())){
-
-                lista.remove(lista.indexOf(user)+1);
+                lista.remove(lista.indexOf(user));
                 question.setLikes((new HashSet<>(lista)));
-                user.setReputation(user.getReputation()-1);
+                question.getPublisher().setReputation(question.getPublisher().getReputation() - 1);
                 userRepository.save(user);
 
-            }else{
+            } else {
                 question.getLikes().add(user);
-                user.setReputation(user.getReputation()+1);
+                question.getPublisher().setReputation(question.getPublisher().getReputation() + 1);
                 userRepository.save(user);
             }
+        }
        return  questionRepository.save(question);
     }
 }

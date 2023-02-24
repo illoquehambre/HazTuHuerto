@@ -5,7 +5,7 @@ import NavBar from './NavBar.js'
 import { Link } from 'wouter';
 import "../styles/List.css";
 import AskQuestion from './modals/AskQuesquion'
-
+import Like from './Like'
 
 export default function QuestionDetails() {
     const [location, setLocation] = useLocation();
@@ -63,7 +63,7 @@ export default function QuestionDetails() {
                     <div className="course-preview">
                         <h6>{question.publisher}</h6>
                         <h3>{question.title}</h3>
-                        <p>Score: {question.score}</p>
+                        <Like id={question.id}></Like>
 
                     </div>
                     <div className="course-info">
@@ -74,6 +74,7 @@ export default function QuestionDetails() {
                         </div>
 
                         <h6>{question.content}</h6>
+                        
                         <AskQuestion id={question.id}></AskQuestion>
 
 

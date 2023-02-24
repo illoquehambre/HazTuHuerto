@@ -302,36 +302,22 @@ public class UserController {
         return userService.searchBanned(params, pageable);
 
     }
-    //Banear/Desbanear un usuario
-    //Tiene sentido que esta petición sea PUT???Está bien no pasarle requestBody?
+
     @Operation(summary = "This methos bann or unbann a user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "The operation was succesfully",
-                    content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
-                            examples = @ExampleObject(value = """
-                                    {
-                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
-                                         "username": "Programer13",
-                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
-                                         "fullName": "Paquito programador2",
-                                         "createdAt": "12/12/2022 00:00:00"
-                                     }
-                                    """)) }),
-            @ApiResponse(responseCode = "404",
-                    description = "The user was not found ",
+            @ApiResponse(responseCode = "204",
+                    description = "No content ",
                     content = @Content),
             @ApiResponse(responseCode = "403",
                     description = "You are not allowed to do this request",
                     content = @Content),
     })
-    @PutMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned? //cambiar a delete
-    public UserResponse bannUser(@PathVariable UUID id) {
+    @DeleteMapping("/admin/user/{id}")//deberia devolver otro tipode dto que muestre el atributo isbanned? 
+    public ResponseEntity<?> bannUser(@PathVariable UUID id) {
 
-        User banned = userService.bannUser(id);
+        userService.bannUser(id);
 
-        return UserResponse.fromUser(banned);
+        return ResponseEntity.noContent().build();
 
     }
 

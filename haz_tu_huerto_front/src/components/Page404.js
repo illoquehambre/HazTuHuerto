@@ -27,7 +27,7 @@ export default function Page404(){
                     
                     <div className="central-body">
                         <img className="image-404" src="http://salehriaz.com/404Page/img/404.svg" width="300px"/>
-                        <Link to={''} className="btn-go-home" target="_blank">GO BACK HOME</Link>
+                        <Link to={'/'} className="btn-go-home" target="_blank">GO BACK HOME</Link>
                     </div>
                     <div className="objects">
                         <img className="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px"/>

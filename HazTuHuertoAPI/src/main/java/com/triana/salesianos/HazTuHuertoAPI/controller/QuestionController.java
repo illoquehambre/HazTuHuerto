@@ -70,9 +70,10 @@ public class QuestionController {
 
     //Ver una pregunta por id
     @GetMapping("/question/{id}")
-    public QuestionDetails findQuestById(@PathVariable Long id) {
+    public QuestionDetails findQuestById(@AuthenticationPrincipal User user,@PathVariable Long id) {
 
-        return QuestionDetails.fromQuestion(questionService.findById(id));
+        Boolean liked = userService.checkUserLiked(user.getId(), id);
+        return QuestionDetails.fromQuestion(questionService.findById(id), liked);
 
     }
 
@@ -123,8 +124,8 @@ public class QuestionController {
 
         Question found = questionService.findById(id);
         Question modified = questionService.likeQuestion(user,found);
-
-        return QuestionDetails.fromQuestion(modified);
+        Boolean liked = userService.checkUserLiked(user.getId(), id);
+        return QuestionDetails.fromQuestion(modified, liked);
 
     }
 

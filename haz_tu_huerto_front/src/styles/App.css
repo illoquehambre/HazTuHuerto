@@ -58,3 +58,21 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.like{
+  display: flex;
+  align-items: last baseline;
+}
+.like > img{
+  width: 20%;
+  margin: auto;
+}
+
+.navBarProfile{
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.navBarProfile > img{
+  width: 10%;
+}

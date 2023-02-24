@@ -16,17 +16,17 @@ export default function PokemonDetails() {
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
             </Helmet>
             <ul class="d-flex justify-content-center  nav nav-pills nav-justified mb-3">
-                <li class="active"><a data-toggle="tab" href="#menu1">Login</a></li>
-                <li><a data-toggle="tab" href="#menu2">SignUp</a></li>
+                <li class="active"><a data-toggle="tab" href="#login">Login</a></li>
+                <li><a data-toggle="tab" href="#signup">SignUp</a></li>
 
             </ul>
 
             <div class="tab-content">
-                <div id="menu1" class="tab-pane fade in active">
+                <div id="login" class="tab-pane fade in active">
                     <h3>Login</h3>
                     <Login></Login>
                 </div>
-                <div id="menu2" class="tab-pane fade">
+                <div id="signup" class="tab-pane fade">
                     <h3>SignUp</h3>
                     <Signup></Signup>
                 </div>

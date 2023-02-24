@@ -13,6 +13,7 @@ export default function FileUploadSingle() {
             console.log(event.target.files)
             setIsSelected(true);
         };
+        const boundary = `----${new Date().getTime().toString(16)}-${Math.random().toString(16)}`;
 
         const handleSubmit = async (e) => {
             e.preventDefault();
@@ -23,21 +24,22 @@ export default function FileUploadSingle() {
             console.log(JSON.parse(JSON.stringify(name)))
             
             console.log(selectedFile)
-            formData.append('editUser', JSON.parse(JSON.stringify(name)))
+            //formData.append('editUser', JSON.parse(JSON.stringify(name)))
+            formData.append('editUser', JSON.stringify(name));
+
             formData.append('file', selectedFile);
             console.log(formData)
             fetch(
                 apiUrl,
                 {
                     method: 'PUT',
-                    body: formData,
-                    
+                    body: formData,                    
                     headers: {
-                    "Content-Type":"multipart/form-data;boundary=-",
+                    "Content-Type":`multipart/form-data;boundary=${boundary}--`,
                     "Accept": "*/*",
                     "Authorization": `Bearer ${localStorage.getItem('token')}`,
                     "Access-Control-Allow-Origin":"*",
-                    "type": "formData"
+                    'type': 'formData'
                     }
                 }
             )

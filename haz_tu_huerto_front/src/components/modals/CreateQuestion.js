@@ -116,7 +116,6 @@ export default function CreateQuestion() {
                 id="filled-textarea"
                 label="Title"
                 placeholder="Placeholder"
-                multiline="true"
                 variant="standard"
                 onChange={(e)=>setTitle(e.target.value)}
               />
