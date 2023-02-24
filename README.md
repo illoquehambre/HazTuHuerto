@@ -4,6 +4,7 @@
 <img src="https://img.shields.io/badge/Spring--Framework-5.7-green"/> <img src="https://img.shields.io/badge/Apache--Maven-3.8.6-blue"/> <img src="https://img.shields.io/badge/Java-17.0-brightgreen"/>
 
  <img src="https://niixer.com/wp-content/uploads/2020/11/spring-boot.png" width="500" alt="Spring Logo"/>
+ <img src="https://styles.redditmedia.com/t5_2su6s/styles/communityIcon_4g1uo0kd87c61.png" width="500" alt="React Logo"/>
  
 ___
 
@@ -26,51 +27,30 @@ El proyecto trata de realizar una API REST para la gestión de un huerto propi, 
 
 
 Se pueden realizar las siguientes funcionalidades: 	:point_right:
+* Login de USUARIO
 * Listado de USUARIO
-* Busqueda de una USUARIO por su id
+* Busqueda de un USUARIO por su id
+* Busqueda de un USUARIO por su nombre
 * Creación de un nuevo USUARIO
-* Edición del perfil de un USUARIO
+* Edición del perfil de un USUARIO con subida de ficheros (NO operativo en el front)
 * Edición de la contraseña de un USUARIO
 * Creación de un USUARIO con rol ADMIN
 * Borrado de un USUARIO en base a **Soft Delete**
 
 * Listado de las PREGUNTAS
+* Listado de las PREGUNTAS por usuario
 * Búsqueda de un PREGUNTA por su id
-* Creación de un nuevo PREGUNTA
-* Edición de un PREGUNTA
-* Borrado de un PREGUNTA
+* Creación de una nueva PREGUNTA con subida de ficheros (NO operativo en el front)
+* Borrado de una PREGUNTA
 
-* Listado de todas las APORTACIONES
-* Listado de las APORTACIONES de una determinada clase localizada por su id
-* Búsqueda de una APORTACIÓN buscada por su id
-* Creación de un nueva APORTACIÓN
-* Edición de un TIPO DE ALIMEMTO
-* Borrado de una APORTACIÓN localizada por su id
-* Borrado de un DETALLE DE UNA APORTACIÓN localizado por su id
+* Listado de todas las RESPUESTAS
+* Listado de las RESPUESTAS de una determinada PREGUNTA localizada por su id
+* Búsqueda de una RESPUESTA buscada por su id
+* Creación de un nueva RESPUESTA para una PREGUNTA
+* Borrado de una RESPUESTA localizada por su id
 
-
-* Listado del total de KILOS DISPONIBLES de todos los alimentos
-* Listado de los KILOS DISPONIBLES de un tipo de alimento
-
-* RANKING de solidaridad de las clases medido por sus aportaciones
-
-* Listado de todos los DESTINATARIOS
-* Búsqueda general de un DESTINATARIO por su id
-* Búsqueda de los detalles de un DESTINATARIO por su id
-* Creación de un nuevo DESTINATARIO
-* Edición de un DESTINATARIO
-* Borrado de un DESTINATARIO buscado por su id
-
-
-* Listado general de CAJAS 
-* Búsqueda de una CAJA por su id
-* Creación de una nueva CAJA
-* Edición de los datos generales de una CAJA
-* Edición del contenido de una CAJA
-* Borrado de una CAJA
-* Borrado de un TIPO DE ALIMENTO de una CAJA
-* Creación de una CAJA asiganda a un DESTINATARIO
-
+*Cabe destacar que dichos endpoints implementan validación y gestión de errores personalizadas
+ así como uso de Search Criteria y pageable en los métodos FindAll
 
 ---
 
@@ -84,37 +64,22 @@ Para realizar este proyecto hemos utilizado:
 4. [GitHub](https://github.com/)
 5. [springdoc 1.6.13](https://springdoc.org/)
 6. [Swagger](https://swagger.io/)
+7. [React](https://es.reactjs.org)
 
 
 
 ### Ejemplos del Código Usado: 
 
-**JAVA**:
+**JAVA - SPRING**:
 ```Java
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAportacion(
-            @Parameter(description = "Id de la aportación de la que quiere borrar", name = "id", required = true)
-            @PathVariable Long id) {
-        if (aportacionService.findById(id).isPresent()) {
-            Aportacion aportacion = aportacionService.findById(id).get();
-            if (aportacionService.findById(id).get().getDetalleAportacionList().isEmpty())
-                aportacionService.deleteById(id);
-            else {
-                Iterator<DetalleAportacion> aux = aportacion.getDetalleAportacionList().iterator();
-                while (aux.hasNext()) {
-                    DetalleAportacion detalle = aux.next();
-                    TipoAlimento tipoAlimento = tipoAlimentoService.findById(detalle.getTipoAlimento().getId()).get();
-                    double cantidadDisponible = tipoAlimento.getKilosDisponibles().getCantidadDisponible();
-                    if (detalle.getCantidadEnKilos() <= cantidadDisponible)
-                        tipoAlimento.getKilosDisponibles().setCantidadDisponible(cantidadDisponible - detalle.getCantidadEnKilos());
-                    aux.remove();
-                }
-                if (aportacion.getDetalleAportacionList().isEmpty())
-                    aportacionService.deleteById(id);
-            }
-        }
+   @GetMapping(value = "/user/{name}/image", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<Resource> image(@PathVariable String name) throws IOException {
+        User user= userService.findByUsername(name);
+        Resource img = storageService.loadAsResource(user.getAvatar());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(img);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 ```
@@ -122,49 +87,98 @@ Para realizar este proyecto hemos utilizado:
 **Documentación**
 
 ```Java
-    @Operation(summary = "Este método lista todas las aportaciones")
+    @Operation(summary = "This method upload a user profile")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Se han encontrado al menos una aportación",
+                    description = "The operation was succesfully",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = AportacionListResponse.class)),
-                            examples = {@ExampleObject(
-                                    value = """
-                                            [
-                                                {
-                                                    "fecha": "2022-12-21",
-                                                    "nombreClase": "2ºDAM",
-                                                    "kilosTotales": 7.0
-                                                },
-                                                {
-                                                    "fecha": "2022-12-21",
-                                                    "nombreClase": "1ºDAM",
-                                                    "kilosTotales": 5.0
-                                                }
-                                            ]
-                                            """
-                            )}
-                    )}),
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                    {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
             @ApiResponse(responseCode = "404",
-                    description = "No se ha encontrado ninguna aportación",
+                    description = "The user was not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "The data sended was not correct",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "You are not allowed to do this request",
                     content = @Content),
     })
 ```
+**JAVASCRIPT - REACT**:
+```JavaScript
+    export default function Like(quest) {
+        const apiUrl = `http://localhost:8080/question/`;
+        const [location, setLocation] = useLocation();
+        const [question, setQuestion]=useState(quest)
+        const [like, setLike]=useState()
+
+    async function fetchLike(apiUrl,id) {
+
+        return fetch(apiUrl +id+ '/like', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            }
+        }).then(res => {
+
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Something went wrong');
+        })
+        .then((data) => {
+            setQuestion(data)
+            console.log(data)
+            setLike(data.likedByLoguedUser)
+        })
+        .catch((error) => {
+            console.log(error)
+            setLocation('/Page404')
+        });  
+    };
+
+        const handleSubmit = async (e) => {
+
+            const response = await fetchLike(apiUrl,quest.id);
+
+          };
 
 
+
+
+        return (
+            <div className="like">
+                <img onClick={handleSubmit} src={like?'/img/heart.png':'/img/heart_1.png'}></img>
+                <p>Likes: {question.score}</p>
+            </div>
+
+        );
+    }
+```
 ---
 ## **Arranque**
 
 Realiza un *git clone* de la siguiente dirección: 
-*https://github.com/illoquehambre/KiloApi*
+*https://github.com/illoquehambre/HazTuHuerto*
 
 ```console
-git clone https://github.com/illoquehambre/KiloApi.git
+git clone https://github.com/illoquehambre/azTuHuerto.git
 ```
 
 Dirígete hasta la carpeta:
 
-> cd ./KiloApi/
+> cd ./HazTuHuertoAPI/
 
 
 **Primero** tienes que tener instalado Apache Maven y sería recomendable tener alguna IDE, como **Intellij IDEA** o **VisualStudio Code**
@@ -188,9 +202,26 @@ Si diese algún error, realiza el siguiente comando:
 
     mvn dependencies:resolve
     ---> 100% 
+    
+Con esto ya podría realizar peticiones desde postman a la dirección http://localhost:8080
+Una vez corriendo la api, dirijase a la carpeta haz_tu_huerto_front
+
+    cd ../haz_tu_huerto_front
+    
+Ejecute el siguiente comando:
+
+    npm install
+
+Ejecute el siguiente comando:
+
+    npm start
+
+Con esto el front estaría corriendo y se podría acceder desde un navegador a part de la ruta http://localhost:3000
+
+
 
 ___
-## **Autores**
+## **Autor**
 
 Este proyecto ha sido realizado por: 
 
@@ -205,7 +236,7 @@ superior de formación profesional en la ciudad de Sevilla, España.
 ___
 ## **TODO**
 
-Tareas realizadas y cosas por hacer.
+Revisar el documento TODO.txt el cual indica todo aquello que no se ha podido hacer todavía así como los posibles errores que pueden salir
 
 [ ] Fix possible future errors
 ___
