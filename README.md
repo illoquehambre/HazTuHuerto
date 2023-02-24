@@ -193,7 +193,10 @@ Ejecuta el siguiente comando:
     
     mvn clean
 
+Ejecuta el comando:
 
+    docker-compose up
+    
 Ejecuta el comando:
 
     mvn spring-boot:run
