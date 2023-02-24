@@ -186,7 +186,7 @@ Dirígete hasta la carpeta:
 
 Ejecuta el siguiente comando:
     
-    mvn complile
+    mvn compile
     
     
 Ejecuta el siguiente comando:
