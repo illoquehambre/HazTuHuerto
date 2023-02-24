@@ -1,4 +1,8 @@
-- Crear Readme
+A falta de tiempo y conocimientos en REACT, este proyecto se ha realizado de forma escasa.
+con el fin de poder dedicar más tiempo a la parte de front se ha descuidado en gran parte el Backend, 
+no dedicandole todo el tiempo que debería.
+
+pd: Lo siento Luismi
 ***********************************************************************************************************
 					BACKEND
 ***********************************************************************************************************
@@ -6,31 +10,25 @@
 
 			Cosas a gestionar 
 
-- Decidir si quitar atributos de usuario de Luismi (ivestigar si hacen algo)
+- Decidir si quitar atributos de usuario de Luismi 
 - Revisar Dto's de respuesta de cada petición
 - Revisar Errores de respuesta y excepciones lanzadas. Crear excepciones personalizadas de ser necesario.
 - Documentación
 - Revisar comentario propios
-- Dejar bonito el postman
-- ¿Admin buscar un usuario específico baneado? Implementar filtro del softDelate en findbyname
-- Pedir a alguien que intente petardear el proyecto
-- No funciona el search criteria
+- ¿Admin buscar un usuario específico baneado? Implementar filtro del softDelate en findByName/findById
 
 ***********************************************************************************************************
 					FRONTEND
 ***********************************************************************************************************
 
-Subir archivos 5   
-Crear/eliminar pregunta/respuesta 4
-Editar perfil 4
-Cambiar contraseña 3
-Dar like 3 
+Subir archivos - Crear pregunta - Editar perfil
 Banear Usuario 3
 Buscador 2
 Mostrar botones dependiendo de Rol 2
 Ordenación de listados por fecha y puntuación 2
--Personalizar Search criteria para mostrar tamaño de listas
--Poner bonito
+Personalizar Search criteria para mostrar tamaño de listas
+Distribuir, organizar y revisar los documentos Css(Poner bonito)
+Organizar Componentes/Páginas en carpetas
 
 -Voy a llorar
 
@@ -38,6 +36,11 @@ Ordenación de listados por fecha y puntuación 2
 					Errores
 ***************************************************************************************************
 
-- Subir archivos no va (Problema de CORS)
-- La imagen de perfil carga cuando quiere (undefined)
-- Cambiar contraseña (Problema de CORS)
+- Subida de archivos no funcional
+- Los botones de Login y Signup de la página de inicio en ocasiones no funcionan al ejecutar la app. 
+	SOLUCIÓN: Refrescar la página y comprobar que la ruta es http://localhost:3000
+- El estado del icono de like no se guarda en la primera iteración, sin embargo recoge correctamente el estado tras el primer click
+- Un usuario baneado no puede acceder ni sale en los listados de usuarios, sin embargo se puede acceder a su perfil hardcodeando el nombre en la ruta
+- No se gestiona mostrar/ocultar elementos enfunción del usuario logueado y/o su rol
+- Al pulsar el botón profile del navBar desde el perfil de otro usuario este no se actualiza y hay que hacerlo manualmente
+- El método de conteo de num Preguntas/Respuestas d eun usario en el perfil muestra '?' ya que si no peta
