@@ -59,6 +59,10 @@ public class User implements UserDetails {
     @Builder.Default
     private List<Answer> publishedAnswers=new ArrayList<>();
 
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.DETACH, fetch = FetchType.LAZY)//Bidi
+    @Builder.Default
+    private List<VegetableGarden> gardens=new ArrayList<>();
+
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Unidi???
     @Builder.Default
     private List<Question> favPosts=new ArrayList<>();//Lo vamos a dejar por ahora
@@ -149,6 +153,9 @@ public class User implements UserDetails {
 
     public void addQuestion(Question question){
         this.getPublishedQuestions().add(question);
+    }
+    public void addGarden(VegetableGarden garden){
+        this.getGardens().add(garden);
     }
     public void addAnswer(Question question, Answer answer){
         question.getAnswers().add(answer);
