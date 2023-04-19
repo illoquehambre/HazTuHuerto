@@ -20,12 +20,14 @@ import java.util.List;
 public class PatchDetails {
 
     private String name;
+    private Long id;
     private CultivationDetails cultivation;
 
     public static PatchDetails fromPatch(Patch patch) {
 
         return PatchDetails.builder()
                 .name(patch.getName())
+                .id(patch.getId())
                 .cultivation(CultivationDetails.fromCultivation(patch.getCultivation()))
                 .build();
     }

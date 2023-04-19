@@ -41,15 +41,15 @@ public class CultivationService {
 
     public Patch save(CreatePatch newPatch, VegetableGarden garden, User user) {
         //Hacer comprobaciones de usuario
-        if(userService.checkUserLogedInGarden(user.getId(), garden.getId())) {
+       // if(userService.checkUserLogedInGarden(user.getId(), garden.getId())) {
             return patchRepository.save(
                     Patch.builder()
                             .name(newPatch.getName())
                             .garden(garden)
                             .build());
-        }else
+       /* }else
             throw new SecurityException("Access Denied.");
-
+*/
     }
     public Patch divide(Patch patch, User user) {
         //Hacer comprobaciones de usuario

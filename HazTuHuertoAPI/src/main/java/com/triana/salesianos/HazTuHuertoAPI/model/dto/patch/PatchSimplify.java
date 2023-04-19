@@ -16,12 +16,14 @@ import java.time.temporal.ChronoUnit;
 public class PatchSimplify {
 
     private CultivationSimplify cultivation;
+    private Long id;
     //Lo mismo esta clase no tiene mucho sentido y se deberia obviar
 
 
     public static PatchSimplify fromPatch(Patch patch) {
 
         return PatchSimplify.builder()
+                .id(patch.getId())
                 .cultivation(CultivationSimplify.fromCultivation(patch.getCultivation()))
                 .build();
     }

@@ -83,10 +83,10 @@ public class VegetableGardenController {
 
     }
 
-    @DeleteMapping("/question/{id}")//Hay que hacer todavia las politicas de borrado
+    @DeleteMapping("/vegetableGarden/{id}")//Hay que hacer todavia las politicas de borrado
     public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
         //Question quest=questionService.findById(id);
-        if(userService.checkUserLogedInGarden(user.getId(), id))
+        //if(userService.checkUserLogedInGarden(user.getId(), id))
             gardenService.deleteById(id);
 
         return ResponseEntity.noContent().build();

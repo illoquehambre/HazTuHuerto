@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="Vegetable_Garden")
@@ -21,7 +22,8 @@ public class VegetableGarden {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Ojo piojo
-    private List<Patch> patchList;
+    @Builder.Default
+    private List<Patch> patchList =new ArrayList<>();
 
     @JoinColumn(name = "owner_id", foreignKey = @ForeignKey(name= "FK_USER_VEGETABLEGARDEN"))
     @ManyToOne

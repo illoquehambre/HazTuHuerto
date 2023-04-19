@@ -24,7 +24,8 @@ public class CultivationSimplify {
 
         return CultivationSimplify.builder()
                 .cultivationName(cultivation.getName())
-                .daysLeft(ChronoUnit.DAYS.between(cultivation.getHarvestingDate(),
+                .daysLeft((cultivation.getHarvestingDate()==null || cultivation.getPlantingDate()==null)?0:
+                        ChronoUnit.DAYS.between(cultivation.getHarvestingDate(),
                         cultivation.getPlantingDate()))
                 .build();
     }

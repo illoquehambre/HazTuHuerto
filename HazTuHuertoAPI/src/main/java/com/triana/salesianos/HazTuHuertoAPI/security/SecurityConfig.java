@@ -91,6 +91,10 @@ public class SecurityConfig {
                                 .antMatchers("/question/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/answer/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/vegetableGarden/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/patch/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/cultivation/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/note/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/auth/register/admin").hasRole("ADMIN")
                                 .antMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated();

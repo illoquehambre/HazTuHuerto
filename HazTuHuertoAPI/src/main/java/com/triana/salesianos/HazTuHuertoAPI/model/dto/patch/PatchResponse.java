@@ -17,12 +17,14 @@ import java.time.temporal.ChronoUnit;
 public class PatchResponse {
 
     private String name;
+    private Long id;
     private CultivationResponse cultivation;
 
     public static PatchResponse fromPatch(Patch patch) {
 
         return PatchResponse.builder()
                 .name(patch.getName())
+                .id(patch.getId())
                 .cultivation(CultivationResponse.fromCultivation(patch.getCultivation()))
                 .build();
     }

@@ -3,10 +3,7 @@ package com.triana.salesianos.HazTuHuertoAPI.controller;
 import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.CreatePatch;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.EditPatchCultivation;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.PatchDetails;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.PatchResponse;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.*;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.CreateVegetableGarden;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.VegetableGardenDetails;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.VegetableGardenResponse;
@@ -19,6 +16,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -43,17 +41,15 @@ public class PatchController {
     private final UserRepository userRepository;
 
 
-    @GetMapping("/cultivation/{patchId}")
-    public List<VegetableGardenResponse> findAll(@AuthenticationPrincipal User user) {
-        return gardenService.findByUser(user)
-                .stream()
-                .map(VegetableGardenResponse::fromGarden)
-                .toList();
+    @GetMapping("/patch/{id}")
+    public PatchDetails findByPatchId(@AuthenticationPrincipal User user,
+                                      @PathVariable Long id) {
+        return PatchDetails.fromPatch(patchService.findById(id, user));
     }
 
 
     @PostMapping("/patch/garden/{id}")//El id es de garden pero crea un nuevo patch en este
-    public ResponseEntity<PatchDetails> register(@Valid @RequestPart("newPatch") CreatePatch newPatch,
+    public ResponseEntity<PatchSimplify> register(@Valid @RequestBody CreatePatch newPatch,
                                                     @PathVariable Long id,
                                                     @AuthenticationPrincipal User user) {
 
@@ -68,7 +64,7 @@ public class PatchController {
 
         return ResponseEntity
                 .created(createdURI)
-                .body(PatchDetails.fromPatch(created));
+                .body(PatchSimplify.fromPatch(created));
 
 
     }
@@ -76,8 +72,8 @@ public class PatchController {
     public PatchDetails editDetails(@AuthenticationPrincipal User logguedUser,
                                      @PathVariable Long id,
                                     @RequestPart("file") MultipartFile file,
-                                     @Valid @RequestPart("editGarden") EditPatchCultivation editPatch) {
-        Patch patch=patchService.findById(id);
+                                     @Valid @RequestPart("editPatch") EditPatchCultivation editPatch) {
+        Patch patch=patchService.findById(id, logguedUser);
         Patch edited = patchService.edit(patch, editPatch,logguedUser, file);
 
         return PatchDetails.fromPatch(edited);
@@ -85,10 +81,11 @@ public class PatchController {
     }
 
     @DeleteMapping("/patch/{id}")//Hay que hacer todavia las politicas de borrado
-    public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
+    public ResponseEntity<?> delete(@AuthenticationPrincipal @NotNull User user, @PathVariable Long id) {
+        System.out.println("1");
         if(userService.checkUserLogedInPatch(user.getId(), id))
             patchService.deleteById(id);
-
+        System.out.println("2");
         return ResponseEntity.noContent().build();
     }
 
@@ -98,7 +95,7 @@ public class PatchController {
                                                  @AuthenticationPrincipal User user) {
 
         VegetableGarden garden = gardenService.findById(gardenId);
-        Patch patch = patchService.findById(patchId);
+        Patch patch = patchService.findById(patchId, user);
         Patch created = patchService.divide(patch, user);
         garden.addPatch(created);
         gardenRepository.save(garden);

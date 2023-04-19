@@ -46,7 +46,7 @@ public class CultivationController {
 
     @GetMapping("/cultivation/{id}")
     public List<CultivationDetails> findAllCultivationByPatchId(@AuthenticationPrincipal User user, @PathVariable Long id) {
-        Patch patch =patchService.findById(id);
+        Patch patch =patchService.findById(id, user);
         if(userService.checkUserLogedInPatch(user.getId(), id)) {
             return patch.getCultivationHistory()
                     .stream()
@@ -77,7 +77,7 @@ public class CultivationController {
 
 
     }
-    @DeleteMapping("/patch/{id}")//Hay que hacer todavia las politicas de borrado
+    @DeleteMapping("/cultivation/{id}")//Hay que hacer todavia las politicas de borrado
     public ResponseEntity<?> delete(@AuthenticationPrincipal User user,@PathVariable Long id) {
         if(userService.checkUserLogedInPatch(user.getId(), id))
             patchService.deleteById(id);
@@ -85,13 +85,13 @@ public class CultivationController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/patch/{patchID}")//divide un patch en otro con us mismo historial
+    @PostMapping("/cultivation/{patchID}")//divide un patch en otro con us mismo historial
     public ResponseEntity<PatchDetails> divide( @PathVariable Long gardenId,
                                                 @PathVariable Long patchId,
                                                  @AuthenticationPrincipal User user) {
 
         VegetableGarden garden = gardenService.findById(gardenId);
-        Patch patch = patchService.findById(patchId);
+        Patch patch = patchService.findById(patchId, user);
         Patch created = patchService.divide(patch, user);
         garden.addPatch(created);
         gardenRepository.save(garden);

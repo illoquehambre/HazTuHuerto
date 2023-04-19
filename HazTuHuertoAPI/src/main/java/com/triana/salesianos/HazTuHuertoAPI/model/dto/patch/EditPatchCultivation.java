@@ -17,8 +17,8 @@ public class EditPatchCultivation {
     @NotEmpty(message = "{createQuestion.title.notempty}")
     private String cultivationName;
     private String variety;
-    private LocalDate plantDate;
-    private LocalDate harvestDate;
+    private String plantDate;
+    private String harvestDate;
     @URL
     private String cultivationImg;
 }
