@@ -1,6 +1,7 @@
 package com.triana.salesianos.HazTuHuertoAPI.service;
 
 import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
+import com.triana.salesianos.HazTuHuertoAPI.model.Cultivation;
 import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
@@ -32,8 +33,8 @@ public class CultivationService {
 
         return patchRepository.findAll();
     }
-    public Patch findById(Long id) {
-        return patchRepository.findById(id)
+    public Cultivation findById(Long id) {
+        return cultivationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No user with id: " + id));
 
     }
@@ -77,5 +78,12 @@ public class CultivationService {
             patch.setName(newPatch.getName());
         }
         return patchRepository.save(patch);
+    }
+
+    public Cultivation createEmpty(Patch patch){
+        return cultivationRepository.save(Cultivation.builder()
+                .name("Empty")
+                .patch(patch)
+                .build());
     }
 }

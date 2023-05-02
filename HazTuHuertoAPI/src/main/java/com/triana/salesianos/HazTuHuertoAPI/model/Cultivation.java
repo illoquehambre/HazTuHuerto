@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="Cultivation")
@@ -30,7 +31,11 @@ public class Cultivation {
     private String variety;
     private LocalDate plantingDate;
     private LocalDate harvestingDate;
-    @OneToMany
-    private List<Note> noteList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Note> noteList = new ArrayList<>();
 
+    public void addNote(Note note){
+        this.getNoteList().add(note);
+    }
 }

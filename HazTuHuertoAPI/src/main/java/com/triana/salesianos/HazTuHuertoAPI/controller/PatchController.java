@@ -44,7 +44,14 @@ public class PatchController {
     @GetMapping("/patch/{id}")
     public PatchDetails findByPatchId(@AuthenticationPrincipal User user,
                                       @PathVariable Long id) {
-        return PatchDetails.fromPatch(patchService.findById(id, user));
+        Patch patch = patchService.findById(id);
+        //Por alguna razon todos los datos de garden son nullos en este momento
+        if(userService.checkUserLogedInPatch(user.getId(), id))
+            return PatchDetails.fromPatch(patch);
+            //sin embargo al hacer la conversión si que coge de forma adecuada los datos de garden
+        else
+            throw new SecurityException("Access Denied");
+
     }
 
 
@@ -73,29 +80,29 @@ public class PatchController {
                                      @PathVariable Long id,
                                     @RequestPart("file") MultipartFile file,
                                      @Valid @RequestPart("editPatch") EditPatchCultivation editPatch) {
-        Patch patch=patchService.findById(id, logguedUser);
+        Patch patch=patchService.findById(id);
         Patch edited = patchService.edit(patch, editPatch,logguedUser, file);
 
         return PatchDetails.fromPatch(edited);
 
     }
 
+    //No se que cojones pasa que este delete no lo pilla, no hay erroreres pero tampoco devuelve 204 ni nada
+    //raro
     @DeleteMapping("/patch/{id}")//Hay que hacer todavia las politicas de borrado
-    public ResponseEntity<?> delete(@AuthenticationPrincipal @NotNull User user, @PathVariable Long id) {
-        System.out.println("1");
+    public ResponseEntity<?> deletePatch(@AuthenticationPrincipal User user, @PathVariable Long id) {
         if(userService.checkUserLogedInPatch(user.getId(), id))
             patchService.deleteById(id);
-        System.out.println("2");
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/patch/{patchID}")//divide un patch en otro con us mismo historial
-    public ResponseEntity<PatchDetails> divide( @PathVariable Long gardenId,
-                                                @PathVariable Long patchId,
+    @PostMapping("/patch/divide/{id}")//divide un patch en otro con us mismo historial
+    public ResponseEntity<PatchDetails> divide(@PathVariable Long id,
                                                  @AuthenticationPrincipal User user) {
 
-        VegetableGarden garden = gardenService.findById(gardenId);
-        Patch patch = patchService.findById(patchId, user);
+
+        Patch patch = patchService.findById(id);
+        VegetableGarden garden = patch.getGarden();//Acá se traga un nullPointer como una casa
         Patch created = patchService.divide(patch, user);
         garden.addPatch(created);
         gardenRepository.save(garden);
@@ -110,6 +117,14 @@ public class PatchController {
 
 
     }
+    @PutMapping("/patch/harvest/{id}") //Revisar la respuesta
+    public PatchDetails editDetails(@AuthenticationPrincipal User logguedUser,
+                                    @PathVariable Long id) {
+        Patch patch=patchService.findById(id);
+        Patch edited = patchService.harvest(patch, logguedUser);
 
+        return PatchDetails.fromPatch(edited);
+
+    }
 
 }

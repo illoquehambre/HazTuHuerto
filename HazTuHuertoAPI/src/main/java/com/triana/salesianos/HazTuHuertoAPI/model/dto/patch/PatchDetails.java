@@ -3,6 +3,7 @@ package com.triana.salesianos.HazTuHuertoAPI.model.dto.patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.Note;
 import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.cultivation.CultivationDetails;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.VegetableGardenResponse;
 import com.triana.salesianos.HazTuHuertoAPI.validation.annotation.FieldsValueMatch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class PatchDetails {
     private String name;
     private Long id;
     private CultivationDetails cultivation;
+    private Long gardenId;
 
     public static PatchDetails fromPatch(Patch patch) {
 
@@ -29,6 +31,7 @@ public class PatchDetails {
                 .name(patch.getName())
                 .id(patch.getId())
                 .cultivation(CultivationDetails.fromCultivation(patch.getCultivation()))
+                .gardenId(patch.getGarden().getId())
                 .build();
     }
 }

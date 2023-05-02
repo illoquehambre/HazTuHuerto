@@ -44,9 +44,9 @@ public class CultivationController {
 
 
 
-    @GetMapping("/cultivation/{id}")
+    @GetMapping("/cultivation/{id}")//El id es de la parcela
     public List<CultivationDetails> findAllCultivationByPatchId(@AuthenticationPrincipal User user, @PathVariable Long id) {
-        Patch patch =patchService.findById(id, user);
+        Patch patch =patchService.findById(id);
         if(userService.checkUserLogedInPatch(user.getId(), id)) {
             return patch.getCultivationHistory()
                     .stream()
@@ -91,7 +91,7 @@ public class CultivationController {
                                                  @AuthenticationPrincipal User user) {
 
         VegetableGarden garden = gardenService.findById(gardenId);
-        Patch patch = patchService.findById(patchId, user);
+        Patch patch = patchService.findById(patchId);
         Patch created = patchService.divide(patch, user);
         garden.addPatch(created);
         gardenRepository.save(garden);

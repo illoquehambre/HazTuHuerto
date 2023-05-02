@@ -93,6 +93,7 @@ public class SecurityConfig {
                                 .antMatchers("/answer/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/vegetableGarden/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/patch/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/note/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/cultivation/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/note/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/auth/register/admin").hasRole("ADMIN")

@@ -26,4 +26,6 @@ public class Note {
     @JoinColumn(name = "cultivation_id", foreignKey = @ForeignKey(name= "FK_NOTE_CULTIVATION"))
 
     private Cultivation  cultivation;
+
+
 }
