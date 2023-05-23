@@ -47,6 +47,9 @@ dependencies:
   google_nav_bar: ^5.0.6
   like_button: ^2.0.5
   blurrycontainer: ^1.0.2
+  bloc_concurrency: ^0.2.1  
+  stream_transform: ^2.1.0  
+  loading_animation_widget: ^1.2.0+4
 
 dev_dependencies:
   flutter_test:

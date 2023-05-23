@@ -17,7 +17,7 @@ class UserRepository {
   UserRepository() {
     _client = getIt<RestAuthenticatedClient>();
   }
-
+/*
   Future<dynamic> me() async {
     String url = "/me";
 
@@ -25,7 +25,7 @@ class UserRepository {
     return UserResponse.fromJson(jsonDecode(jsonResponse));
 
   }
-
+*/
 
 
 

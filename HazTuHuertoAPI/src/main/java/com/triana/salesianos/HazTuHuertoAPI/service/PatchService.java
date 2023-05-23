@@ -74,7 +74,7 @@ public class PatchService {
                     .name(newPatch.getName())
                     .garden(garden)
                     .build();
-
+            //La creacion de un cultivo vacio no deberia realizarse
             Cultivation cultivation = cultivationService.createEmpty(patchRepository.save(patch));
             patch.setCultivation(cultivation);
            return patchRepository.save(patch);
@@ -130,7 +130,7 @@ public class PatchService {
         //Yo no se si esto está bien, habria qwu preguntarle al señor lusimi, parese chapuza
         if(userService.checkUserLogedInPatch(user.getId(), patch.getId())) {
             Cultivation cultivation = patch.getCultivation();
-            patch.setCultivation(cultivationService.createEmpty(patch));
+            patch.setCultivation(cultivationService.createEmpty(patch));//no deberia crearse un cultivo vacio
             patch.getCultivationHistory().add(cultivation);
             cultivationRepository.save(cultivation);
 

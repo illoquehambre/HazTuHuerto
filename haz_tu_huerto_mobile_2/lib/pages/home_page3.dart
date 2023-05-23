@@ -1,29 +1,31 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/home_page.dart';
 import '../models/models.dart';
-class HomePage extends StatelessWidget {
+import 'question_list_page.dart';
+class HomePage3 extends StatelessWidget {
   final User user;
 
-  const HomePage({super.key, required this.user});
+  const HomePage3({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
-    return HomePageStates(user: user);
+    return HomePageStates3(user: user);
   }
 }
 
-class HomePageStates extends StatefulWidget {
+class HomePageStates3 extends StatefulWidget {
   final User user;
-  const HomePageStates({super.key, required this.user});
+  const HomePageStates3({super.key, required this.user});
 
   @override
-  State<HomePageStates> createState() => _HomePageStatesState(user);
+  State<HomePageStates3> createState() => _HomePageStates3State(user);
 }
 
-class _HomePageStatesState extends State<HomePageStates> {
+class _HomePageStates3State extends State<HomePageStates3> {
   final User user;
-  _HomePageStatesState(this.user);
+  _HomePageStates3State(this.user);
 
   void _onItemSelected(int index) {
     setState(() {
@@ -36,8 +38,10 @@ class _HomePageStatesState extends State<HomePageStates> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _screens = [
-      /*
-      PostsPage(),     
+      
+      QuestionPage(),  
+      HomePage(user: user)
+      /*   
       EventsPage(),
       NewPostPage(),
       SearchPage(),
@@ -46,12 +50,6 @@ class _HomePageStatesState extends State<HomePageStates> {
     ];
 
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/main-background.png"),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: _screens[_selectedIndex],

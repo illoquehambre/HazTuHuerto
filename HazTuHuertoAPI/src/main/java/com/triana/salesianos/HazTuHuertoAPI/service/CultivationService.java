@@ -80,7 +80,7 @@ public class CultivationService {
         return patchRepository.save(patch);
     }
 
-    public Cultivation createEmpty(Patch patch){
+    public Cultivation createEmpty(Patch patch){ //Este metodo no debe existir
         return cultivationRepository.save(Cultivation.builder()
                 .name("Empty")
                 .patch(patch)

@@ -7,6 +7,7 @@ import 'blocs/authentication/authentication_state.dart';
 import 'config/locator.dart';
 import 'pages/home_page.dart';
 import 'pages/home_page2.dart';
+import 'pages/home_page3.dart';
 import 'pages/login_page.dart';
 import 'services/authentication_service.dart';
 
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
           GlobalContext.ctx = context;
           if (state is AuthenticationAuthenticated) {
             // show home page
-            return HomePage2(
+            return HomePage3(
               user: state.user,
             );
           }

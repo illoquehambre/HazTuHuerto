@@ -68,8 +68,11 @@ class JwtAuthenticationService extends AuthenticationService {
     print("get current user");
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
+      /*
       UserResponse response = await _userRepository.me();
       return response;
+      */
+      return null;
     }
     return null;
   }
