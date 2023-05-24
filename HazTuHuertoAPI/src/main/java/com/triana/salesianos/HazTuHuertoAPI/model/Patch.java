@@ -19,11 +19,11 @@ public class Patch {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Cultivation cultivation;
     //Con este atributo tenemos un pequeño problema a gestionar, ya que en principio en la clase cultivo solo hay
     //una parcela a la que pertenezca. Como lógica e negocio una msima estancia de un cultivo no puede estar en ambos
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Ojo piojo
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)//Ojo piojo
     private List<Cultivation> cultivationHistory;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Ojo piojo
@@ -31,6 +31,15 @@ public class Patch {
     private VegetableGarden garden;
 
     private String name;
+
+    public Cultivation addCultivation(Cultivation cult) {
+        this.setCultivation(cult);
+        cult.setPatch(this);
+
+        return cult;
+
+    }
+
 
 
 }

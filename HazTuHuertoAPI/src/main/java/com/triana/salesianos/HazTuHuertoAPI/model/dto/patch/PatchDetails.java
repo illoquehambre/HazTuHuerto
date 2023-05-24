@@ -23,7 +23,7 @@ public class PatchDetails {
     private String name;
     private Long id;
     private CultivationDetails cultivation;
-    private Long gardenId;
+    private String gardenName;
 
     public static PatchDetails fromPatch(Patch patch) {
 
@@ -31,7 +31,7 @@ public class PatchDetails {
                 .name(patch.getName())
                 .id(patch.getId())
                 .cultivation(CultivationDetails.fromCultivation(patch.getCultivation()))
-                .gardenId(patch.getGarden().getId())
+                .gardenName(patch.getGarden().getName())
                 .build();
     }
 }

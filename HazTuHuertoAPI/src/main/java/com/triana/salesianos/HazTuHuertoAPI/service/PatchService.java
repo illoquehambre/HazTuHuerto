@@ -5,26 +5,18 @@ import com.triana.salesianos.HazTuHuertoAPI.model.Cultivation;
 import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.CreatePatch;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.EditPatchCultivation;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.CreateVegetableGarden;
-import com.triana.salesianos.HazTuHuertoAPI.repository.CultivationRepository;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.CreatePatchCultivation;
 import com.triana.salesianos.HazTuHuertoAPI.repository.PatchRepository;
-import com.triana.salesianos.HazTuHuertoAPI.repository.VegetableGardenRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -33,9 +25,7 @@ public class PatchService {
     private final PatchRepository patchRepository;
     private final UserService userService;
     private final StorageService storageService;
-    private final CultivationRepository cultivationRepository;
-    private final CultivationService cultivationService;
-
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     public List<Patch> findAll() {
 
@@ -53,6 +43,12 @@ public class PatchService {
                 .orElseThrow(() -> new EntityNotFoundException("No patch with id: " + id));
 
     }
+    public Cultivation findCultivationById(Long id) {
+
+        return patchRepository.findFirstCultivationById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No patch with id: " + id));
+
+    }
     public List<Patch> findByGarden(VegetableGarden garden, User user) {
         if(userService.checkUserLogedInGarden(user.getId(), garden.getId())) {
             List<Patch> result = patchRepository.findAllByGarden(garden);
@@ -66,17 +62,14 @@ public class PatchService {
 
     }
 
-    public Patch save(CreatePatch newPatch, VegetableGarden garden, User user) {
+    public Patch save(CreatePatchCultivation newPatch, VegetableGarden garden, User user, MultipartFile file) {
         //Hacer comprobaciones de usuario
         if(userService.checkUserLogedInGarden(user.getId(), garden.getId())) {
 
-            Patch patch=Patch.builder()
-                    .name(newPatch.getName())
-                    .garden(garden)
-                    .build();
-
-            Cultivation cultivation = cultivationService.createEmpty(patchRepository.save(patch));
-            patch.setCultivation(cultivation);
+            Patch patch=createPatch(newPatch, garden);
+            patchRepository.save(patch);
+            Cultivation cultivation =createCultivation(newPatch, patch, file);
+            patch.addCultivation(cultivation);
            return patchRepository.save(patch);
 
 
@@ -84,6 +77,31 @@ public class PatchService {
             throw new SecurityException("Access Denied.");
 
     }
+
+    public Cultivation createCultivation(CreatePatchCultivation newPatch, Patch patch, MultipartFile file){
+        String fileName = "";
+        if(file!=null)
+            fileName=storageService.store(file);
+
+        return Cultivation.builder()
+                .patch(patch)
+                .name(newPatch.getCultivationName())
+                .variety(newPatch.getVariety())
+                .harvestingDate(newPatch.getHarvestDate())
+                .plantingDate(newPatch.getPlantDate())
+                .img(fileName)
+                .build();
+    }
+    public Patch createPatch(CreatePatchCultivation newPatch, VegetableGarden garden){
+        return patchRepository.save(
+                Patch.builder()
+                .name(newPatch.getPatchName())
+                .garden(garden)
+                .build()
+        );
+    }
+
+
     public Patch divide(Patch patch, User user) {
         //Hacer comprobaciones de usuario
         if(userService.checkUserLogedInPatch(user.getId(), patch.getId())) {
@@ -93,8 +111,7 @@ public class PatchService {
                             .garden(patch.getGarden())
                             .cultivationHistory(new ArrayList<>(patch.getCultivationHistory()))
                             .build();
-            Cultivation cultivation = cultivationService.createEmpty(patchRepository.save(patch));
-            patch.setCultivation(cultivation);
+            newPatch.setCultivation(patch.getCultivation());
             return patchRepository.save(newPatch);
         }else
             throw new SecurityException("Access Denied.");
@@ -108,7 +125,7 @@ public class PatchService {
 
     }
 
-    public Patch edit(Patch patch, EditPatchCultivation edit, User user, MultipartFile file) {
+    public Patch edit(Patch patch, CreatePatchCultivation edit, User user, MultipartFile file) {
         //Yo no se si esto está bien, habria qwu preguntarle al señor lusimi, parese chapuza
         if(userService.checkUserLogedInPatch(user.getId(), patch.getId())) {
             if(patch.getCultivation().getImg()!=null)
@@ -117,22 +134,19 @@ public class PatchService {
             patch.setName(edit.getPatchName());
             patch.getCultivation().setName(edit.getCultivationName());
             patch.getCultivation().setVariety(edit.getVariety());
-            patch.getCultivation().setPlantingDate(LocalDate.parse(edit.getPlantDate(),
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy")) );
-            patch.getCultivation().setHarvestingDate(LocalDate.parse(edit.getHarvestDate(),
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            patch.getCultivation().setPlantingDate(edit.getPlantDate());
+            patch.getCultivation().setHarvestingDate(edit.getHarvestDate());
             patch.getCultivation().setImg(fileName);
         }
         return patchRepository.save(patch);
     }
 
-    public Patch harvest(Patch patch, User user) {
+    public Patch harvest(Patch patch, User user, MultipartFile file, CreatePatchCultivation editPatch ) {
         //Yo no se si esto está bien, habria qwu preguntarle al señor lusimi, parese chapuza
         if(userService.checkUserLogedInPatch(user.getId(), patch.getId())) {
             Cultivation cultivation = patch.getCultivation();
-            patch.setCultivation(cultivationService.createEmpty(patch));
+            patch.setCultivation(this.createCultivation(editPatch, patch, file));
             patch.getCultivationHistory().add(cultivation);
-            cultivationRepository.save(cultivation);
 
         }
         return patchRepository.save(patch);

@@ -22,7 +22,7 @@ public class Note {
     private String title;
     private String content;
     private LocalDate lastModifiedDate;
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "cultivation_id", foreignKey = @ForeignKey(name= "FK_NOTE_CULTIVATION"))
 
     private Cultivation  cultivation;

@@ -3,19 +3,13 @@ package com.triana.salesianos.HazTuHuertoAPI.service;
 import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.model.*;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.note.CreateNote;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.CreatePatch;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.EditPatchCultivation;
-import com.triana.salesianos.HazTuHuertoAPI.repository.CultivationRepository;
 import com.triana.salesianos.HazTuHuertoAPI.repository.NoteRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,8 +19,6 @@ public class NoteService {
     private final NoteRepository noteRepository;
     private final UserService userService;
     private final StorageService storageService;
-    private final CultivationRepository cultivationRepository;
-    private final CultivationService cultivationService;
 
 
     public List<Note> findAll() {

@@ -3,17 +3,12 @@ package com.triana.salesianos.HazTuHuertoAPI.controller;
 import com.triana.salesianos.HazTuHuertoAPI.model.*;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.note.CreateNote;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.note.NoteResponse;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.CreatePatch;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.EditPatchCultivation;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.PatchDetails;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.PatchSimplify;
-import com.triana.salesianos.HazTuHuertoAPI.repository.CultivationRepository;
+import com.triana.salesianos.HazTuHuertoAPI.repository.NoteRepository;
+import com.triana.salesianos.HazTuHuertoAPI.repository.PatchRepository;
 import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
-import com.triana.salesianos.HazTuHuertoAPI.repository.VegetableGardenRepository;
-import com.triana.salesianos.HazTuHuertoAPI.service.CultivationService;
 import com.triana.salesianos.HazTuHuertoAPI.service.NoteService;
+import com.triana.salesianos.HazTuHuertoAPI.service.PatchService;
 import com.triana.salesianos.HazTuHuertoAPI.service.UserService;
-import com.triana.salesianos.HazTuHuertoAPI.service.VegetableGardenService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +16,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -35,10 +29,10 @@ import java.net.URI;
 public class NoteController {
 
     private final NoteService noteService;
-    private final CultivationService cultivationService;
-    private final CultivationRepository cultivationRepository;
     private final UserService userService;
     private final UserRepository userRepository;
+    private final PatchService patchService;
+    private final NoteRepository noteRepository;
 
 
     @GetMapping("/note/{id}")
@@ -59,10 +53,10 @@ public class NoteController {
                                                     @PathVariable Long id,
                                                     @AuthenticationPrincipal User user) {
 
-        Cultivation cultivation = cultivationService.findById(id);
+        Cultivation cultivation = patchService.findCultivationById(id);
         Note created = noteService.save(newNote,cultivation, user);
         cultivation.addNote(created);
-        cultivationRepository.save(cultivation);
+
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -70,7 +64,7 @@ public class NoteController {
 
         return ResponseEntity
                 .created(createdURI)
-                .body(NoteResponse.fromNote(created));
+                .body(NoteResponse.fromNote(noteRepository.save(created)));
 
 
     }

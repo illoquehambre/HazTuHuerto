@@ -4,9 +4,6 @@ import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.*;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.CreateVegetableGarden;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.VegetableGardenDetails;
-import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.VegetableGardenResponse;
 import com.triana.salesianos.HazTuHuertoAPI.repository.UserRepository;
 import com.triana.salesianos.HazTuHuertoAPI.repository.VegetableGardenRepository;
 import com.triana.salesianos.HazTuHuertoAPI.service.PatchService;
@@ -16,7 +13,6 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -41,6 +36,17 @@ public class PatchController {
     private final UserRepository userRepository;
 
 
+    @GetMapping("/patch/history/{id}")
+    public PatchHistory findHistoryByPatchId(@AuthenticationPrincipal User user,
+                                      @PathVariable Long id) {
+        Patch patch = patchService.findById(id);
+        if(userService.checkUserLogedInPatch(user.getId(), id))
+            return PatchHistory.fromPatch(patch);
+        else
+            throw new SecurityException("Access Denied");
+
+    }
+
     @GetMapping("/patch/{id}")
     public PatchDetails findByPatchId(@AuthenticationPrincipal User user,
                                       @PathVariable Long id) {
@@ -53,15 +59,15 @@ public class PatchController {
             throw new SecurityException("Access Denied");
 
     }
-
-
+    //Esto crea tanto una parcela como un cultivo
     @PostMapping("/patch/garden/{id}")//El id es de garden pero crea un nuevo patch en este
-    public ResponseEntity<PatchSimplify> register(@Valid @RequestBody CreatePatch newPatch,
+    public ResponseEntity<PatchDetails> register(@Valid @RequestPart CreatePatchCultivation newPatch,
+                                                    @RequestPart MultipartFile file,
                                                     @PathVariable Long id,
                                                     @AuthenticationPrincipal User user) {
 
         VegetableGarden garden = gardenService.findById(id);
-        Patch created = patchService.save(newPatch,garden, user);
+        Patch created = patchService.save(newPatch,garden, user, file);
         garden.addPatch(created);
         gardenRepository.save(garden);
         URI createdURI = ServletUriComponentsBuilder
@@ -71,7 +77,7 @@ public class PatchController {
 
         return ResponseEntity
                 .created(createdURI)
-                .body(PatchSimplify.fromPatch(created));
+                .body(PatchDetails.fromPatch(created));
 
 
     }
@@ -79,7 +85,7 @@ public class PatchController {
     public PatchDetails editDetails(@AuthenticationPrincipal User logguedUser,
                                      @PathVariable Long id,
                                     @RequestPart("file") MultipartFile file,
-                                     @Valid @RequestPart("editPatch") EditPatchCultivation editPatch) {
+                                     @Valid @RequestPart("editPatch") CreatePatchCultivation editPatch) {
         Patch patch=patchService.findById(id);
         Patch edited = patchService.edit(patch, editPatch,logguedUser, file);
 
@@ -118,10 +124,13 @@ public class PatchController {
 
     }
     @PutMapping("/patch/harvest/{id}") //Revisar la respuesta
-    public PatchDetails editDetails(@AuthenticationPrincipal User logguedUser,
-                                    @PathVariable Long id) {
+    public PatchDetails harvest(@AuthenticationPrincipal User logguedUser,
+                                    @PathVariable Long id,
+                                    @RequestPart("file") MultipartFile file,
+                                    @Valid @RequestPart("editPatch") CreatePatchCultivation editPatch) {
+
         Patch patch=patchService.findById(id);
-        Patch edited = patchService.harvest(patch, logguedUser);
+        Patch edited = patchService.harvest(patch, logguedUser, file, editPatch);
 
         return PatchDetails.fromPatch(edited);
 

@@ -1,5 +1,6 @@
 package com.triana.salesianos.HazTuHuertoAPI.repository;
 
+import com.triana.salesianos.HazTuHuertoAPI.model.Cultivation;
 import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
 import org.jetbrains.annotations.NotNull;
@@ -15,5 +16,7 @@ public interface PatchRepository extends JpaRepository<Patch, Long>,
     List<Patch> findAllByGarden(VegetableGarden garden);
     @Transactional(readOnly = true)
     Optional<Patch> findById(@NotNull Long id);
+
+    Optional<Cultivation> findFirstCultivationById(Long id);
 
 }
