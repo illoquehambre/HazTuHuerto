@@ -26,8 +26,8 @@ public class Patch {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)//Ojo piojo
     private List<Cultivation> cultivationHistory;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Ojo piojo
-    @JoinColumn(name = "huerto_id", foreignKey = @ForeignKey(name= "FK_HUERTO_PARCELA"))
+    @ManyToOne(fetch = FetchType.LAZY)//Ojo piojo
+    @JoinColumn(name = "garden_id", foreignKey = @ForeignKey(name= "FK_GARDEN_PATCH"))
     private VegetableGarden garden;
 
     private String name;

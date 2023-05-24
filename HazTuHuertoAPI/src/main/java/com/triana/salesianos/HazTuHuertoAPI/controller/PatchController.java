@@ -44,7 +44,6 @@ public class PatchController {
             return PatchHistory.fromPatch(patch);
         else
             throw new SecurityException("Access Denied");
-
     }
 
     @GetMapping("/patch/{id}")

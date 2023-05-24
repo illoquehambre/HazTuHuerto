@@ -4,10 +4,19 @@ import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.question.QuestionResponse;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.EditUser;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.CreateVegetableGarden;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.VegetableGardenResponse;
 import com.triana.salesianos.HazTuHuertoAPI.repository.VegetableGardenRepository;
+import com.triana.salesianos.HazTuHuertoAPI.search.spec.GardenSpecificationBuilder;
+import com.triana.salesianos.HazTuHuertoAPI.search.spec.QuestionSpecificationBuilder;
+import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,12 +41,24 @@ public class VegetableGardenService {
 
         return vegetableGardenRepository.findAll();
     }
+
+    public PageDto<VegetableGardenResponse> search(Pageable pageable, User owner) {
+        /*
+        GardenSpecificationBuilder gardenSpecificationBuilder =
+                new GardenSpecificationBuilder(params);
+        Specification<VegetableGarden> spec =  gardenSpecificationBuilder.build(); //Spec queda nulo, porque?
+*/
+        Page<VegetableGardenResponse> pageGardenResponse = vegetableGardenRepository.findAllByOwner(owner,pageable).map(VegetableGardenResponse::fromGarden);
+        if(pageGardenResponse.isEmpty())
+            throw new EntityNotFoundException("No Gardens with this search criteria");
+        return new PageDto<>(pageGardenResponse);
+    }
     public VegetableGarden findById(Long id) {
         return vegetableGardenRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No user with id: " + id));
 
     }
-    public List<VegetableGarden> findByUser(User user) {
+   /* public List<VegetableGarden> findByUser(User user) {
 
         List<VegetableGarden> result = vegetableGardenRepository.findAllByOwner(user);
 
@@ -46,7 +67,7 @@ public class VegetableGardenService {
 
         return vegetableGardenRepository.findAll();
 
-    }
+    }*/
     public VegetableGarden save(CreateVegetableGarden newHuerto, User user, MultipartFile file) {
         String fileName = storageService.store(file);
         return vegetableGardenRepository.save(

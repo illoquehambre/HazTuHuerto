@@ -119,9 +119,9 @@ public class PatchService {
     }
     public void deleteById(Long id) {
         //Esto es una gitanada, perdón
-        if (patchRepository.existsById(id)){
-            patchRepository.deleteById(id);
-        }
+        Patch patch=this.findById(id);
+        patch.getGarden().removePatch(patch);
+        patchRepository.deleteById(id);
 
     }
 

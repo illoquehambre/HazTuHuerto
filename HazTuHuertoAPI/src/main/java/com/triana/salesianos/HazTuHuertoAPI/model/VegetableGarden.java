@@ -21,7 +21,7 @@ public class VegetableGarden {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//Ojo piojo
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)//Ojo piojo
     @Builder.Default
     private List<Patch> patchList =new ArrayList<>();
 
@@ -49,7 +49,9 @@ public class VegetableGarden {
     }
 
 
-
+    public void removePatch(Patch patch){
+        this.getPatchList().remove(patch);
+    }
 
 
 }

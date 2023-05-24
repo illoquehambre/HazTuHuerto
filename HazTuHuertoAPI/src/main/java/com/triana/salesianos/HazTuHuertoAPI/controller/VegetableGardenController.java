@@ -3,6 +3,7 @@ package com.triana.salesianos.HazTuHuertoAPI.controller;
 import com.triana.salesianos.HazTuHuertoAPI.model.Question;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.EditUser;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.UserResponse;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.vegetableGarden.CreateVegetableGarden;
@@ -17,6 +18,8 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +42,9 @@ public class VegetableGardenController {
     private final UserRepository userRepository;
 
     @GetMapping("/vegetableGarden")
-    public List<VegetableGardenResponse> findAll(@AuthenticationPrincipal User user) {
-        return gardenService.findByUser(user)
-                .stream()
-                .map(VegetableGardenResponse::fromGarden)
-                .toList();
+    public PageDto<VegetableGardenResponse> findAll(@AuthenticationPrincipal User user,
+                                                    @PageableDefault(size = 5, page = 0) Pageable pageable) {
+        return gardenService.search(pageable,user);
     }
 
     @GetMapping("/vegetableGarden/{id}")
