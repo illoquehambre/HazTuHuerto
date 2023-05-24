@@ -32,5 +32,11 @@ public interface UserRepository extends JpaRepository <User, UUID>,
     @Query(value="SELECT CASE WHEN COUNT(q) > 0 THEN true ELSE false END FROM Question q JOIN q.publisher u WHERE q.id = :questionId AND u.id = :userId")
     boolean checkUserLogedInQuestion(@Param("userId") UUID userId, @Param("questionId") Long questionId);
 
+    @Query(value="SELECT CASE WHEN COUNT(g) > 0 THEN true ELSE false END FROM Vegetable_Garden g JOIN g.owner u WHERE g.id = :gardenId AND u.id = :userId")
+    boolean checkUserLogedInGarden(@Param("userId") UUID userId, @Param("gardenId") Long gardenId);
+
+    @Query(value="SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Patch p JOIN p.garden g JOIN g.owner u WHERE p.id = :patchId AND u.id = :userId")
+    boolean checkUserLogedInPatch(@Param("userId") UUID userId, @Param("patchId") Long patchId);
+
 
 }

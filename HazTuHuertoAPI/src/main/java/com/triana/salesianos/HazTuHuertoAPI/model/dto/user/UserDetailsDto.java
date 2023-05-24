@@ -22,6 +22,7 @@ public class UserDetailsDto extends UserResponse{
     private List<Question> publishedQuestions;
 
     private List<Answer> publishedAnswers;
+    private Long numGardens;
 
     private List<Question> favPosts;//Lo vamos a dejar por ahora
 
@@ -46,6 +47,7 @@ public class UserDetailsDto extends UserResponse{
                 .reputation(user.getReputation())
                 .email(user.getEmail())
                 .roles(user.getRoles())
+                .numGardens((long) user.getGardens().size())
                 .build();
     }
 }

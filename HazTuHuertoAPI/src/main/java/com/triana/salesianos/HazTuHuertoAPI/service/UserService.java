@@ -180,6 +180,12 @@ public class UserService {
         return userRepository.checkUserLogedInQuestion(userId,questionId);
     }
 
+    public boolean checkUserLogedInGarden(UUID userId, Long gardenId) {
+        return userRepository.checkUserLogedInGarden(userId,gardenId);
+    }
+    public boolean checkUserLogedInPatch(UUID userId, Long patchId) {
+        return userRepository.checkUserLogedInPatch(userId, patchId);
+    }
 
 
 
