@@ -1,0 +1,5 @@
+insert into user_entity (id,account_non_expired, account_non_locked, credentials_non_expired, enabled, full_name, username, password, avatar, email, reputation, created_at, last_password_change_at, banned) values ('1b257813-0195-43ab-9a3c-f1b08ab4c5a9',true, true, true,true, 'Paquito programador', 'Programer12', '{bcrypt}$2a$12$mLpix4ldpNRePczH1ozXJeE3NbWkPP1HgMRsuY9WF34JuUio4NcUK', 'mandarina.jpg','javieribarra@gmail.com',5000, '2022-12-12','2022-12-12', false);
+insert into user_roles (user_id, roles) values ('1b257813-0195-43ab-9a3c-f1b08ab4c5a9', 0)
+
+insert into user_entity (id,account_non_expired, account_non_locked, credentials_non_expired, enabled, full_name, username, password, avatar, email, reputation, created_at, last_password_change_at, banned) values ('73fcb043-b1a1-4ba8-af88-4ad3abcf2021',true, true, true,true, 'Paquito programador2', 'Programer13', '{bcrypt}$2a$12$mLpix4ldpNRePczH1ozXJeE3NbWkPP1HgMRsuY9WF34JuUio4NcUK', 'mandarina.jpg','javieribarra2@gmail.com',100, '2022-12-12','2022-12-12', true);
+insert into user_roles (user_id, roles) values ('73fcb043-b1a1-4ba8-af88-4ad3abcf2021', 1)
