@@ -3,7 +3,6 @@ import '../../rest/rest_client.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 import '../authentication/authentication.dart';
-import '../../exceptions/exceptions.dart';
 import '../../services/services.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -11,9 +10,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationService _authenticationService;
 
   LoginBloc(AuthenticationBloc authenticationBloc, AuthenticationService authenticationService)
-      : assert(authenticationBloc != null),
-        assert(authenticationService != null),
-        _authenticationBloc = authenticationBloc,
+      : _authenticationBloc = authenticationBloc,
         _authenticationService = authenticationService,
         super(LoginInitial()) {
           on<LoginInWithEmailButtonPressed>(__onLogingInWithEmailButtonPressed);

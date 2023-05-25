@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haz_tu_huerto_mobile_2/blocs/blocs.dart';
+import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/register_page.dart';
-import '../blocs/blocs.dart';
-import '../config/locator.dart';
-import '../services/services.dart';
+import 'package:haz_tu_huerto_mobile_2/services/authentication_service.dart';
+
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: SafeArea(
           minimum: const EdgeInsets.all(16),
@@ -30,7 +33,7 @@ class LoginPage extends StatelessWidget {
                     Text(msg),
                     TextButton(
                       //textColor: Theme.of(context).primaryColor,
-                      child: Text('Retry'),
+                      child: const Text('Retry'),
                       onPressed: () {
                         authBloc.add(AppLoaded());
                       },
@@ -39,7 +42,7 @@ class LoginPage extends StatelessWidget {
                 ));
               }
               // return splash screen
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                 ),
@@ -80,11 +83,11 @@ class __SignInFormState extends State<_SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final _loginBloc = BlocProvider.of<LoginBloc>(context);
+    final loginBloc = BlocProvider.of<LoginBloc>(context);
 
     _onLoginButtonPressed() {
       if (_key.currentState!.validate()) {
-        _loginBloc.add(LoginInWithEmailButtonPressed(email: _emailController.text, password: _passwordController.text));
+        loginBloc.add(LoginInWithEmailButtonPressed(email: _emailController.text, password: _passwordController.text));
       } else {
         setState(() {
           _autoValidate = true;
@@ -101,7 +104,7 @@ class __SignInFormState extends State<_SignInForm> {
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state is LoginLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -113,7 +116,7 @@ class __SignInFormState extends State<_SignInForm> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email address',
                       filled: true,
                       isDense: true,
@@ -128,11 +131,11 @@ class __SignInFormState extends State<_SignInForm> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Password',
                       filled: true,
                       isDense: true,
@@ -154,7 +157,7 @@ class __SignInFormState extends State<_SignInForm> {
                             backgroundColor: MaterialStatePropertyAll<Color>(
                                 Colors.transparent),
                           ),
-                          child: Text(
+                          child: const Text(
                             'You do not have count? register now',
                             style: TextStyle(color: Colors.redAccent),
                           ),
@@ -162,7 +165,7 @@ class __SignInFormState extends State<_SignInForm> {
                             Navigator.push(
                               context,
                               PageRouteBuilder(
-                                transitionDuration: Duration(milliseconds: 500),
+                                transitionDuration: const Duration(milliseconds: 500),
                                 transitionsBuilder: (context, animation,
                                     secondaryAnimation, child) {
                                   return FadeTransition(
@@ -172,7 +175,7 @@ class __SignInFormState extends State<_SignInForm> {
                                 },
                                 pageBuilder:
                                     (context, animation, secondaryAnimation) {
-                                  return RegisterPage();
+                                  return const RegisterPage();
                                 },
                               ),
                             );
@@ -187,8 +190,12 @@ class __SignInFormState extends State<_SignInForm> {
                     //textColor: Colors.white,
                     //padding: const EdgeInsets.all(16),
                     //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    child: Text('LOG IN'),
-                    onPressed: state is LoginLoading ? () {} : _onLoginButtonPressed,
+                    onPressed: state is LoginLoading ? () {} : _onLoginButtonPressed,  
+                    //color: Theme.of(context).primaryColor,
+                    //textColor: Colors.white,
+                    //padding: const EdgeInsets.all(16),
+                    //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                    child: const Text('LOG IN'),
                   )
                 ],
               ),

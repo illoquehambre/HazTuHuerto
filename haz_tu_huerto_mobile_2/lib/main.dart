@@ -5,8 +5,6 @@ import 'blocs/authentication/authentication_bloc.dart';
 import 'blocs/authentication/authentication_event.dart';
 import 'blocs/authentication/authentication_state.dart';
 import 'config/locator.dart';
-import 'pages/home_page.dart';
-import 'pages/home_page2.dart';
 import 'pages/home_page3.dart';
 import 'pages/login_page.dart';
 import 'services/authentication_service.dart';
@@ -49,7 +47,7 @@ class MyApp extends StatelessWidget {
     print("Enrutando al login");
     return MaterialPageRoute<void>(builder: (context) {
       var authBloc = BlocProvider.of<AuthenticationBloc>(context);
-      authBloc..add(SessionExpiredEvent());
+      authBloc.add(SessionExpiredEvent());
       return _instance;
     });
     /*return MaterialPageRoute<void>(builder: (context) {
@@ -61,7 +59,7 @@ class MyApp extends StatelessWidget {
     });*/
   }
 
-  MyApp() {
+  MyApp({super.key}) {
     _instance = this;
   }
 
@@ -83,7 +81,7 @@ class MyApp extends StatelessWidget {
             );
           }
           // otherwise show login page
-          return LoginPage();
+          return const LoginPage();
         },
       ),
     );

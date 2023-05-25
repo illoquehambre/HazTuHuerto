@@ -23,10 +23,10 @@ class User {
   User({this.id, this.username, this.avatar, this.fullName});
 
     User.fromLoginResponse(LoginResponse response) {
-      this.id = response.id;
-      this.username = response.username;
-      this.avatar = response.avatar;
-      this.fullName = response.fullName;
+      id = response.id;
+      username = response.username;
+      avatar = response.avatar;
+      fullName = response.fullName;
     }
 }
 
@@ -41,11 +41,11 @@ class UserResponse extends User {
   fullName = json['fullName'];
 }
   Map<String, dynamic> toJson() {
-  final Map<String, dynamic> data = new Map<String, dynamic>();
-  data['id'] = this.id;
-  data['username'] = this.username;
-  data['avatar'] = this.avatar;
-  data['fullName'] = this.fullName;
+  final Map<String, dynamic> data = <String, dynamic>{};
+  data['id'] = id;
+  data['username'] = username;
+  data['avatar'] = avatar;
+  data['fullName'] = fullName;
   return data;
 }
 

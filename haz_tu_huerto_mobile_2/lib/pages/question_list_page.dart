@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haz_tu_huerto_mobile_2/blocs/question/question_bloc.dart';
 import 'package:haz_tu_huerto_mobile_2/services/question_service.dart';
-import 'package:haz_tu_huerto_mobile_2/widget/post_list_item.dart';
+import 'package:haz_tu_huerto_mobile_2/widget/question.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../config/locator.dart';
 import '../widget/bottom_loader.dart';
@@ -17,7 +17,7 @@ class QuestionPage extends StatelessWidget {
         final questionService = getIt<QuestionService>();
         return QuestionBloc(questionService)..add(QuestionInitialEvent());
       },
-      child: EventsPageSF(),
+      child: const EventsPageSF(),
     );
   }
 }
@@ -39,7 +39,7 @@ class _EventsPageSFState extends State<EventsPageSF> {
             state: state,
           );
         } else if (state is QuestionFailure) {
-          return Center(
+          return const Center(
             child: Text("Ha ocurrido un error a la hora de cargar los posts"),
           );
         } else {
@@ -159,7 +159,7 @@ class _QuestionListState extends State<QuestionList>
   }
 */
   Future loadlist() async {
-    await Future.delayed(Duration(milliseconds: 1750));
+    await Future.delayed(const Duration(milliseconds: 1750));
     context.read<QuestionBloc>().add(QuestionRefreshEvent());
   }
 /*

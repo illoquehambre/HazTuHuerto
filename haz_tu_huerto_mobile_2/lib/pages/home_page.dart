@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/authentication/authentication_bloc.dart';
-import '../blocs/authentication/authentication_event.dart';
-import '../config/locator.dart';
-import '../models/models.dart';
-import '../services/authentication_service.dart';
+import 'package:haz_tu_huerto_mobile_2/blocs/blocs.dart';
+import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
+import 'package:haz_tu_huerto_mobile_2/models/models.dart';
+import 'package:haz_tu_huerto_mobile_2/services/services.dart';
 
 class HomePage extends StatelessWidget {
   final User user;
@@ -17,7 +16,7 @@ class HomePage extends StatelessWidget {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home Page'),
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(16),
@@ -26,7 +25,7 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Welcome, ${user.fullName}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24
                 ),
               ),
@@ -38,7 +37,7 @@ class HomePage extends StatelessWidget {
                 /*style: TextButton.styleFrom(
                   primary: Theme.of(context).primaryColor,
                 ),*/
-                child: Text('Logout'),
+                child: const Text('Logout'),
                 onPressed: (){
                   authBloc.add(UserLoggedOut());
                 },
@@ -48,7 +47,7 @@ class HomePage extends StatelessWidget {
                 JwtAuthenticationService service = getIt<JwtAuthenticationService>();
                 await service.getCurrentUser();
               }
-              , child: Text('Check')
+              , child: const Text('Check')
               )
             ],
           ),

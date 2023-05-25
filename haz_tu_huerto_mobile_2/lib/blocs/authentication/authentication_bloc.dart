@@ -9,8 +9,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   final AuthenticationService _authenticationService;
 
   AuthenticationBloc(AuthenticationService authenticationService)
-      : assert(authenticationService != null),
-        _authenticationService = authenticationService,
+      : _authenticationService = authenticationService,
         super(AuthenticationInitial()) {
           on<AppLoaded>(_onAppLoaded);
           on<UserLoggedIn>(_onUserLoggedIn);
@@ -25,7 +24,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   ) async {
       emit(AuthenticationLoading());
       try {
-        await Future.delayed(Duration(milliseconds: 500)); // a simulated delay
+        await Future.delayed(const Duration(milliseconds: 500)); // a simulated delay
         final currentUser = await _authenticationService.getCurrentUser();
 
         if (currentUser != null) {
@@ -63,7 +62,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     //emit(AuthenticationFailure(message: 'An unknown error occurred: ${e.toString()}'));
     print("sesión expirada");
     await _authenticationService.signOut();
-    emit(SessionExpiredState());
+    emit(const SessionExpiredState());
   }
 
 }

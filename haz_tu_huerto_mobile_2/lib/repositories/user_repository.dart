@@ -1,11 +1,9 @@
 
 
-import 'dart:convert';
 import 'package:injectable/injectable.dart';
 
 
 import '../config/locator.dart';
-import '../models/user.dart';
 import '../rest/rest_client.dart';
 
 @Order(-1)

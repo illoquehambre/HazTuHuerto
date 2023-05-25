@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:get_it/get_it.dart';
 import 'package:haz_tu_huerto_mobile_2/models/models.dart';
+import 'package:haz_tu_huerto_mobile_2/rest/rest_client.dart';
 import 'package:injectable/injectable.dart';
 
-import '../models/login.dart';
-import '../rest/rest_client.dart';
+
 
 @Order(-1)
 @singleton

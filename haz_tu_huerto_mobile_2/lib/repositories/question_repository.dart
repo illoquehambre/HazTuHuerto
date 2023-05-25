@@ -1,11 +1,8 @@
 import 'dart:convert';
 import 'package:get_it/get_it.dart';
-import 'package:haz_tu_huerto_mobile_2/models/models.dart';
-import 'package:haz_tu_huerto_mobile_2/models/question_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/question_response_dto.dart';
 import 'package:injectable/injectable.dart';
 
-import '../models/login.dart';
 import '../rest/rest_client.dart';
 
 @Order(-1)
@@ -19,7 +16,7 @@ class QuestionRepository {
   }
 
   Future<dynamic> findAll(int index, String token) async {
-    String url = "/question?page=${index}";
+    String url = "/question?page=$index";
 
     var response = await _client.get(url, token);
 

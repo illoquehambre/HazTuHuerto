@@ -16,5 +16,5 @@ class QuestionRefreshEvent extends QuestionEvent {}
 class LikeAQuestion extends QuestionEvent {
   final int questionId;
 
-  LikeAQuestion(this.questionId);
+  const LikeAQuestion(this.questionId);
 }

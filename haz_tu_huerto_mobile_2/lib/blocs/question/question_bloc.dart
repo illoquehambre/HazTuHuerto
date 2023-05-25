@@ -2,9 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:haz_tu_huerto_mobile_2/models/question_response_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/services/question_service.dart';
 import 'package:stream_transform/stream_transform.dart';
 
-import '../../services/question_service.dart';
+
 
 part 'question_event.dart';
 part 'question_state.dart';
@@ -65,7 +66,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       }
     } catch (_) {
       print(_);
-      emit(QuestionFailure(error: "${_}"));
+      emit(QuestionFailure(error: "$_"));
     }
   }
 

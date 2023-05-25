@@ -1,10 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
 import 'package:haz_tu_huerto_mobile_2/models/question_response_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/repositories/question_repository.dart';
 import 'package:haz_tu_huerto_mobile_2/services/services.dart';
 import 'package:injectable/injectable.dart';
 
-import '../config/locator.dart';
+
 
 @Order(2)
 @singleton
@@ -26,6 +27,6 @@ class QuestionService {
       QuestionResponseDto response = await _questRepository.findAll(index, token);
       return response;
     }
-    throw new Exception("There is an error in the service.");
+    throw Exception("There is an error in the service.");
   }
 }

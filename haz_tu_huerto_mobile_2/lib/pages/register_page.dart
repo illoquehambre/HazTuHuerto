@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haz_tu_huerto_mobile_2/blocs/blocs.dart';
 import 'package:haz_tu_huerto_mobile_2/blocs/register/register.dart';
-import 'package:haz_tu_huerto_mobile_2/blocs/register/register_bloc.dart';
-import 'package:haz_tu_huerto_mobile_2/blocs/register/register_event.dart';
+import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/login_page.dart';
-import '../blocs/blocs.dart';
-import '../config/locator.dart';
-import '../services/services.dart';
+import 'package:haz_tu_huerto_mobile_2/services/services.dart';
 
 class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: const Text('Register'),
       ),
       body: SafeArea(
           minimum: const EdgeInsets.all(16),
@@ -33,7 +33,7 @@ class RegisterPage extends StatelessWidget {
                     Text(msg),
                     TextButton(
                       //textColor: Theme.of(context).primaryColor,
-                      child: Text('Retry'),
+                      child: const Text('Retry'),
                       onPressed: () {
                         authBloc.add(AppLoaded());
                       },
@@ -42,7 +42,7 @@ class RegisterPage extends StatelessWidget {
                 ));
               }
               // return splash screen
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                 ),
@@ -87,11 +87,11 @@ class __SignInFormState extends State<_SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final _registerBloc = BlocProvider.of<RegisterBloc>(context);
+    final registerBloc = BlocProvider.of<RegisterBloc>(context);
 
     _onSignupButtonPressed() {
       if (_key.currentState!.validate()) {
-        _registerBloc.add(SignUp(username: _usernameController.text, email: _emailController.text, verifyEmail: _verifyEmailController.text,
+        registerBloc.add(SignUp(username: _usernameController.text, email: _emailController.text, verifyEmail: _verifyEmailController.text,
          fullName: _fullNameController.text ,password: _passwordController.text, verifyPassword: _verifyPasswordController.text));
       } else {
         setState(() {
@@ -109,7 +109,7 @@ class __SignInFormState extends State<_SignInForm> {
       child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
           if (state is RegisterLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -121,7 +121,7 @@ class __SignInFormState extends State<_SignInForm> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'User Name',
                       filled: true,
                       isDense: true,
@@ -136,11 +136,11 @@ class __SignInFormState extends State<_SignInForm> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email address',
                       filled: true,
                       isDense: true,
@@ -155,11 +155,11 @@ class __SignInFormState extends State<_SignInForm> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Verify Email address',
                       filled: true,
                       isDense: true,
@@ -174,11 +174,11 @@ class __SignInFormState extends State<_SignInForm> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Full Name',
                       filled: true,
                       isDense: true,
@@ -193,11 +193,11 @@ class __SignInFormState extends State<_SignInForm> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Password',
                       filled: true,
                       isDense: true,
@@ -215,7 +215,7 @@ class __SignInFormState extends State<_SignInForm> {
                     height: 16,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Verify Password',
                       filled: true,
                       isDense: true,
@@ -238,12 +238,11 @@ class __SignInFormState extends State<_SignInForm> {
                     //textColor: Colors.white,
                     //padding: const EdgeInsets.all(16),
                     //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    child: Text('SIGN UP'),
                     onPressed: state is RegisterLoading ? () {
                        Navigator.push(
                               context,
                               PageRouteBuilder(
-                                transitionDuration: Duration(milliseconds: 500),
+                                transitionDuration: const Duration(milliseconds: 500),
                                 transitionsBuilder: (context, animation,
                                     secondaryAnimation, child) {
                                   return FadeTransition(
@@ -253,11 +252,16 @@ class __SignInFormState extends State<_SignInForm> {
                                 },
                                 pageBuilder:
                                     (context, animation, secondaryAnimation) {
-                                  return LoginPage();
+                                  return const LoginPage();
                                 },
                               ),
                             );
-                    } : _onSignupButtonPressed,
+                    } : _onSignupButtonPressed,  
+                    //color: Theme.of(context).primaryColor,
+                    //textColor: Colors.white,
+                    //padding: const EdgeInsets.all(16),
+                    //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                    child: const Text('SIGN UP'),
                    
                   )
                 ],

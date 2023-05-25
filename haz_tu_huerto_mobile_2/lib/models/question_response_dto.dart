@@ -21,7 +21,7 @@ class QuestionResponseDto {
     if (json['content'] != null) {
       content = <QuestionDto>[];
       json['content'].forEach((v) {
-        content.add(new QuestionDto.fromJson(v));
+        content.add(QuestionDto.fromJson(v));
       });
     }
    // currentPage = json['currentPage'];
@@ -32,13 +32,13 @@ class QuestionResponseDto {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['content'] = this.content.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['content'] = content.map((v) => v.toJson()).toList();
    // data['currentPage'] = this.currentPage;
-    data['last'] = this.last;
-    data['first'] = this.first;
-    data['totalPages'] = this.totalPages;
-    data['totalElements'] = this.totalElements;
+    data['last'] = last;
+    data['first'] = first;
+    data['totalPages'] = totalPages;
+    data['totalElements'] = totalElements;
     return data;
   }
 }
@@ -108,9 +108,9 @@ class UserWhoPost {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userName'] = this.userName;
-    data['imgPath'] = this.imgPath;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['userName'] = userName;
+    data['imgPath'] = imgPath;
     return data;
   }
 }

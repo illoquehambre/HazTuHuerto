@@ -75,8 +75,8 @@ class RestClient {
       /*} on SocketException catch(ex) {
       throw FetchDataException('No internet connection: ${ex.message}');
     }*/
-    } on Exception catch (ex) {
-      throw ex;
+    } on Exception {
+      rethrow;
     }
   }
 
@@ -180,7 +180,7 @@ class AuthorizationInterceptor implements InterceptorContract {
   @override
   Future<ResponseData> interceptResponse({required ResponseData data}) async {
     if (data.statusCode == 401 || data.statusCode == 403) {
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(GlobalContext.ctx).push<void>(MyApp.route());
       });
     }

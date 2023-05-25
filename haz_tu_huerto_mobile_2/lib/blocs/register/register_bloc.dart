@@ -10,9 +10,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthenticationService _authenticationService;
 
   RegisterBloc(AuthenticationBloc authenticationBloc, AuthenticationService authenticationService)
-      : assert(authenticationBloc != null),
-        assert(authenticationService != null),
-        _authenticationBloc = authenticationBloc,
+      : _authenticationBloc = authenticationBloc,
         _authenticationService = authenticationService,
         super(RegisterInitial()) {
           on<SignUp>(__onSignUp);

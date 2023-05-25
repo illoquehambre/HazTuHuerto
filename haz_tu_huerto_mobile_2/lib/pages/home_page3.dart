@@ -1,8 +1,9 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:haz_tu_huerto_mobile_2/models/user.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/garden_list_page.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/home_page.dart';
-import '../models/models.dart';
 import 'question_list_page.dart';
 class HomePage3 extends StatelessWidget {
   final User user;
@@ -37,9 +38,10 @@ class _HomePageStates3State extends State<HomePageStates3> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _screens = [
+    List<Widget> screens = [
       
-      QuestionPage(),  
+      const QuestionPage(),  
+      const GardenPage(),
       HomePage(user: user)
       /*   
       EventsPage(),
@@ -52,10 +54,10 @@ class _HomePageStates3State extends State<HomePageStates3> {
     return Container(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: _screens[_selectedIndex],
+        body: screens[_selectedIndex],
         extendBody: true,
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.transparent,
             border: Border(
               top: BorderSide(
@@ -64,10 +66,10 @@ class _HomePageStates3State extends State<HomePageStates3> {
             ),
           ),
           child: BlurryContainer(
-            color: Color.fromRGBO(173, 29, 254, 1).withOpacity(0.35),
+            color: const Color.fromRGBO(173, 29, 254, 1).withOpacity(0.35),
             blur: 8,
             elevation: 4,
-            borderRadius: BorderRadius.all(Radius.zero),
+            borderRadius: const BorderRadius.all(Radius.zero),
             padding: EdgeInsets.zero,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
@@ -76,7 +78,7 @@ class _HomePageStates3State extends State<HomePageStates3> {
                 onTabChange: (value) {
                   _onItemSelected(value);
                 },
-                tabs: [
+                tabs: const [
                   GButton(
                     icon: Icons.home,
                     iconSize: 25,
@@ -115,7 +117,7 @@ class _HomePageStates3State extends State<HomePageStates3> {
                 ],
                 backgroundColor: Colors.transparent,
                 tabBackgroundColor: Colors.white,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
               ),
             ),
           ),

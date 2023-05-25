@@ -12,7 +12,7 @@ class QuestionInitial extends QuestionState {}
 class QuestionSucces extends QuestionState {
   final dynamic questions;
 
-  QuestionSucces({required this.questions});
+  const QuestionSucces({required this.questions});
 
   @override
   List<Object> get props => [questions];
@@ -23,7 +23,7 @@ class QuestionLoading extends QuestionState {}
 class QuestionFailure extends QuestionState {
   final String error;
 
-  QuestionFailure({required this.error});
+  const QuestionFailure({required this.error});
 
   @override
   List<Object> get props => [error];

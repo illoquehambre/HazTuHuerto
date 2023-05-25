@@ -27,7 +27,7 @@ class QuestionDto {
     content = json['content'];
     createdAt = json['createdAt'];
     publisher = (json['publisher'] != null
-        ? new UserResponse.fromJson(json['publisher'])
+        ? UserResponse.fromJson(json['publisher'])
         : null)!;
     score = json['score'];
     answers = json['answers'];

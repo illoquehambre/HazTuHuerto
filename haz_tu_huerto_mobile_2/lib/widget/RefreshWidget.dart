@@ -20,7 +20,7 @@ class _RefreshWidgetState extends State<RefreshWidget> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: widget.scrollController,
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         CupertinoSliverRefreshControl(
           onRefresh: widget.onRefresh,

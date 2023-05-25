@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +46,7 @@ class _HomePageStatesState extends State<HomePageStates> {
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
 
-    List<Widget> _screens = [
+    List<Widget> screens = [
       PostsPage(),
       EventsPage(),
       NewPostPage(),
@@ -56,7 +55,7 @@ class _HomePageStatesState extends State<HomePageStates> {
     ];
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/main-background.png"),
           fit: BoxFit.cover,
@@ -64,10 +63,10 @@ class _HomePageStatesState extends State<HomePageStates> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: _screens[_selectedIndex],
+        body: screens[_selectedIndex],
         extendBody: true,
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.transparent,
             border: Border(
               top: BorderSide(
@@ -76,10 +75,10 @@ class _HomePageStatesState extends State<HomePageStates> {
             ),
           ),
           child: BlurryContainer(
-            color: Color.fromRGBO(173, 29, 254, 1).withOpacity(0.35),
+            color: const Color.fromRGBO(173, 29, 254, 1).withOpacity(0.35),
             blur: 8,
             elevation: 4,
-            borderRadius: BorderRadius.all(Radius.zero),
+            borderRadius: const BorderRadius.all(Radius.zero),
             padding: EdgeInsets.zero,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
@@ -90,7 +89,7 @@ class _HomePageStatesState extends State<HomePageStates> {
                     _onItemSelected(value);
                   });
                 },
-                tabs: [
+                tabs: const [
                   GButton(
                     icon: Icons.home,
                     text: "Inicio",
@@ -124,7 +123,7 @@ class _HomePageStatesState extends State<HomePageStates> {
                 ],
                 backgroundColor: Colors.transparent,
                 tabBackgroundColor: Colors.white,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
               ),
             ),
           ),
@@ -140,7 +139,7 @@ Widget PostsPage() {
     child: Column(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(
@@ -148,8 +147,8 @@ Widget PostsPage() {
               ),
             ),
           ),
-          padding: EdgeInsets.only(top: 50, bottom: 8),
-          child: TabBar(
+          padding: const EdgeInsets.only(top: 50, bottom: 8),
+          child: const TabBar(
             overlayColor: MaterialStatePropertyAll(Colors.transparent),
             indicatorSize: TabBarIndicatorSize.label,
             indicatorWeight: 5,
@@ -172,11 +171,11 @@ Widget PostsPage() {
               SingleChildScrollView(
                 child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   child: Column(
                     children: [
                       Post(
-                        new GetPostDto.fromJson(
+                        GetPostDto.fromJson(
                           {
                             "id": 57,
                             "affair": "Marketing Manager",
@@ -195,7 +194,7 @@ Widget PostsPage() {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 90,
                       )
                     ],
@@ -205,52 +204,52 @@ Widget PostsPage() {
               SingleChildScrollView(
                 child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   child: Column(
                     children: [
                       Container(
                         color: Colors.white,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
                       Container(
                         color: Colors.white,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
                       Container(
                         color: Colors.white,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
                       Container(
                         color: Colors.white,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
                       Container(
                         color: Colors.red,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
                       Container(
                         color: Colors.white,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
                       Container(
                         color: Colors.white,
                         height: 200,
                         width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 90,
                       )
                     ],
@@ -286,13 +285,13 @@ Widget ProfilePage(AuthenticationBloc authBloc, User user) {
         children: <Widget>[
           Text(
             'Welcome, ${user.fullName}',
-            style: TextStyle(fontSize: 24),
+            style: const TextStyle(fontSize: 24),
           ),
           const SizedBox(
             height: 12,
           ),
           ElevatedButton(
-            child: Text('Logout'),
+            child: const Text('Logout'),
             onPressed: () {
               authBloc.add(UserLoggedOut());
             },
@@ -304,7 +303,7 @@ Widget ProfilePage(AuthenticationBloc authBloc, User user) {
                     getIt<JwtAuthenticationService>();
                 await service.getCurrentUser();
               },
-              child: Text('Check'))
+              child: const Text('Check'))
         ],
       ),
     ),
@@ -315,17 +314,17 @@ Widget Post(GetPostDto post) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
-      borderRadius: BorderRadius.all(
+      borderRadius: const BorderRadius.all(
         Radius.circular(5),
       ),
       border: Border.all(
-        color: Color.fromRGBO(173, 29, 254, 1),
+        color: const Color.fromRGBO(173, 29, 254, 1),
       ),
     ),
     width: double.infinity,
-    padding: EdgeInsets.all(15),
+    padding: const EdgeInsets.all(15),
     child: TextButton(
-      style: ButtonStyle(
+      style: const ButtonStyle(
         splashFactory: NoSplash.splashFactory,
         overlayColor: MaterialStatePropertyAll(Colors.transparent),
       ),
@@ -334,7 +333,7 @@ Widget Post(GetPostDto post) {
         children: [
           ElevatedButton(
             onPressed: () => print(post.userWhoPost.userName),
-            style: ButtonStyle(
+            style: const ButtonStyle(
               padding: MaterialStatePropertyAll(
                 EdgeInsets.only(top: 5, bottom: 5),
               ),
@@ -351,8 +350,8 @@ Widget Post(GetPostDto post) {
                 Container(
                   width: 50,
                   height: 50,
-                  margin: EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsets.only(right: 10),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(100),
                     ),
@@ -366,58 +365,58 @@ Widget Post(GetPostDto post) {
                 Text(
                   post.userWhoPost.userName.length < 15
                       ? post.userWhoPost.userName
-                      : post.userWhoPost.userName.substring(0, 12) + "...",
-                  style: TextStyle(
+                      : "${post.userWhoPost.userName.substring(0, 12)}...",
+                  style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 post.userWhoPost.verified
-                    ? Icon(
+                    ? const Icon(
                         Icons.verified,
                         color: Colors.blue,
                       )
-                    : Text(""),
+                    : const Text(""),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
+            width: double.infinity,
             child: Text(
               post.affair,
               textAlign: TextAlign.justify,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
                 fontSize: 16,
                 color: Colors.black,
               ),
             ),
-            width: double.infinity,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
+            width: double.infinity,
             child: Text(
               post.content,
               textAlign: TextAlign.justify,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 17,
                 color: Colors.black,
               ),
             ),
-            width: double.infinity,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -436,8 +435,8 @@ Widget Post(GetPostDto post) {
                   },
                   countBuilder: (likeCount, isLiked, text) {
                     return Text(
-                      "${text}",
-                      style: TextStyle(
+                      text,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                       ),
@@ -447,24 +446,24 @@ Widget Post(GetPostDto post) {
                 Container(
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.message,
                         size: 25,
                         color: Colors.black,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
                         "${post.comments}",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        style: const TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ],
                   ),
                 ),
                 Text(
                   "${post.postDate.split(" ")[0]}\n${post.postDate.split(" ")[1]}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                   textAlign: TextAlign.center,

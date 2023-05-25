@@ -26,7 +26,7 @@ class GetPostDto {
     content = json['content'];
     imgPath = json['imgPath'].cast<String>();
     userWhoPost = (json['userWhoPost'] != null
-        ? new UserWhoPost.fromJson(json['userWhoPost'])
+        ? UserWhoPost.fromJson(json['userWhoPost'])
         : null)!;
     usersWhoLiked = json['usersWhoLiked'];
     comments = json['comments'];
@@ -35,16 +35,16 @@ class GetPostDto {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['affair'] = this.affair;
-    data['content'] = this.content;
-    data['imgPath'] = this.imgPath;
-    data['userWhoPost'] = this.userWhoPost.toJson();
-    data['usersWhoLiked'] = this.usersWhoLiked;
-    data['comments'] = this.comments;
-    data['likedByUser'] = this.likedByUser;
-    data['postDate'] = this.postDate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['affair'] = affair;
+    data['content'] = content;
+    data['imgPath'] = imgPath;
+    data['userWhoPost'] = userWhoPost.toJson();
+    data['usersWhoLiked'] = usersWhoLiked;
+    data['comments'] = comments;
+    data['likedByUser'] = likedByUser;
+    data['postDate'] = postDate;
     return data;
   }
 }
@@ -64,10 +64,10 @@ class UserWhoPost {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userName'] = this.userName;
-    data['imgPath'] = this.imgPath;
-    data['verified'] = this.verified;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['userName'] = userName;
+    data['imgPath'] = imgPath;
+    data['verified'] = verified;
     return data;
   }
 }
