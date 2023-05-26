@@ -20,12 +20,12 @@ public class CultivationDetails {
 
     private String name;
     private String variety;
-    private LocalDate plantDate;
-    private LocalDate harvestDate;
+    private LocalDate plantDate;//Esto deberia ser un string con la fecha formateada
+    private LocalDate harvestDate;//Esto deberia ser un string con la fecha formateada
     private long daysLeft;
     private long daysPlanted;
     private String cultivationImg;
-    private List<String> notesTitles;
+    private List<String> notesTitles;//Esto deberia ser un dto de nota
 
     public static CultivationDetails fromCultivation(Cultivation cultivation) {
 

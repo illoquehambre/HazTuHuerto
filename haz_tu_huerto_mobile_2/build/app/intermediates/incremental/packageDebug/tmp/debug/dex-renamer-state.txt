@@ -1,4 +1,4 @@
-#Thu May 25 13:14:37 CEST 2023
+#Fri May 26 15:15:45 CEST 2023
 base.0=C\:\\Users\\Nacho\\Desktop\\repos\\HazTuHuerto\\haz_tu_huerto_mobile_2\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

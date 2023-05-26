@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haz_tu_huerto_mobile_2/models/question_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/models/question/question_dto.dart';
 
 
 class Question extends StatefulWidget {

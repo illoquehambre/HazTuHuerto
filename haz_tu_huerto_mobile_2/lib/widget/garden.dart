@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/models/garden/garden_dto.dart';
 
 
 

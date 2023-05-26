@@ -1,3 +1,3 @@
 export 'user.dart';
-export 'register.dart';
-export 'login.dart';
+export 'auth/register.dart';
+export 'auth/login.dart';

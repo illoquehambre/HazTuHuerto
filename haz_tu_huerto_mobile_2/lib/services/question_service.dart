@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
-import 'package:haz_tu_huerto_mobile_2/models/question_response_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/models/question/question_response_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/repositories/question_repository.dart';
 import 'package:haz_tu_huerto_mobile_2/services/services.dart';
 import 'package:injectable/injectable.dart';

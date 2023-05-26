@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:get_it/get_it.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden_response_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/models/garden/garden_response_dto.dart';
 import 'package:injectable/injectable.dart';
 
 import '../rest/rest_client.dart';

@@ -12,7 +12,7 @@
 }*/
 
 
-import '../models/login.dart';
+import 'auth/login.dart';
 
 class User {
   String? id;

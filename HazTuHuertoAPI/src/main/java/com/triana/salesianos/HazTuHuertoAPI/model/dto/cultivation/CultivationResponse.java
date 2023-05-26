@@ -18,8 +18,8 @@ public class CultivationResponse {
 
 
     private String name;
-    private LocalDate plantDate;
-    private LocalDate harvestDate;
+    private LocalDate plantDate;//Esto deberia ser un string con la fecha formateada
+    private LocalDate harvestDate;//Esto deberia ser un string con la fecha formateada
     private long daysLeft;
     private long daysPlanted;
     private String cultivationImg;
