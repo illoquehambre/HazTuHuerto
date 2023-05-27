@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haz_tu_huerto_mobile_2/models/garden/garden_dto.dart';
-
-
-
+import 'package:haz_tu_huerto_mobile_2/pages/garden_details_page.dart';
 
 class Garden extends StatefulWidget {
   final GardenDto garden;
@@ -19,8 +17,7 @@ class Garden extends StatefulWidget {
   State<Garden> createState() => _GardenState();
 }
 
-
- class _GardenState extends State<Garden> {
+class _GardenState extends State<Garden> {
   final _scrollController = ScrollController();
 
   @override
@@ -34,6 +31,25 @@ class Garden extends StatefulWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Material(
+        child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 500),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return  GardenDetailsPage(id: widget.garden.id);
+            },
+          ),
+        );
+      },
       child: ListTile(
         leading: Text(widget.garden.id, style: textTheme.bodySmall),
         title: Text(widget.garden.name),
@@ -42,10 +58,10 @@ class Garden extends StatefulWidget {
         textColor: const Color.fromRGBO(126, 19, 126, 0.745),
         dense: true,
       ),
-    );
+    ));
   }
-   _onScroll() {
+
+  _onScroll() {
     setState(() {});
   }
 }
-

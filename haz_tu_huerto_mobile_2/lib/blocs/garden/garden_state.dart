@@ -7,24 +7,24 @@ abstract class GardenState extends Equatable {
   List<Object> get props => [];
 }
 
-class GardenInitial extends GardenState {}
+  class GardenInitial extends GardenState {}
 
-class GardenSucces extends GardenState {
-  final dynamic garden;
+  class GardenSucces extends GardenState {
+    final dynamic garden;
 
-  const GardenSucces({required this.garden});
+    const GardenSucces({required this.garden});
 
-  @override
-  List<Object> get props => [garden];
-}
+    @override
+    List<Object> get props => [garden];
+  }
 
-class GardenLoading extends GardenState {}
+  class GardenLoading extends GardenState {}
 
-class GardenFailure extends GardenState {
-  final String error;
+  class GardenFailure extends GardenState {
+    final String error;
 
-  const GardenFailure({required this.error});
+    const GardenFailure({required this.error});
 
-  @override
-  List<Object> get props => [error];
-}
+    @override
+    List<Object> get props => [error];
+  }

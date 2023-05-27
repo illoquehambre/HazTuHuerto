@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get_it/get_it.dart';
+import 'package:haz_tu_huerto_mobile_2/models/garden/garden_details_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/garden/garden_response_dto.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,6 +27,19 @@ class GardenRepository {
     }
 
     return GardenResponseDto.fromJson(jsonDecode(response));
+  }
+
+  Future<dynamic> findById(String id, String token) async {
+    String url = "/vegetableGarden/$id";
+
+    var response = await _client.get(url, token);
+
+    if (response is NotFoundException) {
+      String aux = "No se ha encontrado ningún post en esta página de...";
+      return aux;
+    }
+
+    return GardenDetailsDto.fromJson(jsonDecode(response));
   }
 
 }

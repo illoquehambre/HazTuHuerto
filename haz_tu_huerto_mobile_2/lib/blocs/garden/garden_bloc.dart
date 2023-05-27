@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
+import 'package:haz_tu_huerto_mobile_2/models/garden/garden_details_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/garden/garden_response_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/services/garden_service.dart';
 import 'package:stream_transform/stream_transform.dart';
@@ -30,7 +31,12 @@ class GardenBloc extends Bloc<GardenEvent, GardenState> {
     final response = await _GardenService.findAll(startIndex);
     return response;
   }
-  
+/*
+  Future<dynamic> _fetchGardenDetails(int id) async {
+    final response = await _GardenService.findById(id);
+    return response;
+  }
+  */
 /*
     on<LikeAGarden>(
       (event, emit) async {
@@ -115,7 +121,34 @@ class GardenBloc extends Bloc<GardenEvent, GardenState> {
       );
     }
   }
+/*
+    Future<void> _onGardenDetailsFetched(
+      GardenEvent event,
+      Emitter<GardenState> emit,
+    ) async {
+      try {
+        if (state is GardenInitial) {
+          final response = await _fetchGardenDetails(it);
 
+          if (response is GardenDetailsDto) {
+            fetchedGarden = response;
+          
+          } else if (response is String) {
+            fetchedGarden = response;
+          }
+
+          emit(
+            GardenSucces(
+              garden: fetchedGarden,
+            ),
+          );
+        }
+      } catch (_) {
+        print(_);
+        emit(GardenFailure(error: "$_"));
+      }
+    }
+*/
   GardenBloc(GardenService gardenService)
       // ignore: unnecessary_null_comparison
       : assert(GardenService != null),

@@ -26,8 +26,8 @@ class CultivationDto {
 
   CultivationDto.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    plantDate = json['plantDate'];
-    harvestDate = json['harvestDate'];
+    plantDate = json['plantDate']?? '12-12-2012';
+    harvestDate = json['harvestDate']?? '12-12-2012';
     daysLeft = json['daysLeft'];
     daysPlanted = (json['daysPlanted']);
     cultivationImg = json['cultivationImg'];
