@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http_interceptor/http_interceptor.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:uuid/uuid.dart';
 import '../main.dart';
 import '../services/localstorage_service.dart';
+import 'package:http_parser/http_parser.dart';
+
 
 class ApiConstants {
   //static String baseUrl = "http://localhost:8080";
@@ -90,6 +93,104 @@ class RestClient {
         body: jsonEncode(body));
     return response;
   }
+
+  Future<dynamic> postMultipartChetada(String url, List<XFile> files, dynamic data, String dataName) async {
+    late LocalStorageService _localStorageService;
+    GetIt.I
+        .getAsync<LocalStorageService>()
+        .then((value) => _localStorageService = value);
+        
+    final request = http.MultipartRequest(
+      'POST',
+      Uri.parse(ApiConstants.baseUrl + url),
+      
+    );
+    if(files.isNotEmpty){
+      for (final file in files) {
+      final fileExtension = file.path.split('.').last.toLowerCase();
+      final contentType = MediaType('image', fileExtension);
+      final bytes = await file.readAsBytes();
+      request.files.add(http.MultipartFile.fromBytes(
+        'file',
+        bytes,
+        filename: file.name.substring(1, 10),
+        contentType: contentType,
+      ));
+    }
+    
+
+    }
+/*
+    request.fields[dataName] = data.toJson().toString();
+
+*/
+final jsonData = jsonEncode(data.toJson());
+final jsonPart = http.MultipartFile.fromString(
+    dataName,
+    jsonData,
+    filename: 'data.json',
+    contentType: MediaType('application', 'json'),
+  );
+  request.files.add(jsonPart);
+    var boundary = Uuid().v4();
+    final headers = {
+      'Authorization': 'Bearer ${_localStorageService.getFromDisk("user_token")}',
+      'Content-Type': 'multipart/form-data; boundary=$boundary',
+      "Accept": "*/*",
+    };
+    request.headers.addAll(headers);
+
+    try {
+      final response = await request.send();
+      return response;
+    } catch (error) {
+      throw new Exception("Error en el cliente");
+    }
+  }
+
+  Future<dynamic> postMultipartChetada2(String url, List<XFile> files, dynamic data, String dataName) async {
+  late LocalStorageService _localStorageService;
+  GetIt.I.getAsync<LocalStorageService>().then((value) => _localStorageService = value);
+  
+  final dio = Dio();
+  final formData = FormData();
+
+  if (files.isNotEmpty) {
+    for (final file in files) {
+      final bytes = await file.readAsBytes();
+      final fileExtension = file.path.split('.').last.toLowerCase();
+      final contentType = MediaType('image', fileExtension);
+      final multipartFile = MultipartFile.fromBytes(
+        bytes,
+        filename: file.name.substring(1, 10),
+        contentType: contentType,
+      );
+      formData.files.add(MapEntry('file', multipartFile));
+    }
+  }
+  
+  final jsonData = jsonEncode(data.toJson());
+  formData.fields.add(MapEntry(dataName, jsonData));
+
+  var boundary = Uuid().v4();
+    final headers = {
+      'Authorization': 'Bearer ${_localStorageService.getFromDisk("user_token")}',
+      'Content-Type': 'multipart/form-data; boundary=$boundary',
+      "Accept": "*/*",
+    };
+
+  try {
+    final response = await dio.post(
+      ApiConstants.baseUrl + url,
+      data: formData,
+      options: Options(headers: headers),
+    );
+    return response;
+  } catch (error) {
+    throw Exception("Error en el cliente");
+  }
+}
+
 
   dynamic _response(http.Response response) {
     switch (response.statusCode) {

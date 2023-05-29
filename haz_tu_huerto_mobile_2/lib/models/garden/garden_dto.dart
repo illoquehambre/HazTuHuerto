@@ -47,7 +47,7 @@ class GardenDto {
     data['longitude'] = longitude;
     data['img'] = img;
     data['numPatch'] = numPatch;
-    data['patchList'] = patchList;
+    data['patchList'] = patchList.map((v) => v.toJson()).toList();
    // data['refreshToken'] = refreshToken;
     return data;
   }

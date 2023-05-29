@@ -30,7 +30,7 @@ public class QuestionDetails {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     protected LocalDateTime createdAt;
 
-    protected String publisher;
+    protected UserResponse publisher;
     //Esto será calculable entre likes y dislikes de alguna manera
     protected int score;
 
@@ -44,7 +44,7 @@ public class QuestionDetails {
                 .id(quest.getId().toString())
                 .title(quest.getTitle())
                 .content(quest.getContent())
-                .publisher(quest.getPublisher().getUsername())
+                .publisher(UserResponse.fromUser(quest.getPublisher()))
                 .createdAt(quest.getCreatedAt())
                 .score(quest.getLikes()==null||quest.getLikes().isEmpty()?0:quest.getLikes().size())
                 .urlImg(quest.getUrlImg())
@@ -58,7 +58,7 @@ public class QuestionDetails {
                 .id(quest.getId().toString())
                 .title(quest.getTitle())
                 .content(quest.getContent())
-                .publisher(quest.getPublisher().getUsername())
+                .publisher(UserResponse.fromUser(quest.getPublisher()))
                 .createdAt(quest.getCreatedAt())
                 .score(quest.getLikes()==null||quest.getLikes().isEmpty()?0:quest.getLikes().size())
                 .urlImg(quest.getUrlImg())
