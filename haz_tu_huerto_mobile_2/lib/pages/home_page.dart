@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:haz_tu_huerto_mobile_2/blocs/blocs.dart';
-import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
-import 'package:haz_tu_huerto_mobile_2/models/models.dart';
-import 'package:haz_tu_huerto_mobile_2/services/services.dart';
+import 'package:haz_tu_huerto_mobile_2/rest/rest_client.dart';
+import '../blocs/authentication/authentication_bloc.dart';
+import '../blocs/authentication/authentication_event.dart';
+import '../config/locator.dart';
+import '../models/models.dart';
+import '../services/authentication_service.dart';
 
 class HomePage extends StatelessWidget {
   final User user;
@@ -16,16 +18,21 @@ class HomePage extends StatelessWidget {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: Text('Home Page'),
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(16),
         child: Center(
           child: Column(
             children: <Widget>[
+              Image.network(
+                      ApiConstants.baseUrl +
+                          "/post/file/${user.avatar}",
+                      fit: BoxFit.cover,
+                    ),
               Text(
                 'Welcome, ${user.fullName}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24
                 ),
               ),
@@ -37,7 +44,7 @@ class HomePage extends StatelessWidget {
                 /*style: TextButton.styleFrom(
                   primary: Theme.of(context).primaryColor,
                 ),*/
-                child: const Text('Logout'),
+                child: Text('Logout'),
                 onPressed: (){
                   authBloc.add(UserLoggedOut());
                 },
@@ -47,7 +54,8 @@ class HomePage extends StatelessWidget {
                 JwtAuthenticationService service = getIt<JwtAuthenticationService>();
                 await service.getCurrentUser();
               }
-              , child: const Text('Check')
+              , child: Text('Check')
+              
               )
             ],
           ),

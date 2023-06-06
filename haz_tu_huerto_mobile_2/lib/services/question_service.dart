@@ -8,8 +8,6 @@ import 'package:haz_tu_huerto_mobile_2/services/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
-
-
 @Order(2)
 @singleton
 class QuestionService {
@@ -27,20 +25,19 @@ class QuestionService {
     String? token = await _localStorageService.getFromDisk("user_token");
 
     if (token != null) {
-      QuestionResponseDto response = await _questRepository.findAll(index, token);
+      QuestionResponseDto response =
+          await _questRepository.findAll(index, token);
       return response;
     }
     throw Exception("There is an error in the service.");
   }
 
-
-    Future<QuestionDetailsDto>  create(
+  Future<QuestionDetailsDto> create(
       List<XFile> file, NewQuestionDto quest) async {
     String? token = await _localStorageService.getFromDisk("user_token");
 
     if (token != null) {
-      QuestionDetailsDto response =
-          await _questRepository.create(file, quest);
+      QuestionDetailsDto response = await _questRepository.create(file, quest);
       return response;
     }
     throw new Exception("Ha ocurrido un error en el servicio");

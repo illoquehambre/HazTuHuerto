@@ -4,7 +4,6 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:haz_tu_huerto_mobile_2/models/user.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/garden_list_page.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/home_page.dart';
-import 'package:haz_tu_huerto_mobile_2/pages/new_post_page.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/new_quest_page.dart';
 import 'question_list_page.dart';
 class HomePage3 extends StatelessWidget {
@@ -44,7 +43,7 @@ class _HomePageStates3State extends State<HomePageStates3> {
       
       const QuestionPage(),  
       const GardenPage(),
-      const NewPostPage(),
+      const NewQuestPage(),
       HomePage(user: user)
       /*   
       EventsPage(),

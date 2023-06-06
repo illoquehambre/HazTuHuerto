@@ -32,14 +32,14 @@ class QuestionRepository {
     return QuestionResponseDto.fromJson(jsonDecode(response));
   }
 
-    Future<dynamic> create(List<XFile> files, NewQuestionDto quest) async {
+  Future<dynamic> create(List<XFile> files, NewQuestionDto quest) async {
     String url = "/question";
 
-    StreamedResponse response = await _client.postMultipartChetada(url, files, quest, 'newQuest');
+    StreamedResponse response =
+        await _client.postMultipartChetada(url, files, quest, 'newQuest');
 
     var stringResponse = await response.stream.bytesToString();
 
     return QuestionDetailsDto.fromJson(jsonDecode(stringResponse));
   }
-
 }
