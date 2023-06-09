@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:haz_tu_huerto_mobile_2/blocs/garden/garden_bloc.dart';
 import 'package:haz_tu_huerto_mobile_2/models/garden/garden_details_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/update_garden_page.dart';
+import 'package:haz_tu_huerto_mobile_2/widget/bottom_loader.dart';
+import 'package:haz_tu_huerto_mobile_2/widget/patch.dart';
 
 class GardenDetails extends StatefulWidget {
   final GardenDetailsDto garden;
@@ -28,48 +30,59 @@ class _GardenDetailsState extends State<GardenDetails> {
     final textTheme = Theme.of(context).textTheme;
     return Material(
       child: Center(
-        child: Column(
-          children: <Widget>[
-            Text(
-              widget.garden.id,
-              style: textTheme.bodySmall,
-            ),
-            Text(widget.garden.name, style: textTheme.bodySmall),
-            const SizedBox(
-              height: 12,
-            ),
-            ElevatedButton(
-              child: const Text('Logout'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: const Duration(milliseconds: 500),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      return UpdateGardenPage(id: widget.garden.id);
-                    },
-                  ),
-                );
-              },
-            ),
-            /*
-            ElevatedButton(
-                onPressed: () async {
-                  print("Check");
-                  JwtAuthenticationService service =
-                      getIt<JwtAuthenticationService>();
-                  await service.getCurrentUser();
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Text(
+                widget.garden.id,
+                style: textTheme.bodySmall,
+              ),
+              Text(widget.garden.name, style: textTheme.bodySmall),
+        
+              ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return index >= widget.garden.patchList.length
+                      ? const BottomLoader()
+                      : Patch(num:1, patch: widget.garden.patchList[index],
+                      context: context,);
                 },
-                child: const Text('Check'))
-                */
-          ],
+                itemCount: widget.garden.patchList.length),
+              const SizedBox(
+                height: 12,
+              ),
+              ElevatedButton(
+                child: const Text('Update'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: const Duration(milliseconds: 500),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return UpdateGardenPage(id: widget.garden.id);
+                      },
+                    ),
+                  );
+                },
+              ),
+              /*
+              ElevatedButton(
+                  onPressed: () async {
+                    print("Check");
+                    JwtAuthenticationService service =
+                        getIt<JwtAuthenticationService>();
+                    await service.getCurrentUser();
+                  },
+                  child: const Text('Check'))
+                  */
+            ],
+          ),
         ),
       ),
     );

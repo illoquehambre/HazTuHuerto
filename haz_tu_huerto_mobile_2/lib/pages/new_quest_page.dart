@@ -169,7 +169,7 @@ class _NewQuestPageSFState extends State<NewQuestPageSF> {
                                           (currentLength.ceilToDouble() * 200) /
                                               250,
                                       height: 3,
-                                      color: Color.fromRGBO(173, 29, 254, 1),
+                                      color: Color.fromRGBO(90, 186, 107, 1),
                                     ),
                                   ),
                                 ),
@@ -320,7 +320,7 @@ class _NewQuestPageSFState extends State<NewQuestPageSF> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(173, 29, 254, 1),
+                          Color.fromRGBO(27, 211, 27, 1),
                         ),
                         padding: MaterialStateProperty.all<EdgeInsets>(
                             EdgeInsets.all(10)),

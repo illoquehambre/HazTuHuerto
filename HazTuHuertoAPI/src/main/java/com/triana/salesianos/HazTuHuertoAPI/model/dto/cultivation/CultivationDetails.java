@@ -3,6 +3,7 @@ package com.triana.salesianos.HazTuHuertoAPI.model.dto.cultivation;
 import com.triana.salesianos.HazTuHuertoAPI.model.Cultivation;
 import com.triana.salesianos.HazTuHuertoAPI.model.Note;
 import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
+import com.triana.salesianos.HazTuHuertoAPI.model.dto.note.NoteSimplify;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class CultivationDetails {
     private long daysLeft;
     private long daysPlanted;
     private String cultivationImg;
-    private List<String> notesTitles;//Esto deberia ser un dto de nota
+    private List<NoteSimplify> notes;//Esto deberia ser un dto de nota
 
     public static CultivationDetails fromCultivation(Cultivation cultivation) {
 
@@ -41,7 +42,7 @@ public class CultivationDetails {
                         ChronoUnit.DAYS.between(cultivation.getPlantingDate(),
                         LocalDate.now()))
                 .cultivationImg(cultivation.getImg())
-                .notesTitles(cultivation.getNoteList().stream().map(Note::getTitle).toList())
+                .notes(cultivation.getNoteList().stream().map(NoteSimplify::fromNote).toList())
                 .build();
     }
 }
