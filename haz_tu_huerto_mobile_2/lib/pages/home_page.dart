@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               Image.network(
                       ApiConstants.baseUrl +
-                          "/post/file/${user.avatar}",
+                          "/download/${user.avatar}",
                       fit: BoxFit.cover,
                     ),
               Text(
