@@ -17,6 +17,6 @@ public interface PatchRepository extends JpaRepository<Patch, Long>,
     @Transactional(readOnly = true)
     Optional<Patch> findById(@NotNull Long id);
 
-    Optional<Cultivation> findFirstCultivationById(Long id);
+    Optional<Cultivation> findFirstCultivationByCultivationId(Long id);
 
 }

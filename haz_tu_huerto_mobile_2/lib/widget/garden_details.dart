@@ -30,7 +30,6 @@ class _GardenDetailsState extends State<GardenDetails> {
     final textTheme = Theme.of(context).textTheme;
     return Material(
       child: Center(
-        child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Text(
@@ -39,7 +38,9 @@ class _GardenDetailsState extends State<GardenDetails> {
               ),
               Text(widget.garden.name, style: textTheme.bodySmall),
         
-              ListView.builder(
+              SizedBox(
+              height: 350, // Establece una altura específica para el ListView
+              child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return index >= widget.garden.patchList.length
                       ? const BottomLoader()
@@ -47,6 +48,7 @@ class _GardenDetailsState extends State<GardenDetails> {
                       context: context,);
                 },
                 itemCount: widget.garden.patchList.length),
+                ),
               const SizedBox(
                 height: 12,
               ),
@@ -83,7 +85,6 @@ class _GardenDetailsState extends State<GardenDetails> {
                   */
             ],
           ),
-        ),
       ),
     );
   }

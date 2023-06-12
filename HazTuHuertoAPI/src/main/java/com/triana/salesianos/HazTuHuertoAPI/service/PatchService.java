@@ -6,6 +6,7 @@ import com.triana.salesianos.HazTuHuertoAPI.model.Patch;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
 import com.triana.salesianos.HazTuHuertoAPI.model.VegetableGarden;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.patch.CreatePatchCultivation;
+import com.triana.salesianos.HazTuHuertoAPI.repository.CultivationRepository;
 import com.triana.salesianos.HazTuHuertoAPI.repository.PatchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import java.util.List;
 public class PatchService {
 
     private final PatchRepository patchRepository;
+    private final CultivationRepository cultivationRepository;
+
     private final UserService userService;
     private final StorageService storageService;
     private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -45,8 +48,8 @@ public class PatchService {
     }
     public Cultivation findCultivationById(Long id) {
 
-        return patchRepository.findFirstCultivationById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No patch with id: " + id));
+        return cultivationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No Cultivation with id: " + id));
 
     }
     public List<Patch> findByGarden(VegetableGarden garden, User user) {

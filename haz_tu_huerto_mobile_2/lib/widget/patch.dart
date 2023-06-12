@@ -45,17 +45,17 @@ class _PatchState extends State<Patch> {
               );
             },
             pageBuilder: (context, animation, secondaryAnimation) {
-              return  PatchDetailsPage(id: widget.patch.id as String);
+              return  PatchDetailsPage(id: widget.patch.id);
             },
           ),
         );
       },
       child: ListTile(
-        leading: Text(widget.patch.id as String, style: textTheme.bodySmall),
+        leading: Text(widget.patch.id.toString(), style: textTheme.bodySmall),
         title: Text(widget.patch.name),
         isThreeLine: true,
         subtitle: Text(widget.patch.cultivation.name),
-        textColor: const Color.fromRGBO(126, 19, 126, 0.745),
+        textColor: Color.fromARGB(187, 0, 0, 0),
         dense: true,
       ),
     ));

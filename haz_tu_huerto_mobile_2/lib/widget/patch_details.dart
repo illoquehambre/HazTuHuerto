@@ -32,11 +32,13 @@ class _PatchDetailsState extends State<PatchDetails> {
         child: Column(
           children: <Widget>[
             Text(
-              widget.patch.id as String,
+              widget.patch.id.toString(),
               style: textTheme.bodySmall,
             ),
             Text(widget.patch.name, style: textTheme.bodySmall),
-            ListView.builder(
+             SizedBox(
+              height: 350, // Establece una altura específica para el ListView
+              child:ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return index >= widget.patch.cultivation.notes.length
                     ? const BottomLoader()
@@ -44,6 +46,7 @@ class _PatchDetailsState extends State<PatchDetails> {
                     context: context,);
               },
               itemCount: widget.patch.cultivation.notes.length),
+             ),
             const SizedBox(
               height: 12,
             ),

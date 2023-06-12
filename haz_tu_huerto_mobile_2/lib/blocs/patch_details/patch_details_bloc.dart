@@ -10,7 +10,7 @@ class PatchDetailsBloc extends Bloc<PatchDetailsEvent, PatchDetailsState> {
   dynamic fetchedPatch;
   final PatchService _PatchService;
   
-    Future<dynamic> _fetchPatchDetails(String id) async {
+    Future<dynamic> _fetchPatchDetails(int id) async {
     final response = await _PatchService.findById(id);
     return response;
   }

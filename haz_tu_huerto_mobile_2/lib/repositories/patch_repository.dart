@@ -1,11 +1,6 @@
 import 'dart:convert';
 import 'package:get_it/get_it.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden/garden_details_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden/garden_response_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden/new_garden_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/patch_details_dto.dart';
-import 'package:http/http.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 import '../rest/rest_client.dart';
@@ -21,7 +16,7 @@ class PatchRepository {
   }
 
 
-  Future<dynamic> findById(String id, String token) async {
+  Future<dynamic> findById(int id, String token) async {
     String url = "/patch/$id";
 
     var response = await _client.get(url, token);

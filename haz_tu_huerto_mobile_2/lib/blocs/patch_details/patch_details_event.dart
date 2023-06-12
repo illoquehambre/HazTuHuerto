@@ -7,7 +7,7 @@ abstract class PatchDetailsEvent extends Equatable {
   List<Object> get props => [];
 }
 class PatchDetailsInitialEvent extends PatchDetailsEvent {
-   final String id;
+   final int id;
 
   const PatchDetailsInitialEvent({required this.id});
 

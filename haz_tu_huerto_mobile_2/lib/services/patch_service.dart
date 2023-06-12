@@ -1,14 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden/garden_details_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden/garden_response_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/models/garden/new_garden_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/patch_details_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/models/question/new_question_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/repositories/garden_repository.dart';
 import 'package:haz_tu_huerto_mobile_2/repositories/patch_repository.dart';
 import 'package:haz_tu_huerto_mobile_2/services/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 
@@ -29,7 +23,7 @@ class PatchService {
 
 
   
-  Future<dynamic> findById(String id) async {
+  Future<dynamic> findById(int id) async {
     String? token = await _localStorageService.getFromDisk("user_token");
 
     if (token != null) {

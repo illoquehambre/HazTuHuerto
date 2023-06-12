@@ -50,8 +50,9 @@ class _NoteState extends State<Note> {
         );
       },*/
       child: ListTile(
-        leading: Text(widget.note.id as String, style: textTheme.bodySmall),
+        leading: Text(widget.note.id.toString(), style: textTheme.bodySmall),
         title: Text(widget.note.title),
+        subtitle: Text(widget.note.title),//Arreglar esto
         isThreeLine: true,
         textColor: const Color.fromRGBO(126, 19, 126, 0.745),
         dense: true,
