@@ -134,6 +134,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "cross_file",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "crypto",
       "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3",
       "packageUri": "lib/",
@@ -150,6 +156,12 @@
       "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/dart_style-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
+    },
+    {
+      "name": "dio",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.2.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "equatable",
@@ -174,6 +186,30 @@
       "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "file_selector_linux",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_linux-0.9.1+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "file_selector_macos",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_macos-0.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "file_selector_platform_interface",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_platform_interface-2.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "file_selector_windows",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_windows-0.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "fixnum",
@@ -240,6 +276,12 @@
       "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter_test",
@@ -312,6 +354,54 @@
       "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "image_picker",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_android",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.6+20",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_for_web",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-2.1.12",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "image_picker_ios",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.7+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_linux",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_linux-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_macos",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_macos-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_platform_interface",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_windows",
+      "rootUri": "file:///C:/Users/Nacho/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_windows-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "injectable",
@@ -656,7 +746,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-06-13T09:47:15.656212Z",
+  "generated": "2023-06-13T09:47:23.406856Z",
   "generator": "pub",
   "generatorVersion": "3.1.0-63.0.dev"
 }
