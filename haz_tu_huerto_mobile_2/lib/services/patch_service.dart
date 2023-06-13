@@ -1,8 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
+import 'package:haz_tu_huerto_mobile_2/models/patch/new_patch_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/patch_details_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/models/question/new_question_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/repositories/patch_repository.dart';
 import 'package:haz_tu_huerto_mobile_2/services/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 
@@ -31,6 +34,27 @@ class PatchService {
       return response;
     }
     throw Exception("There is an error in the service.");
+  }
+
+   Future<PatchDetailsDto> create(
+      List<XFile> file, NewPatchDto patch, int id) async {
+    String? token = await _localStorageService.getFromDisk("user_token");
+
+    if (token != null) {
+      PatchDetailsDto response = await _patchRepository.create(file, patch, id);
+      return response;
+    }
+    throw new Exception("Ha ocurrido un error en el servicio");
+  }
+
+    Future<PatchDetailsDto> divide( int id) async {
+    String? token = await _localStorageService.getFromDisk("user_token");
+
+    if (token != null) {
+      PatchDetailsDto response = await _patchRepository.divide(id);
+      return response;
+    }
+    throw new Exception("Ha ocurrido un error en el servicio");
   }
 
 

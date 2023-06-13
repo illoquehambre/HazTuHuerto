@@ -57,7 +57,10 @@ class _NoteState extends State<Note> {
         textColor: const Color.fromRGBO(126, 19, 126, 0.745),
         dense: true,
       ),
-    ));
+      
+    ),
+    );
+    
   }
 
   _onScroll() {

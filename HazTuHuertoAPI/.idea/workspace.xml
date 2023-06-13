@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56e6010e-259c-4707-94d9-8898e5bf4776" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/repository/CultivationRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/repository/PatchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/repository/PatchRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/PatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/PatchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/PatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/PatchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/cultivation/CultivationDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/cultivation/CultivationDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/.dart_tool/build/fcd1995bc647fb959e82ea360c6c2c9a/asset_graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/.dart_tool/build/fcd1995bc647fb959e82ea360c6c2c9a/asset_graph.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/.dart_tool/flutter_build/5ab514f9da1ee5a17afd9bebfd4f8ffd/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/.dart_tool/flutter_build/5ab514f9da1ee5a17afd9bebfd4f8ffd/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/.dart_tool/flutter_build/5ab514f9da1ee5a17afd9bebfd4f8ffd/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/.dart_tool/flutter_build/5ab514f9da1ee5a17afd9bebfd4f8ffd/app.dill" afterDir="false" />
@@ -31,14 +31,9 @@
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/build/app/outputs/flutter-apk/app-debug.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/build/app/outputs/flutter-apk/app-debug.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/blocs/patch_details/patch_details_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/blocs/patch_details/patch_details_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/blocs/patch_details/patch_details_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/blocs/patch_details/patch_details_event.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/config/locator.config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/config/locator.config.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/pages/patch_details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/pages/patch_details_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/repositories/patch_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/repositories/patch_repository.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/services/patch_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/services/patch_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/widget/garden_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/widget/garden_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/widget/patch.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/widget/patch.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/widget/patch_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/lib/widget/patch_details.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,6 +163,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/PatchService.java</url>
           <line>50</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/QuestionController.java</url>

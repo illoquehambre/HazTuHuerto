@@ -32,6 +32,17 @@ class QuestionService {
     throw Exception("There is an error in the service.");
   }
 
+
+  Future<dynamic> findById(String id) async {
+    String? token = await _localStorageService.getFromDisk("user_token");
+
+    if (token != null) {
+      QuestionDetailsDto response = await _questRepository.findById(id, token);
+      return response;
+    }
+    throw Exception("There is an error in the service.");
+  }
+
   Future<QuestionDetailsDto> create(
       List<XFile> file, NewQuestionDto quest) async {
     String? token = await _localStorageService.getFromDisk("user_token");

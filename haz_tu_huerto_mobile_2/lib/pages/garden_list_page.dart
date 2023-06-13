@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haz_tu_huerto_mobile_2/blocs/garden/garden_bloc.dart';
 import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/new_garden_page.dart';
 import 'package:haz_tu_huerto_mobile_2/services/garden_service.dart';
 import 'package:haz_tu_huerto_mobile_2/widget/bottom_loader.dart';
 import 'package:haz_tu_huerto_mobile_2/widget/garden.dart';
@@ -77,7 +78,59 @@ class _GardenListState extends State<GardenList>
   
 @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Material(
+      child: Center(
+          child: Column(
+            children: <Widget>[
+      
+        
+              SizedBox(
+              height: 350, // Establece una altura específica para el ListView
+              child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return index >= widget.state.garden.length
+                    ? const BottomLoader()
+                    : Garden(num:1, garden: widget.state.garden[index],
+                    context: context,);
+              },
+              itemCount: widget.state.garden.length,
+              controller: _scrollController,
+            ),
+                ),
+              const SizedBox(
+                height: 12,
+              ),
+              ElevatedButton(
+                child: const Text('New Garden'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: const Duration(milliseconds: 500),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return NewGardenPage();
+                      },
+                    ),
+                  );
+                },
+              ),
+              ],
+          ),
+      ),
+    );
+    
+    
+    
+    
+    
+    /*ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return index >= widget.state.garden.length
                     ? const BottomLoader()
@@ -87,6 +140,7 @@ class _GardenListState extends State<GardenList>
               itemCount: widget.state.garden.length,
               controller: _scrollController,
             );
+            */
   }
                  
 

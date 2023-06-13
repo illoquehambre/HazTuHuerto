@@ -4,6 +4,7 @@
 import 'package:haz_tu_huerto_mobile_2/models/note/note_simplify_dto.dart';
 
 class CultivationDetailsDto {
+  late int id;
   late String name;
   late String plantDate;
   late String harvestDate;
@@ -16,6 +17,7 @@ class CultivationDetailsDto {
 
   CultivationDetailsDto(
       { required this.name,
+      required this.id,
       required this.plantDate,
       required this.harvestDate,
       required this.daysLeft,
@@ -27,6 +29,7 @@ class CultivationDetailsDto {
       });
 
   CultivationDetailsDto.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     plantDate = json['plantDate']?? '12-12-2012';
     harvestDate = json['harvestDate']?? '12-12-2012';
@@ -47,6 +50,7 @@ class CultivationDetailsDto {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['name'] = name;
     data['plantDate'] = plantDate;
     data['harvestDate'] = harvestDate;

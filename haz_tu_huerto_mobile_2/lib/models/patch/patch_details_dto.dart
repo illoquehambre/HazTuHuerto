@@ -1,6 +1,5 @@
 
 import 'package:haz_tu_huerto_mobile_2/models/cultivation/cultivation_details_dto.dart';
-import 'package:haz_tu_huerto_mobile_2/models/cultivation/cultivation_dto.dart';
 
 class PatchDetailsDto {
   late int id;

@@ -83,7 +83,7 @@ public class NoteController {
     //raro
     @DeleteMapping("/note/{id}")//Hay que hacer todavia las politicas de borrado
     public ResponseEntity<?> deleteNote(@AuthenticationPrincipal User user, @PathVariable Long id) {
-        Note note =noteService.findById(id);
+        Note note =noteService.findById(id);//Da problemas
         if(userService.checkUserLogedInPatch(user.getId(), note.getCultivation().getPatch().getId()))
             noteService.deleteById(id);
         return ResponseEntity.noContent().build();

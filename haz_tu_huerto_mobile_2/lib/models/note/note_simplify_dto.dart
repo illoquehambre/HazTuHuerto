@@ -1,6 +1,5 @@
 
 
-import 'package:haz_tu_huerto_mobile_2/models/cultivation/cultivation_simplify_dto.dart';
 
 class NoteSimplifyDto {
   late int id;

@@ -19,6 +19,7 @@ import java.util.List;
 @Builder
 public class CultivationDetails {
 
+    private Long id;
     private String name;
     private String variety;
     private LocalDate plantDate;//Esto deberia ser un string con la fecha formateada
@@ -31,6 +32,7 @@ public class CultivationDetails {
     public static CultivationDetails fromCultivation(Cultivation cultivation) {
 
         return CultivationDetails.builder()
+                .id(cultivation.getId())
                 .name(cultivation.getName())
                 .variety(cultivation.getVariety())
                 .plantDate(cultivation.getPlantingDate())

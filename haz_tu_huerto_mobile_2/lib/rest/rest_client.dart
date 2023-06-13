@@ -83,6 +83,8 @@ class RestClient {
     }
   }
 
+  
+
   Future<http.Response> singUpPost(String url, dynamic body) async {
     Uri uri = Uri.parse(ApiConstants.baseUrl + url);
     final response = await http.post(uri,

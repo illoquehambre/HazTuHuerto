@@ -32,6 +32,20 @@ class QuestionRepository {
     return QuestionResponseDto.fromJson(jsonDecode(response));
   }
 
+Future<dynamic> findById(String id, String token) async {
+    String url = "/question/$id";
+
+    var response = await _client.get(url, token);
+
+    if (response is NotFoundException) {
+      String aux = "No se ha encontrado ningún post en esta página de...";
+      return aux;
+    }
+
+    return QuestionDetailsDto.fromJson(jsonDecode(response));
+  }
+
+
   Future<dynamic> create(List<XFile> files, NewQuestionDto quest) async {
     String url = "/question";
 

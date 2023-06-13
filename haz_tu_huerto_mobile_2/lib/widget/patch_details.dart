@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/patch_details_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/new_note_page.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/update_garden_page.dart';
+import 'package:haz_tu_huerto_mobile_2/services/patch_service.dart';
 import 'package:haz_tu_huerto_mobile_2/widget/bottom_loader.dart';
 import 'package:haz_tu_huerto_mobile_2/widget/note.dart';
 
 class PatchDetails extends StatefulWidget {
   final PatchDetailsDto patch;
   final BuildContext context;
+
 
   const PatchDetails({super.key, required this.patch, required this.context});
 
@@ -27,6 +31,7 @@ class _PatchDetailsState extends State<PatchDetails> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final _patchService = getIt<PatchService>();
     return Material(
       child: Center(
         child: Column(
@@ -50,8 +55,8 @@ class _PatchDetailsState extends State<PatchDetails> {
             const SizedBox(
               height: 12,
             ),
-           /* ElevatedButton(
-              child: const Text('Update'),
+            ElevatedButton(
+              child: const Text('New Note'),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -65,12 +70,19 @@ class _PatchDetailsState extends State<PatchDetails> {
                       );
                     },
                     pageBuilder: (context, animation, secondaryAnimation) {
-                      return UpdateGardenPage(id: widget.patch.id);
+                      return NewNotePage(id: widget.patch.cultivation.id);
                     },
                   ),
                 );
               },
-            ),*/
+            ),
+            ElevatedButton(
+              child: const Text('Divide Patch'),
+              onPressed: () {
+                
+                _patchService.divide(widget.patch.id);
+              },
+            ),
             /*
             ElevatedButton(
                 onPressed: () async {

@@ -60,7 +60,7 @@ public class PatchController {
     }
     //Esto crea tanto una parcela como un cultivo
     @PostMapping("/patch/garden/{id}")//El id es de garden pero crea un nuevo patch en este
-    public ResponseEntity<PatchDetails> register(@Valid @RequestPart CreatePatchCultivation newPatch,
+    public ResponseEntity<PatchDetails> createPatch(@Valid @RequestPart CreatePatchCultivation newPatch,
                                                     @RequestPart MultipartFile file,
                                                     @PathVariable Long id,
                                                     @AuthenticationPrincipal User user) {

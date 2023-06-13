@@ -56,6 +56,7 @@ class GardenService {
     throw new Exception("Ha ocurrido un error en el servicio");
   }
 
+
   Future<GardenDetailsDto> update(
       List<XFile> file, NewGardenDto quest, String id) async {
     String? token = await _localStorageService.getFromDisk("user_token");
@@ -66,4 +67,6 @@ class GardenService {
     }
     throw new Exception("Ha ocurrido un error en el servicio");
   }
+
+ 
 }
