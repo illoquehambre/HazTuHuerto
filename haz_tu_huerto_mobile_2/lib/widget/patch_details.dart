@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/patch_details_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/new_note_page.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/patch_history_page.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/update_garden_page.dart';
 import 'package:haz_tu_huerto_mobile_2/services/patch_service.dart';
 import 'package:haz_tu_huerto_mobile_2/widget/bottom_loader.dart';
@@ -71,6 +72,27 @@ class _PatchDetailsState extends State<PatchDetails> {
                     },
                     pageBuilder: (context, animation, secondaryAnimation) {
                       return NewNotePage(id: widget.patch.cultivation.id);
+                    },
+                  ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Watch Historic'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 500),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return PatchHistoryPage(id: widget.patch.id);
                     },
                   ),
                 );

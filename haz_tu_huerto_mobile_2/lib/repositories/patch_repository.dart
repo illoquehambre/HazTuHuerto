@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get_it/get_it.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/new_patch_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/models/patch/patch_details_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/models/patch/patch_history.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
@@ -43,7 +44,7 @@ class PatchRepository {
       return aux;
     }
 
-    return PatchDetailsDto.fromJson(jsonDecode(response));
+    return PatchHistoryDto.fromJson(jsonDecode(response));
   }
 
   Future<dynamic> create(List<XFile> files, NewPatchDto patch, int id) async {

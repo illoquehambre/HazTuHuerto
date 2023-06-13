@@ -28,8 +28,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @SQLDelete(sql = "UPDATE user_entity SET banned = true WHERE id=?")
-@FilterDef(name = "bannedProductFilter", parameters = @ParamDef(name = "isBanned", type = "boolean"))
-@Filter(name = "bannedProductFilter", condition = "banned = :isBanned")
+    @FilterDef(name = "bannedProductFilter", parameters = @ParamDef(name = "isBanned", type = "boolean"))
+    @Filter(name = "bannedProductFilter", condition = "banned = :isBanned")
 public class User implements UserDetails {
 
 

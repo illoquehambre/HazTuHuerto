@@ -4,14 +4,14 @@ import 'package:haz_tu_huerto_mobile_2/models/cultivation/cultivation_dto.dart';
 class PatchHistoryDto {
   late int id;
   late String name;
-  late CultivationDto cultivation;
+  late List<CultivationDto> cultivationHistory;
   //late int patchList;
   //String? refreshToken;
 
   PatchHistoryDto(
       { required this.id,
       required this.name,
-      required this.cultivation
+      required this.cultivationHistory
       // this.patchList,
       //this.refreshToken
       });
@@ -19,9 +19,12 @@ class PatchHistoryDto {
   PatchHistoryDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    cultivation = (json['cultivation'] != null
-        ? CultivationDto.fromJson(json['cultivation'])
-        : null)!;
+    if (json['cultivationHistory'] != null) {
+      cultivationHistory = <CultivationDto>[];
+      json['cultivationHistory'].forEach((v) {
+        cultivationHistory.add(CultivationDto.fromJson(v));
+      });
+    }
    
     //patchList = json['patchList'];
 
@@ -32,7 +35,7 @@ class PatchHistoryDto {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['cultivation']=cultivation.toJson();
+    data['cultivation']=cultivationHistory.map((v) => v.toJson()).toList();
     //data['patchList'] = patchList;
    // data['refreshToken'] = refreshToken;
     return data;
