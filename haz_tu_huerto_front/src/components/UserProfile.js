@@ -10,44 +10,45 @@ import Swal from "sweetalert2";
 import { Link } from 'wouter';
 import CreateQuestion from './modals/CreateQuestion'
 import Logout from "./Logout.js";
+import Bann from "./Bann.js";
 
 async function changePassword(credentials) {
     return fetch("http://localhost:8080/user/changePassword", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
-        "Access-Control-Allow-Origin": "*"
-      },
-      body: JSON.stringify(credentials),
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+            "Access-Control-Allow-Origin": "*"
+        },
+        body: JSON.stringify(credentials),
     }).then((data) => data.json());
 
 }
- function deleteQuest(id) {
+function deleteQuest(id) {
     console.log(id)
     fetch(`http://localhost:8080/question/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      }
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+        }
     })
 
 }
 function deleteAns(id) {
     console.log(id)
     fetch(`http://localhost:8080/answer/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      }
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+        }
     })
 
 }
 
-    
+
 
 export default function UserProfile() {
     const [location, setLocation] = useLocation();
@@ -55,7 +56,7 @@ export default function UserProfile() {
     const [user, setUser] = useState([])
     const [questions, setQuestions] = useState([])
     const [answers, setAnswers] = useState([])
-    const [avatar, setAvatar]=useState('monke2.jpg')
+    const [avatar, setAvatar] = useState('monke2.jpg')
     const name = location.split('/').reverse()[0]
     console.log(name)
     const apiUrl = `http://localhost:8080/user/${name}`
@@ -63,36 +64,38 @@ export default function UserProfile() {
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [newVerifyPassword, setVerifyNewPassword] = useState();
-  
+
+    const [mostrarComponente, setMostrarComponente] = useState(true);
+
     const handleSubmit = async (e) => {
-      console.log(e)
-      e.preventDefault();
-      const response = await changePassword({
-        oldPassword,
-        newPassword,
-        newVerifyPassword
-      });
-      if ("id" in response) {
-        console.log(response);
-        Swal.fire({
-          icon: 'success',
-          title: 'oleeee',
-          text: 'Welcome',
-          showConfirmButton: false,
-          timer: 2000,
-    
+        console.log(e)
+        e.preventDefault();
+        const response = await changePassword({
+            oldPassword,
+            newPassword,
+            newVerifyPassword
         });
-      } else {
-        console.log(response);
-        console.log(response.status);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: response.message,
-        })
-      }
+        if ("id" in response) {
+            console.log(response);
+            Swal.fire({
+                icon: 'success',
+                title: 'oleeee',
+                text: 'Welcome',
+                showConfirmButton: false,
+                timer: 2000,
+
+            });
+        } else {
+            console.log(response);
+            console.log(response.status);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: response.message,
+            })
+        }
     };
-    async function getUser(){
+    async function getUser() {
         return fetch(apiUrl, {
             method: 'GET',
             headers: {
@@ -102,8 +105,8 @@ export default function UserProfile() {
             }
         }).then(res => {
             console.log(res)
-            if (res.ok) 
-                return res.json()                
+            if (res.ok)
+                return res.json()
             throw new Error('Something went wrong');
         }).then((data) => {
             setUser(data)
@@ -113,45 +116,55 @@ export default function UserProfile() {
             setAnswers(data.publishedAnswers)
             setAvatar(data.avatar)
             console.log(data.avatar)
+
             setIsLoading(false)
-            
+
         }).catch((error) => {
             console.log(error)
             setLocation('/Page404')
         });
-       
+
     }
-    useEffect(function () {       
+    useEffect(function () {
         //getUser()     
-        fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
-                }
-            }).then(res => {
-                console.log(res)
-                if (res.ok) {
-                    return res.json()
-                }                                    
-                throw new Error('Something went wrong');
-            }).then((data) => {
-                setUser(data)
-                console.log(data)
-                setQuestions(data.publishedQuestions)
-                console.log(data.publishedQuestions)
-                setAnswers(data.publishedAnswers)
-                setAvatar(data.avatar)
-                console.log(data.avatar)
-                setIsLoading(false)
-                
-            }).catch((error) => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(res => {
+                        console.log(res)
+                        if (res.ok) {
+                            return res.json()
+                        }
+                        throw new Error('Something went wrong');
+                    }).then((data) => {
+                        setUser(data)
+                        console.log(data)
+                        setQuestions(data.publishedQuestions)
+                        console.log(data.publishedQuestions)
+                        setAnswers(data.publishedAnswers)
+                        setAvatar(data.avatar)
+                        console.log(data.avatar)
+                        console.log('Hola ' + data.username)
+                        console.log(localStorage.getItem('username') === data.username)
+                        localStorage.getItem('username') === data.username ? setMostrarComponente(true) : setMostrarComponente(false)
+                        setIsLoading(false)
+
+                    })
+
+            } catch (error) {
                 console.log(error)
                 setLocation('/Page404')
-            });
-           
-        }, [])
+            }
+        };
+        fetchData();
+    }, []);
     function size(list) {
         console.log(list)
         /*
@@ -160,7 +173,7 @@ export default function UserProfile() {
         }            
         return list.length
         */
-       return '?'
+        return '?'
     }
 
     if (isLoading) {
@@ -215,6 +228,7 @@ export default function UserProfile() {
                                         <div className="uppercase profile-stat-title"> {size(questions)} </div>
                                         <div className="uppercase profile-stat-text"> Questions </div>
                                     </div>
+
                                     <div className="col-md-4 col-sm-4 col-xs-6">
                                         <div className="uppercase profile-stat-title"> {size(user.publishedAnswers)}</div>
                                         <div className="uppercase profile-stat-text"> Answers </div>
@@ -227,20 +241,24 @@ export default function UserProfile() {
                                         <i className="fa fa-globe"></i>
                                         <a href={user.email}>{user.email}</a>
                                     </div>
-                                    
+
 
                                 </div>
-                                
+
                             </div>
 
                             <div>
 
-                                    <div className="margin-top-20 profile-desc-link">
-                                        <Logout></Logout>
-                                    </div>
-                                    
-
+                                <div className="margin-top-20 profile-desc-link">
+                                    {
+                                        mostrarComponente ?
+                                            <Logout></Logout>
+                                            : <Bann user={user}></Bann>
+                                    }
                                 </div>
+
+
+                            </div>
 
                         </div>
                     </div>
@@ -250,14 +268,25 @@ export default function UserProfile() {
                                 <div className="nav nav-tabs" id="nav-tab" role="tablist">
                                     <a className="nav-item nav-link active" id="nav-Question-tab" data-toggle="tab" href="#nav-Question" role="tab" aria-controls="nav-Question" aria-selected="true">Questions</a>
                                     <a className="nav-item nav-link" id="nav-Answer-tab" data-toggle="tab" href="#nav-Answer" role="tab" aria-controls="nav-Answer" aria-selected="false">Answers</a>
-                                    <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Upload Profile</a>
-                                    <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false">Change Password</a>
-
+                                    {
+                                        mostrarComponente ?
+                                            <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Upload Profile</a>
+                                            : null
+                                    }
+                                    {
+                                        mostrarComponente ?
+                                            <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false">Change Password</a>
+                                            : null
+                                    }
                                 </div>
                             </nav>
                             <div className="tab-content text-dark" id="nav-tabContent">
                                 <div className="tab-pane fade show active " id="nav-Question" role="tabpanel" aria-labelledby="nav-Question-tab">
-                                    <CreateQuestion></CreateQuestion>
+                                    {
+                                        mostrarComponente ?
+                                            <CreateQuestion></CreateQuestion>
+                                            : null
+                                    }
                                     {
                                         <div className="courses-container">
                                             {questions.map(
@@ -279,7 +308,7 @@ export default function UserProfile() {
                                                                 </div>
 
                                                                 <h6>{question.content}</h6>
-                                                                <button className="btn" onClick={()=>deleteQuest(question.id)}>Delete</button>
+                                                                <button className="btn" onClick={() => deleteQuest(question.id)}>Delete</button>
 
 
                                                             </div>
@@ -310,7 +339,7 @@ export default function UserProfile() {
                                                                     </div>
 
                                                                     <h6>{answer.content}</h6>
-                                                                    <button className="btn" onClick={()=>deleteAns(answer.id)}>Delete</button>
+                                                                    <button className="btn" onClick={() => deleteAns(answer.id)}>Delete</button>
 
                                                                 </div>
 
@@ -330,18 +359,24 @@ export default function UserProfile() {
                                     <UploadFile></UploadFile>
                                 </div>
                                 <div className="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
+                                    <div className="package">
+                                        <div className="login-box">
+
+                                        </div>
+                                    </div>
+
                                     <form onSubmit={handleSubmit}>
                                         <div className="user-box">
                                             <input type="password" placeholder="Old Password" id="logUsername" required name="username" autoComplete="on" onChange={(e) => setOldPassword(e.target.value)}></input>
-                                           
+
                                         </div>
                                         <div className="user-box">
                                             <input type="password" placeholder="New Password" id="logPassword" required name="password" autoComplete="on" onChange={(e) => setNewPassword(e.target.value)} ></input>
-                                            
+
                                         </div>
                                         <div className="user-box">
                                             <input type="password" placeholder="Verify New Password" id="logVerifyPassword" required name="password" autoComplete="on" onChange={(e) => setVerifyNewPassword(e.target.value)} ></input>
-                                            
+
                                         </div>
                                         <button type="submit">
                                             <span></span>

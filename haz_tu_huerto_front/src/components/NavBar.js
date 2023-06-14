@@ -10,8 +10,10 @@ export default function NavBar() {
         <div className="nav">
             <ul>
                 <li><Link to={`/`}>Home</Link></li>
-                <li><Link to={`/user`}>Users</Link></li>
+                <li><Link to={`/user`}>Users</Link></li>                
+                <li><Link to={`/bannedUser`}>Banned Users</Link></li>
                 <li><Link to={`/question`}>Questions</Link></li>
+                <li><Link to={`/register`}>Register</Link></li>
                 <li>
                     <div className="navBarProfile">
                         <Picture keyword={localStorage.getItem('avatar')}></Picture>

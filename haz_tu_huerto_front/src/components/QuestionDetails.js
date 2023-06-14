@@ -11,6 +11,7 @@ export default function QuestionDetails() {
     const [location, setLocation] = useLocation();
     const [isLoading, setIsLoading] = useState(true);
     const [question, setQuestion] = useState({})
+    const [publisher, setPublisher] = useState({})
     const [answers, setAnswers] = useState([])
     const name = location.split('/').reverse()[0]
     console.log(name)
@@ -35,6 +36,7 @@ export default function QuestionDetails() {
             .then((data) => {
                 setQuestion(data)
                 setAnswers(data.answers)
+                setPublisher(data.publisher)
                 console.log(data)
             })
             .catch((error) => {
@@ -55,15 +57,14 @@ export default function QuestionDetails() {
     }
     return (
         <div>
+
             <NavBar></NavBar>
-
-
             <div className="courses-container">
                 <div className="course">
                     <div className="course-preview">
-                        <h6>{question.publisher}</h6>
+                        <h6>{publisher.username}</h6>
                         <h3>{question.title}</h3>
-                        <Like id={question.id}></Like>
+                        <Like quest={question}></Like>
 
                     </div>
                     <div className="course-info">
@@ -91,7 +92,7 @@ export default function QuestionDetails() {
 
                                     <div className="course-info">
                                         <div className="progress-container">
-                                            <h6>{answer.publisher}</h6>
+                                            {/*<h6>{answer.publisher.username}</h6>*/}
                                             <span class="progress-text">
                                                 {answer.createdAt}
                                             </span>

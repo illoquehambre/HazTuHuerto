@@ -27,7 +27,7 @@ export default function FileUploadSingle() {
             //formData.append('editUser', JSON.parse(JSON.stringify(name)))
             formData.append('editUser', JSON.stringify(name));
 
-            formData.append('file', selectedFile);
+            formData.append ('file', selectedFile);
             console.log(formData)
             fetch(
                 apiUrl,

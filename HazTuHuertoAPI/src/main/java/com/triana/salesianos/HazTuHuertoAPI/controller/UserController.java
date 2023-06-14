@@ -4,6 +4,7 @@ import com.triana.salesianos.HazTuHuertoAPI.exception.BannedAccountException;
 import com.triana.salesianos.HazTuHuertoAPI.exception.NoMatchPasswordException;
 import com.triana.salesianos.HazTuHuertoAPI.files.service.StorageService;
 import com.triana.salesianos.HazTuHuertoAPI.model.User;
+import com.triana.salesianos.HazTuHuertoAPI.model.UserRole;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.PageDto;
 import com.triana.salesianos.HazTuHuertoAPI.model.dto.user.*;
 import com.triana.salesianos.HazTuHuertoAPI.search.util.SearchCriteria;
@@ -165,6 +166,63 @@ public class UserController {
 
 
     }
+
+
+    @Operation(summary = "This method do a login in a user account already created")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha creado una nueva aportacion",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
+                            examples = @ExampleObject(value = """
+                                     {
+                                         "id": "73fcb043-b1a1-4ba8-af88-4ad3abcf2021",
+                                         "username": "Programer13",
+                                         "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Frap.fandom.com%2Fes%2Fwiki%2FKase.O&psig=",
+                                         "fullName": "Paquito programador2",
+                                         "createdAt": "12/12/2022 00:00:00"
+                                     }
+                                    """)) }),
+            @ApiResponse(responseCode = "400",
+                    description = "The data submited have a wrong format",
+                    content = @Content),
+            @ApiResponse(responseCode = "404",
+                    description = "The user account was not found",
+                    content = @Content),
+    })
+    @PostMapping("/auth/login/admin")
+    public ResponseEntity<JwtUserResponse> adminLogin(@RequestBody LoginRequest loginRequest) {
+
+        if(userService.findByUsername(loginRequest.getUsername()).isBanned())
+            throw new BannedAccountException();
+        if(!userService.findByUsername(loginRequest.getUsername()).getRoles().contains(UserRole.ADMIN))
+            throw new SecurityException("Necesitas ser Admin pendejo");
+        // Realizamos la autenticación
+
+        Authentication authentication =
+                authManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginRequest.getUsername(),
+                                loginRequest.getPassword()
+                        )
+                );
+
+        // Una vez realizada, la guardamos en el contexto de seguridad
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Devolvemos una respuesta adecuada
+        String token = jwtProvider.generateToken(authentication);
+
+        User user = (User) authentication.getPrincipal();
+
+
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(JwtUserResponse.of(user, token));
+
+
+    }
+
 /*
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {

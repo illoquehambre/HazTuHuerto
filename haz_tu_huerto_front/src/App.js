@@ -11,6 +11,8 @@ import Signup from './components/Signup'
 import QuestionDetails from './components/QuestionDetails'
 import './styles/App.css';
 import { Helmet,HelmetProvider  } from "react-helmet-async";
+import NavBar from './components/NavBar';
+import UserBannedList from './components/UserBannedList';
 
 function App() {
   return (
@@ -39,13 +41,26 @@ function App() {
                 component={QuestionList}
               />
               <Route              
-               path="/question/:id"//Para la pagina de error
+               path="/question/:id"//No funciona
                 component={QuestionDetails}
+              />
+              <Route              
+               path="/register"//Para la pagina de error
+                component={Signup}
+              />
+              <Route              
+               path="/nav"//Para la pagina de error
+                component={NavBar}
+              />
+              <Route              
+               path="/bannedUser"//Para la pagina de error
+                component={UserBannedList}
               />
               <Route              
                path="/:rest*"//Para la pagina de error
                 component={Page404}
               />
+              
              
             </Switch>
       </header>

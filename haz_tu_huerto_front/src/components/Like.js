@@ -7,8 +7,10 @@ import { useLocation } from "wouter";
 export default function Like(quest) {
     const apiUrl = `http://localhost:8080/question/`;
     const [location, setLocation] = useLocation();
-    const [question, setQuestion]=useState(quest)
-    const [like, setLike]=useState()
+    const [question, setQuestion]=useState(quest.quest)
+    console.log(quest)
+    console.log(quest.quest.likedByLoguedUser)
+    const [like, setLike]=useState(quest.quest.likedByLoguedUser)
 
 /*
     async function fetchQuest(id) {
@@ -60,7 +62,7 @@ async function fetchLike(apiUrl,id) {
 
     const handleSubmit = async (e) => {
    
-        const response = await fetchLike(apiUrl,quest.id);
+        const response = await fetchLike(apiUrl, quest.quest.id);
         
       };
 

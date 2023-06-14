@@ -7,7 +7,7 @@ import '../styles/Login.css'
 //import {useHistory} from 'react-router-dom'
 import { useEffect, useState } from "react";
 async function loginUser(credentials) {
-  return fetch("http://localhost:8080/auth/login", {
+  return fetch("http://localhost:8080/auth/login/admin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
