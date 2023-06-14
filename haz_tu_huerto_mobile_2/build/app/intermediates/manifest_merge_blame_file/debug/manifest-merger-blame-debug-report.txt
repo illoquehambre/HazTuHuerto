@@ -17,20 +17,20 @@
 15-->C:\Users\Nacho\Desktop\repos\HazTuHuerto\haz_tu_huerto_mobile_2\android\app\src\debug\AndroidManifest.xml:6:22-64
 16
 17    <permission
-17-->[androidx.core:core:1.9.0] C:\Users\Nacho\.gradle\caches\transforms-3\c2aff38445ebad8ddeaa989ecf50f56e\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+17-->[androidx.core:core:1.10.1] C:\Users\Nacho\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
 18        android:name="com.example.haz_tu_huerto_mobile_2.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-18-->[androidx.core:core:1.9.0] C:\Users\Nacho\.gradle\caches\transforms-3\c2aff38445ebad8ddeaa989ecf50f56e\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+18-->[androidx.core:core:1.10.1] C:\Users\Nacho\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
 19        android:protectionLevel="signature" />
-19-->[androidx.core:core:1.9.0] C:\Users\Nacho\.gradle\caches\transforms-3\c2aff38445ebad8ddeaa989ecf50f56e\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+19-->[androidx.core:core:1.10.1] C:\Users\Nacho\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
 20
 21    <uses-permission android:name="com.example.haz_tu_huerto_mobile_2.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-21-->[androidx.core:core:1.9.0] C:\Users\Nacho\.gradle\caches\transforms-3\c2aff38445ebad8ddeaa989ecf50f56e\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
-21-->[androidx.core:core:1.9.0] C:\Users\Nacho\.gradle\caches\transforms-3\c2aff38445ebad8ddeaa989ecf50f56e\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+21-->[androidx.core:core:1.10.1] C:\Users\Nacho\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.10.1] C:\Users\Nacho\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
 22
 23    <application
 24        android:name="android.app.Application"
 25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-25-->[androidx.core:core:1.9.0] C:\Users\Nacho\.gradle\caches\transforms-3\c2aff38445ebad8ddeaa989ecf50f56e\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+25-->[androidx.core:core:1.10.1] C:\Users\Nacho\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 26        android:debuggable="true"
 27        android:icon="@mipmap/ic_launcher"
 28        android:label="haz_tu_huerto_mobile_2" >

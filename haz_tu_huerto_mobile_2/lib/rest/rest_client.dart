@@ -126,7 +126,7 @@ class RestClient {
     request.fields[dataName] = data.toJson().toString();
 
 */
-final jsonData = jsonEncode(data.toJson());
+final jsonData = jsonEncode(data. toJson());
 final jsonPart = http.MultipartFile.fromString(
     dataName,
     jsonData,

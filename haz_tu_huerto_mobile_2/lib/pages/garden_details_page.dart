@@ -14,13 +14,19 @@ class GardenDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Garden Details'),
+      ),
+      body: SafeArea(
+          minimum: const EdgeInsets.all(16),
+          child: BlocProvider(
       create: (context) {
         final gardenService = getIt<GardenService>();
         return GardenDetailsBloc(gardenService)..add(GardenDetailsInitialEvent(id: id));
       },
       child: const EventsPageSFG(),
-    );
+    ),),);
   }
 }
 

@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="56e6010e-259c-4707-94d9-8898e5bf4776" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
     </list>
@@ -143,15 +142,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java</url>
           <line>85</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/QuestionController.java</url>
-          <line>252</line>
-          <properties class="com.triana.salesianos.HazTuHuertoAPI.controller.QuestionController" method="register">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

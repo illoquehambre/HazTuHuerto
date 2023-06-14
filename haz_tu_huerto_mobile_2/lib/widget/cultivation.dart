@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haz_tu_huerto_mobile_2/models/cultivation/cultivation_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/rest/rest_client.dart';
 
 class Cultivation extends StatefulWidget {
   final CultivationDto cultivation;
@@ -50,14 +51,32 @@ class _CultivationState extends State<Cultivation> {
           ),
         );
       },*/
-      child: ListTile(
-        leading: Text(widget.cultivation.name, style: textTheme.bodySmall),
-        title: Text(widget.cultivation.plantDate),
-        isThreeLine: true,
-        subtitle: Text(widget.cultivation.daysPlanted.toString()),
-        textColor: Color.fromARGB(187, 0, 0, 0),
-        dense: true,
-      ),
+      child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              margin: EdgeInsets.all(15),
+              elevation: 10,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
+                    title: Text(widget.cultivation.name),
+                    subtitle: Text(
+                        widget.cultivation.daysLeft.toString()),
+                    leading: Text(widget.cultivation.numNotes.toString(), style: textTheme.bodySmall),
+                  ),
+                  Container(
+                    constraints: BoxConstraints(
+                        maxHeight: 250), // Establece la altura máxima deseada
+                    child: Image.network(
+                      ApiConstants.baseUrl + "/download/${widget.cultivation.cultivationImg}",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  
+                ],
+              ),
+            )
     ));
   }
 

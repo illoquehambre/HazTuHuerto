@@ -4,12 +4,12 @@
         "source": "com.example.haz_tu_huerto_mobile_2.app-main-16:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.haz_tu_huerto_mobile_2.app-merged_res-22:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.example.haz_tu_huerto_mobile_2.app-main-16:/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
         "merged": "com.example.haz_tu_huerto_mobile_2.app-merged_res-22:/drawable-v21_launch_background.xml.flat",
         "source": "com.example.haz_tu_huerto_mobile_2.app-main-16:/drawable-v21/launch_background.xml"
+    },
+    {
+        "merged": "com.example.haz_tu_huerto_mobile_2.app-merged_res-22:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.haz_tu_huerto_mobile_2.app-main-16:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
         "merged": "com.example.haz_tu_huerto_mobile_2.app-merged_res-22:/mipmap-hdpi_ic_launcher.png.flat",

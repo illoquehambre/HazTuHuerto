@@ -49,14 +49,26 @@ class _NoteState extends State<Note> {
           ),
         );
       },*/
-      child: ListTile(
+      child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              margin: EdgeInsets.all(15),
+              elevation: 10,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
         leading: Text(widget.note.id.toString(), style: textTheme.bodySmall),
-        title: Text(widget.note.title),
-        subtitle: Text(widget.note.title),//Arreglar esto
+        title: Text(widget.note.title, style: textTheme.headlineMedium,),
+        subtitle: const Text(''),//Arreglar esto
         isThreeLine: true,
         textColor: const Color.fromRGBO(126, 19, 126, 0.745),
         dense: true,
       ),
+                  
+                ],
+              ),
+            )
+    
       
     ),
     );

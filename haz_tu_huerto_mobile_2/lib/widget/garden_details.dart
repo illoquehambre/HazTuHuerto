@@ -30,50 +30,56 @@ class _GardenDetailsState extends State<GardenDetails> {
     final textTheme = Theme.of(context).textTheme;
     return Material(
       child: Center(
-          child: Column(
-            children: <Widget>[
-              Text(
-                widget.garden.id,
-                style: textTheme.bodySmall,
-              ),
-              Text(widget.garden.name, style: textTheme.bodySmall),
-        
-              SizedBox(
-              height: 350, // Establece una altura específica para el ListView
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+             // Espacio entre el primer Text y el segundo
+                 Text(widget.garden.name, style: textTheme.headlineMedium),
+                
+                
+              ],
+            ),
+            SizedBox(
+              height: 550, // Establece una altura específica para el ListView
               child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return index >= widget.garden.patchList.length
-                      ? const BottomLoader()
-                      : Patch(num:1, patch: widget.garden.patchList[index],
-                      context: context,);
-                },
-                itemCount: widget.garden.patchList.length),
-                ),
-              const SizedBox(
-                height: 12,
-              ),
-              ElevatedButton(
-                child: const Text('Update'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 500),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        );
-                      },
-                      pageBuilder: (context, animation, secondaryAnimation) {
-                        return UpdateGardenPage(id: widget.garden.id);
-                      },
-                    ),
-                  );
-                },
-              ),
-              /*
+                  itemBuilder: (BuildContext context, int index) {
+                    return index >= widget.garden.patchList.length
+                        ? const BottomLoader()
+                        : Patch(
+                            num: 1,
+                            patch: widget.garden.patchList[index],
+                            context: context,
+                          );
+                  },
+                  itemCount: widget.garden.patchList.length),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            ElevatedButton(
+              child: const Text('Update'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 500),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return UpdateGardenPage(id: widget.garden.id);
+                    },
+                  ),
+                );
+              },
+            ),
+            /*
               ElevatedButton(
                   onPressed: () async {
                     print("Check");
@@ -83,8 +89,8 @@ class _GardenDetailsState extends State<GardenDetails> {
                   },
                   child: const Text('Check'))
                   */
-            ],
-          ),
+          ],
+        ),
       ),
     );
   }
