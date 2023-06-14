@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haz_tu_huerto_mobile_2/models/question/question_dto.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/question_details_page.dart';
-
+import 'package:haz_tu_huerto_mobile_2/rest/rest_client.dart';
 
 class Question extends StatefulWidget {
   final QuestionDto question;
@@ -18,8 +18,7 @@ class Question extends StatefulWidget {
   State<Question> createState() => _QuestionState();
 }
 
-
- class _QuestionState extends State<Question> {
+class _QuestionState extends State<Question> {
   final _scrollController = ScrollController();
 
   @override
@@ -33,7 +32,7 @@ class Question extends StatefulWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Material(
-      child: GestureDetector(
+        child: GestureDetector(
       onTap: () {
         Navigator.push(
           context,
@@ -47,23 +46,40 @@ class Question extends StatefulWidget {
               );
             },
             pageBuilder: (context, animation, secondaryAnimation) {
-              return  QuestionDetailsPage(id: widget.question.id);
+              return QuestionDetailsPage(id: widget.question.id);
             },
           ),
         );
       },
-      child: ListTile(
-        leading: Text(widget.question.id, style: textTheme.bodySmall),
-        title: Text(widget.question.title),
-        isThreeLine: true,
-        subtitle: Text(widget.question.content),
-        textColor: const Color.fromRGBO(126, 19, 126, 0.745),
-        dense: true,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: EdgeInsets.all(15),
+        elevation: 10,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
+              title: Text(widget.question.title),
+              subtitle: Text(widget.question.content),
+              leading:
+                  Text(widget.question.id.toString(), style: textTheme.bodySmall),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+             // Espacio entre el primer Text y el segundo
+                 Text('Answers: '+widget.question.answers.toString(), style: textTheme.bodySmall),
+                
+                
+              ],
+            ),
+          ],
+        ),
       ),
     ));
   }
-   _onScroll() {
+
+  _onScroll() {
     setState(() {});
   }
 }
-

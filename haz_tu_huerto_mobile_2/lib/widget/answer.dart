@@ -49,13 +49,29 @@ class _AnswerState extends State<Answer> {
           ),
         );
       },*/
-      child: ListTile(
-        leading: Text(widget.answer.id.toString(), style: textTheme.bodySmall),
-        title: Text(widget.answer.content),
-        subtitle: Text(widget.answer.createdAt),
-        isThreeLine: true,
-        textColor: const Color.fromRGBO(126, 19, 126, 0.745),
-        dense: true,
+      child:  Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: EdgeInsets.all(15),
+        elevation: 10,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
+              title: Text(widget.answer.publisher.username.toString()),
+              subtitle: Text(widget.answer.content),
+              leading:
+                  Text(widget.answer.id.toString(), style: textTheme.bodySmall),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+             // Espacio entre el primer Text y el segundo
+                 Text(widget.answer.createdAt, style: textTheme.bodySmall),                
+                
+              ],
+            ),
+          ],
+        ),
       ),
     ));
   }

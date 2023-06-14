@@ -20,7 +20,11 @@ class _NewNotePageState extends State<NewNotePage> {
   @override
   Widget build(BuildContext context) {
     final _noteService = getIt<NoteService>();
-    return BlocProvider(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Patch Details'),
+      ),
+      body:BlocProvider(
       create: (context) => NewNoteFormBloc(_noteService, widget.id),
       child: Builder(
         builder: (context) {
@@ -34,6 +38,7 @@ class _NewNotePageState extends State<NewNotePage> {
             child: NewNotePageSF(formBloc: formBloc),
           );
         },
+      ),
       ),
     );
   }

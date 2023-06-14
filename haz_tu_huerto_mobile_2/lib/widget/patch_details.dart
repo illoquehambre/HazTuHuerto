@@ -54,7 +54,7 @@ class _PatchDetailsState extends State<PatchDetails> {
                   ),
                   Container(
                     constraints: BoxConstraints(
-                        maxHeight: 250), // Establece la altura máxima deseada
+                        maxHeight: 220), // Establece la altura máxima deseada
                     child: Image.network(
                       ApiConstants.baseUrl +
                           "/download/${widget.patch.cultivation.cultivationImg}",
@@ -65,7 +65,7 @@ class _PatchDetailsState extends State<PatchDetails> {
               ),
             ),
             SizedBox(
-              height: 350, // Establece una altura específica para el ListView
+              height: 325, // Establece una altura específica para el ListView
               child: ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
                     return index >= widget.patch.cultivation.notes.length

@@ -21,7 +21,11 @@ class _NewGardenPageState extends State<NewGardenPage> {
   @override
   Widget build(BuildContext context) {
     final _gardenService = getIt<GardenService>();
-    return BlocProvider(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Patch Details'),
+      ),
+      body:BlocProvider(
       create: (context) => NewGardenFormBloc(_gardenService),
       child: Builder(
         builder: (context) {
@@ -36,6 +40,7 @@ class _NewGardenPageState extends State<NewGardenPage> {
             child: NewGardenPageSF(formBloc: formBloc),
           );
         },
+      ),
       ),
     );
   }

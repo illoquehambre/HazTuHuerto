@@ -101,14 +101,14 @@ class _HomePageStates3State extends State<HomePageStates3> {
                     text: "Post",
                     iconColor: Colors.white,
                     iconActiveColor: Colors.black,
-                  ),
+                  ),/*
                   GButton(
                     icon: Icons.search,
                     iconSize: 25,
                     text: "Search",
                     iconColor: Colors.white,
                     iconActiveColor: Colors.black,
-                  ),
+                  ),*/
                   GButton(
                     icon: Icons.account_circle,
                     iconSize: 25,

@@ -11,8 +11,6 @@ class HomePage extends StatelessWidget {
   final User user;
   const HomePage({super.key, required this.user});
 
-  
-
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
@@ -25,16 +23,17 @@ class HomePage extends StatelessWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              Image.network(
-                      ApiConstants.baseUrl +
-                          "/download/${user.avatar}",
-                      fit: BoxFit.cover,
-                    ),
+              Container(
+                constraints: BoxConstraints(
+                    maxHeight: 220), // Establece la altura máxima deseada
+                child: Image.network(
+                  ApiConstants.baseUrl + "/download/${user.avatar}",
+                  fit: BoxFit.cover,
+                ),
+              ),
               Text(
                 'Welcome, ${user.fullName}',
-                style: TextStyle(
-                  fontSize: 24
-                ),
+                style: TextStyle(fontSize: 24),
               ),
               const SizedBox(
                 height: 12,
@@ -45,18 +44,11 @@ class HomePage extends StatelessWidget {
                   primary: Theme.of(context).primaryColor,
                 ),*/
                 child: Text('Logout'),
-                onPressed: (){
+                onPressed: () {
                   authBloc.add(UserLoggedOut());
                 },
               ),
-              ElevatedButton(onPressed: () async {
-                print("Check");
-                JwtAuthenticationService service = getIt<JwtAuthenticationService>();
-                await service.getCurrentUser();
-              }
-              , child: Text('Check')
               
-              )
             ],
           ),
         ),

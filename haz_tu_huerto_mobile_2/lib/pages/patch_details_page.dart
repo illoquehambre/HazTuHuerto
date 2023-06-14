@@ -15,12 +15,17 @@ class PatchDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Patch Details'),
+      ),
+      body:BlocProvider(
       create: (context) {
         final patchService = getIt<PatchService>();
         return PatchDetailsBloc(patchService)..add(PatchDetailsInitialEvent(id: id));
       },
       child: const EventsPageSFG(),
+      ),
     );
   }
 }
