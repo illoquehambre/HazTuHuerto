@@ -190,8 +190,9 @@ Para realizar este proyecto hemos utilizado:
         );
     }
 ```
-**JAVASCRIPT - REACT**:
-```class _QuestionState extends State<Question> {
+**DART - FLUTTER - BLOC**:
+```
+class _QuestionState extends State<Question> {
   final _scrollController = ScrollController();
 
   @override
