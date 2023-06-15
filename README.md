@@ -87,7 +87,8 @@ Para realizar este proyecto hemos utilizado:
 7. [React](https://es.reactjs.org)
 8. [Figma](https://www.figma.com)
 9. [Flutter](https://docs.flutter.dev)
-10.[Docker](https://www.docker.com/products/docker-desktop/)
+10.[Docker](https://www.docker.com/products/docker-desktop/) 
+
 
 
 
