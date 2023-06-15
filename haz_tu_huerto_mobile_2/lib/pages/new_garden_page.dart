@@ -4,7 +4,9 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:haz_tu_huerto_mobile_2/blocs/garden/garden_bloc.dart';
 import 'package:haz_tu_huerto_mobile_2/blocs/new_garden_form/new_garden_form_bloc.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/home_page3.dart';
 import 'package:haz_tu_huerto_mobile_2/services/services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,24 +25,27 @@ class _NewGardenPageState extends State<NewGardenPage> {
     final _gardenService = getIt<GardenService>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Patch Details'),
+        title: const Text('New Garden'),
       ),
-      body:BlocProvider(
-      create: (context) => NewGardenFormBloc(_gardenService),
-      child: Builder(
-        builder: (context) {
-          final formBloc = context.read<NewGardenFormBloc>();
-          return FormBlocListener<NewGardenFormBloc, String, String>(
-            onSuccess: (context, state) {
-              showOk(context);
-              formBloc.clear();
-              formBloc.files.clear();
-              setState(() {});
-            },
-            child: NewGardenPageSF(formBloc: formBloc),
-          );
-        },
-      ),
+      body: BlocProvider(
+        create: (context) => NewGardenFormBloc(_gardenService),
+        child: Builder(
+          builder: (context) {
+            final formBloc = context.read<NewGardenFormBloc>();
+            return FormBlocListener<NewGardenFormBloc, String, String>(
+              onSuccess: (context, state) {
+                showOk(context);
+                formBloc.clear();
+                formBloc.files.clear();
+                Navigator.pop(
+                  context,
+                );
+                setState(() {});
+              },
+              child: NewGardenPageSF(formBloc: formBloc),
+            );
+          },
+        ),
       ),
     );
   }
@@ -271,6 +276,12 @@ class _NewGardenPageSFState extends State<NewGardenPageSF> {
                           style: TextStyle(color: Colors.white, fontSize: 40)),
                       onPressed: () {
                         widget.formBloc.submit();
+                        Navigator.pop(
+                          context,
+                        );
+                        setState(() {
+                          GardenInitial();
+                        });
                       },
                     ),
                   )

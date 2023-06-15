@@ -67,6 +67,17 @@ class RestClient {
     }
   }
 
+  void delete(String url) async {
+    try {
+      Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+
+      await _httpClient.delete(uri);
+     
+    } on SocketException catch (ex) {
+      throw FetchDataException('No internet connection: ${ex.message}');
+    }
+  }
+
   Future<dynamic> post(String url, dynamic body) async {
     try {
       Uri uri = Uri.parse(ApiConstants.baseUrl + url);

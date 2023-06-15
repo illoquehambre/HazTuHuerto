@@ -20,7 +20,7 @@ class NoteRepository {
 
   
 
-Future<dynamic> findById(String id, String token) async {
+Future<dynamic> findById(int id, String token) async {
     String url = "/note/$id";
 
     var response = await _client.get(url, token);
@@ -43,5 +43,12 @@ Future<dynamic> findById(String id, String token) async {
    // var stringResponse = await response.stream.bytesToString();
 
     return NoteResponseDto.fromJson(jsonDecode(response));
+  }
+
+  void delete(int id) async {
+    String url = "/note/$id";
+  
+        _client.delete(url);
+
   }
 }

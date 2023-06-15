@@ -44,7 +44,7 @@ function deleteAns(id) {
             "Accept": "application/json",
             "Authorization": `Bearer ${localStorage.getItem('token')}`
         }
-    })
+    }).then(window.location.reload())
 
 }
 
@@ -167,13 +167,13 @@ export default function UserProfile() {
     }, []);
     function size(list) {
         console.log(list)
-        /*
+        
         if (list == 'undefined'){
             return '?'
         }            
         return list.length
-        */
-        return '?'
+        
+        //return '?'
     }
 
     if (isLoading) {

@@ -23,7 +23,8 @@ class RegisterPage extends StatelessWidget {
               if (state is AuthenticationNotAuthenticated) {
                 return _AuthForm();
               }
-              if (state is AuthenticationFailure || state is SessionExpiredState) {
+              if (state is AuthenticationFailure ||
+                  state is SessionExpiredState) {
                 var msg = (state as AuthenticationFailure).message;
                 return Center(
                     child: Column(
@@ -91,8 +92,13 @@ class __SignInFormState extends State<_SignInForm> {
 
     _onSignupButtonPressed() {
       if (_key.currentState!.validate()) {
-        registerBloc.add(SignUp(username: _usernameController.text, email: _emailController.text, verifyEmail: _verifyEmailController.text,
-         fullName: _fullNameController.text ,password: _passwordController.text, verifyPassword: _verifyPasswordController.text));
+        registerBloc.add(SignUp(
+            username: _usernameController.text,
+            email: _emailController.text,
+            verifyEmail: _verifyEmailController.text,
+            fullName: _fullNameController.text,
+            password: _passwordController.text,
+            verifyPassword: _verifyPasswordController.text));
       } else {
         setState(() {
           _autoValidate = true;
@@ -113,159 +119,177 @@ class __SignInFormState extends State<_SignInForm> {
               child: CircularProgressIndicator(),
             );
           }
-          return Form(
-            key: _key,
-            autovalidateMode: _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'User Name',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    controller: _usernameController,
-                    keyboardType: TextInputType.text,
-                    autocorrect: false,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Username is required.';
-                      }
-                      return null;
-                    },
+          return Material(
+            child: Column(
+              children: <Widget>[
+                ClipOval(
+                  // Establece la altura máxima deseada
+                  child: Image(
+                    image: AssetImage("assets/logo.png"),
+                    fit: BoxFit.cover,
+                    height: 150,
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Email address',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    autocorrect: false,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Email is required.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Verify Email address',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    controller: _verifyEmailController,
-                    keyboardType: TextInputType.emailAddress,
-                    autocorrect: false,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Verify Email is required.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Full Name',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    controller: _fullNameController,
-                    keyboardType: TextInputType.text,
-                    autocorrect: false,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Fullname is required.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    obscureText: true,
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Password is required.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Verify Password',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    obscureText: true,
-                    controller: _verifyPasswordController,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Verify Password is required.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  //RaisedButton(
-                  ElevatedButton(  
-                    //color: Theme.of(context).primaryColor,
-                    //textColor: Colors.white,
-                    //padding: const EdgeInsets.all(16),
-                    //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    onPressed: state is RegisterLoading ? () {
-                       Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                transitionDuration: const Duration(milliseconds: 500),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: child,
+                ),
+                Form(
+                  key: _key,
+                  autovalidateMode: _autoValidate
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'User Name',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          controller: _usernameController,
+                          keyboardType: TextInputType.text,
+                          autocorrect: false,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Username is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Email address',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Email is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Verify Email address',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          controller: _verifyEmailController,
+                          keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Verify Email is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Full Name',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          controller: _fullNameController,
+                          keyboardType: TextInputType.text,
+                          autocorrect: false,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Fullname is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Password',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          obscureText: true,
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Password is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Verify Password',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          obscureText: true,
+                          controller: _verifyPasswordController,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Verify Password is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        //RaisedButton(
+                        ElevatedButton(
+                          //color: Theme.of(context).primaryColor,
+                          //textColor: Colors.white,
+                          //padding: const EdgeInsets.all(16),
+                          //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                          onPressed: state is RegisterLoading
+                              ? () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      transitionsBuilder: (context, animation,
+                                          secondaryAnimation, child) {
+                                        return FadeTransition(
+                                          opacity: animation,
+                                          child: child,
+                                        );
+                                      },
+                                      pageBuilder: (context, animation,
+                                          secondaryAnimation) {
+                                        return const LoginPage();
+                                      },
+                                    ),
                                   );
-                                },
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) {
-                                  return const LoginPage();
-                                },
-                              ),
-                            );
-                    } : _onSignupButtonPressed,  
-                    //color: Theme.of(context).primaryColor,
-                    //textColor: Colors.white,
-                    //padding: const EdgeInsets.all(16),
-                    //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    child: const Text('SIGN UP'),
-                   
-                  )
-                ],
-              ),
+                                }
+                              : _onSignupButtonPressed,
+                          //color: Theme.of(context).primaryColor,
+                          //textColor: Colors.white,
+                          //padding: const EdgeInsets.all(16),
+                          //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                          child: const Text('SIGN UP'),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -280,7 +304,5 @@ class __SignInFormState extends State<_SignInForm> {
     ));*/
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
-
-
   }
 }

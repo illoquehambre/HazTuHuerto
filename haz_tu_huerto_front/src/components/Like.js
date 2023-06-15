@@ -70,8 +70,11 @@ async function fetchLike(apiUrl,id) {
 
    
     return (
+         
         <div className="like">
+           
             <img onClick={handleSubmit} src={like?'/img/heart.png':'/img/heart_1.png'}></img>
+            
             <p>Likes: {question.score}</p>
         </div>
         

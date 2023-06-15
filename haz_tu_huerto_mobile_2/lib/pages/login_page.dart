@@ -5,7 +5,6 @@ import 'package:haz_tu_huerto_mobile_2/config/locator.dart';
 import 'package:haz_tu_huerto_mobile_2/pages/register_page.dart';
 import 'package:haz_tu_huerto_mobile_2/services/authentication_service.dart';
 
-
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -23,7 +22,8 @@ class LoginPage extends StatelessWidget {
               if (state is AuthenticationNotAuthenticated) {
                 return _AuthForm();
               }
-              if (state is AuthenticationFailure || state is SessionExpiredState) {
+              if (state is AuthenticationFailure ||
+                  state is SessionExpiredState) {
                 var msg = (state as AuthenticationFailure).message;
                 return Center(
                     child: Column(
@@ -87,7 +87,8 @@ class __SignInFormState extends State<_SignInForm> {
 
     _onLoginButtonPressed() {
       if (_key.currentState!.validate()) {
-        loginBloc.add(LoginInWithEmailButtonPressed(email: _emailController.text, password: _passwordController.text));
+        loginBloc.add(LoginInWithEmailButtonPressed(
+            email: _emailController.text, password: _passwordController.text));
       } else {
         setState(() {
           _autoValidate = true;
@@ -108,51 +109,63 @@ class __SignInFormState extends State<_SignInForm> {
               child: CircularProgressIndicator(),
             );
           }
-          return Form(
-            key: _key,
-            autovalidateMode: _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Email address',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    autocorrect: false,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Email is required.';
-                      }
-                      return null;
-                    },
+          return Material(
+            child: Column(
+              children: <Widget>[
+                ClipOval( // Establece la altura máxima deseada
+                  child: Image(
+                    image: AssetImage ("assets/logo.png"),
+                    fit: BoxFit.cover,
+                    height: 150,
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    obscureText: true,
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Password is required.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
+                ),
+                Form(
+                  key: _key,
+                  autovalidateMode: _autoValidate
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Email address',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Email is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Password',
+                            filled: true,
+                            isDense: true,
+                          ),
+                          obscureText: true,
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Password is required.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        ElevatedButton(
                           style: const ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll<Color>(
                                 Colors.transparent),
@@ -165,7 +178,8 @@ class __SignInFormState extends State<_SignInForm> {
                             Navigator.push(
                               context,
                               PageRouteBuilder(
-                                transitionDuration: const Duration(milliseconds: 500),
+                                transitionDuration:
+                                    const Duration(milliseconds: 500),
                                 transitionsBuilder: (context, animation,
                                     secondaryAnimation, child) {
                                   return FadeTransition(
@@ -184,21 +198,26 @@ class __SignInFormState extends State<_SignInForm> {
                         const SizedBox(
                           height: 20,
                         ),
-                  //RaisedButton(
-                  ElevatedButton(  
-                    //color: Theme.of(context).primaryColor,
-                    //textColor: Colors.white,
-                    //padding: const EdgeInsets.all(16),
-                    //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    onPressed: state is LoginLoading ? () {} : _onLoginButtonPressed,  
-                    //color: Theme.of(context).primaryColor,
-                    //textColor: Colors.white,
-                    //padding: const EdgeInsets.all(16),
-                    //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    child: const Text('LOG IN'),
-                  )
-                ],
-              ),
+                        //RaisedButton(
+                        ElevatedButton(
+                          //color: Theme.of(context).primaryColor,
+                          //textColor: Colors.white,
+                          //padding: const EdgeInsets.all(16),
+                          //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                          onPressed: state is LoginLoading
+                              ? () {}
+                              : _onLoginButtonPressed,
+                          //color: Theme.of(context).primaryColor,
+                          //textColor: Colors.white,
+                          //padding: const EdgeInsets.all(16),
+                          //shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                          child: const Text('LOG IN'),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -213,7 +232,5 @@ class __SignInFormState extends State<_SignInForm> {
     ));*/
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
-
-
   }
 }

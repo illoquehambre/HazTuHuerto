@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haz_tu_huerto_mobile_2/models/note/note_simplify_dto.dart';
+import 'package:haz_tu_huerto_mobile_2/pages/note_details_page.dart';
 
 class Note extends StatefulWidget {
   final NoteSimplifyDto note;
@@ -31,7 +32,7 @@ class _NoteState extends State<Note> {
     final textTheme = Theme.of(context).textTheme;
     return Material(
         child: GestureDetector(
-     /* onTap: () {
+      onTap: () {
         Navigator.push(
           context,
           PageRouteBuilder(
@@ -48,7 +49,7 @@ class _NoteState extends State<Note> {
             },
           ),
         );
-      },*/
+      },
       child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),

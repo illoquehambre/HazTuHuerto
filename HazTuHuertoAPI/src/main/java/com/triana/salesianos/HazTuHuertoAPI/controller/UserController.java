@@ -311,7 +311,7 @@ public class UserController {
     })
     @GetMapping("/user")
     public PageDto<UserResponse> findAll(@RequestParam(value = "search", defaultValue = "") String search,
-                                        @PageableDefault(size = 20, page = 0) Pageable pageable) {
+                                        @PageableDefault(size = 5, page = 0) Pageable pageable) {
 
         List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
 

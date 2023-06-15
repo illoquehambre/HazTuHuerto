@@ -38,4 +38,7 @@ public class Cultivation {
     public void addNote(Note note){
         this.getNoteList().add(note);
     }
+    public void removeNote(Note note){
+        this.getNoteList().remove(note);
+    }
 }

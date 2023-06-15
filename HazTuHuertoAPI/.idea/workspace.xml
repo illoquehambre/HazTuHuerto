@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="56e6010e-259c-4707-94d9-8898e5bf4776" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Cultivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Cultivation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Patch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Patch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/NoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/NoteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/Like.js" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/Like.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/UserProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

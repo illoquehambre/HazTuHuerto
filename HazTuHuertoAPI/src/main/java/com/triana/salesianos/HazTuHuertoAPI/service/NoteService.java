@@ -18,6 +18,7 @@ public class NoteService {
 
     private final NoteRepository noteRepository;
     private final UserService userService;
+    private final PatchService patchService;
     private final StorageService storageService;
 
 
@@ -68,10 +69,10 @@ public class NoteService {
     }
 
     public void deleteById(Long id) {
-        //Esto es una gitanada, perdón
-        if (noteRepository.existsById(id)){
-            noteRepository.deleteById(id);
-        }
+        Note note = this.findById(id);
+        note.getCultivation().removeNote(note);
+        noteRepository.deleteById(id);
+
 
     }
 

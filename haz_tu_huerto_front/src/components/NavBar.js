@@ -18,6 +18,7 @@ export default function NavBar() {
                     <div className="navBarProfile">
                         <Picture keyword={localStorage.getItem('avatar')}></Picture>
                         <Link to={`/user/${localStorage.getItem('username')}`}>Profile</Link>
+                        
                     </div>
                 </li>
             </ul>

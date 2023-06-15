@@ -19,10 +19,7 @@ class NoteService {
         .then((value) => _localStorageService = value);
   }
 
-
-
-
-  Future<dynamic> findById(String id) async {
+  Future<dynamic> findById(int id) async {
     String? token = await _localStorageService.getFromDisk("user_token");
 
     if (token != null) {
@@ -32,8 +29,7 @@ class NoteService {
     throw Exception("There is an error in the service.");
   }
 
-  Future<NoteResponseDto> create(
-      int id, NewNoteDto note) async {
+  Future<NoteResponseDto> create(int id, NewNoteDto note) async {
     String? token = await _localStorageService.getFromDisk("user_token");
 
     if (token != null) {
@@ -41,5 +37,11 @@ class NoteService {
       return response;
     }
     throw new Exception("Ha ocurrido un error en el servicio");
+  }
+
+  void delete(
+    int id,
+  ) async {
+    _noteRepository.delete(id);
   }
 }

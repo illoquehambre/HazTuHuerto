@@ -41,7 +41,7 @@ export default function UserList() {
   };
 
   useEffect(function () {
-    fetch(`${apiUrl}user?page=${numPage}&size=1`, {
+    fetch(`${apiUrl}user?page=${numPage}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
