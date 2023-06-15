@@ -41,7 +41,7 @@ export default function UserBannedList() {
   };
 
   useEffect(function () {
-    fetch(`${apiUrl}admin/user?page=${numPage}&size=1`, {
+    fetch(`${apiUrl}admin/user?page=${numPage}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

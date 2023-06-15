@@ -38,7 +38,7 @@ class _PatchHistoryState extends State<PatchHistory> {
               Text(widget.patch.name, style: textTheme.bodySmall),
         
               SizedBox(
-              height: 350, // Establece una altura específica para el ListView
+              height: 650, // Establece una altura específica para el ListView
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return index >= widget.patch.cultivationHistory.length

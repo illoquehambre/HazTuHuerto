@@ -79,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"illo2\",\r\n    \"password\": \"MaeM14_quehambre\"\r\n}",
+							"raw": "{\r\n    \"username\":\"illo\",\r\n    \"password\": \"MaeM14_quehambre\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -177,14 +177,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/auth/login",
+							"raw": "localhost:8080/auth/login/admin",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"auth",
-								"login"
+								"login",
+								"admin"
 							]
 						}
 					},
@@ -236,7 +237,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/user?search=reputation>5500",
+							"raw": "localhost:8080/user?search=reputation>4500",
 							"host": [
 								"localhost"
 							],
@@ -247,7 +248,7 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "reputation>5500"
+									"value": "reputation>4500"
 								}
 							]
 						}
@@ -295,7 +296,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"illoMaster\",\r\n    \"password\": \"MaeM14_quehambre\",\r\n    \"verifyPassword\": \"MaeM14_quehambre\",\r\n    \"avatar\": \"https://www.youtube.com/watch?v=B3GiCGz0gXM&list=RDMMXtpo_KW13ms&index=27\",\r\n    \"fullName\": \"illo que hambre\",\r\n    \"email\": \"illoquehambreprimo@gmail.com\",\r\n    \"verifyEmail\": \"illoquehambreprimo@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"username\":\"illoMaster\",\r\n    \"password\": \"MaeM14_quehambre\",\r\n    \"verifyPassword\": \"MaeM14_quehambre\",\r\n    \"fullName\": \"illo que hambre\",\r\n    \"email\": \"illoquehambreprimo@gmail.com\",\r\n    \"verifyEmail\": \"illoquehambreprimo@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -449,14 +450,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}question?search=score>0",
+							"raw": "{{baseUrl}}question?page=0",
 							"host": [
 								"{{baseUrl}}question"
 							],
 							"query": [
 								{
-									"key": "search",
-									"value": "score>0"
+									"key": "page",
+									"value": "0"
 								}
 							]
 						}
@@ -510,15 +511,15 @@
 							"mode": "formdata",
 							"formdata": [
 								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Nacho/Pictures/Achill/Imagen de WhatsApp 2023-04-17 a las 10.23.12.jpg"
+								},
+								{
 									"key": "newQuest",
 									"value": "{\n    \"title\": \"Duda existencial\",\n    \"content\": \"¿Son los pájaros reales?¿Son los pájaros reales?¿Son los pájaros reales?¿Son los pájaros reales?¿Son los pájaros reales?¿Son los pájaros reales?¿Son los pájaros reales?¿Son los pájaros reales?\"\n\n}",
 									"contentType": "application/vnd.api+json",
 									"type": "text"
-								},
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/C:/Users/Usuario/Pictures/tatoo/mandarina_03.jpg"
 								}
 							]
 						},
@@ -751,6 +752,532 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Garden",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}vegetableGarden?page=0",
+							"host": [
+								"{{baseUrl}}vegetableGarden"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}vegetableGarden/1",
+							"host": [
+								"{{baseUrl}}vegetableGarden"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}vegetableGarden/1",
+							"host": [
+								"{{baseUrl}}vegetableGarden"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Nacho/Pictures/Achill/Imagen de WhatsApp 2023-04-17 a las 10.23.10.jpg"
+								},
+								{
+									"key": "newGarden",
+									"value": "{\n    \"name\": \"garden\"\n}",
+									"contentType": "application/vnd.api+json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}vegetableGarden",
+							"host": [
+								"{{baseUrl}}vegetableGarden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Nacho/Pictures/Achill/Imagen de WhatsApp 2023-04-17 a las 10.23.10.jpg"
+								},
+								{
+									"key": "editGarden",
+									"value": "{\n    \"name\": \"gardenUpdated\"\n}",
+									"contentType": "application/vnd.api+json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}vegetableGarden/1",
+							"host": [
+								"{{baseUrl}}vegetableGarden"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Patch",
+			"item": [
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}patch/2",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHistoryById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}patch/2",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dividir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}patch/divide/3",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"divide",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Nacho/Pictures/Achill/Imagen de WhatsApp 2023-04-17 a las 10.23.12.jpg"
+								},
+								{
+									"key": "editPatch",
+									"value": "{\n    \"patchName\": \"editedPatch\",\n    \"cultivationName\":\"tomates\",\n    \"variety\":\"a\",\n    \"plantDate\":\"2023-05-24\",\n    \"harvestDate\":\"2023-08-24\"\n\n}",
+									"contentType": "application/vnd.api+json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}patch/2",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "harvest",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Nacho/Pictures/Achill/Imagen de WhatsApp 2023-04-17 a las 10.23.12.jpg"
+								},
+								{
+									"key": "editPatch",
+									"value": "{\n    \"patchName\": \"editedPatch\",\n    \"cultivationName\":\"tomates\",\n    \"variety\":\"none\",\n    \"plantDate\":\"2012-12-12\",\n    \"harvestDate:\"2013-10-12\"\n\n}",
+									"contentType": "application/vnd.api+json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}patch/harvest/2",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"harvest",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}patch/3",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Nacho/Pictures/Achill/Imagen de WhatsApp 2023-04-17 a las 10.23.12.jpg"
+								},
+								{
+									"key": "newPatch",
+									"value": "{\n    \"patchName\": \"newPatch\",\n    \"cultivationName\": \"newCultivation\",\n    \"variety\": \"tomates negros\"\n\n}",
+									"contentType": "application/vnd.api+json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}patch/garden/2",
+							"host": [
+								"{{baseUrl}}patch"
+							],
+							"path": [
+								"garden",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Note",
+			"item": [
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}note/4",
+							"host": [
+								"{{baseUrl}}note"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"newNote\",\r\n    \"content\":\"Lorem ipsum dolor bla vla bla\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}note/2",
+							"host": [
+								"{{baseUrl}}note"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"editedNote\",\r\n    \"content\":\"Este texto fue modifcado correctamente ;)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}note/4",
+							"host": [
+								"{{baseUrl}}note"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}note/7",
+							"host": [
+								"{{baseUrl}}note"
+							],
+							"path": [
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PowerBi",
+			"item": [
+				{
+					"name": "prueba",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -759,7 +1286,8 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					""
+					"const moment = require('moment');",
+					"pm.globals.set(\"today\", moment().format(\"DD/MM/yyyy\"));"
 				]
 			}
 		},
