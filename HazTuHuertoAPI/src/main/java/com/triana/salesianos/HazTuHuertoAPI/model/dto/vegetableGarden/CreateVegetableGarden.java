@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class CreateVegetableGarden {
 
-    @NotEmpty(message = "{createQuestion.title.notempty}")
+    @NotEmpty(message = "{createGarden.name.notempty}")
     private String name;
     private String latitude;
     private String longitude;

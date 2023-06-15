@@ -28,6 +28,7 @@ import java.util.List;
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
+    private final UserService userService;
     public List<Answer> findAll() {
 
         List<Answer> result = answerRepository.findAll();
@@ -48,13 +49,13 @@ public class AnswerService {
         return answerRepository.findAll();
     }
     public List<Answer> findAllByUserName(String name) {
-
-        List<Answer> result = answerRepository.findAllByPublisherUsername(name);
+        User publisher= userService.findByUsername(name);
+        List<Answer> result = answerRepository.findAllByPublisherId(publisher.getId());
 
         if (result.isEmpty())
             throw new EntityNotFoundException("No questions with this search criteria");
 
-        return answerRepository.findAll();
+        return result;
     }
 
 

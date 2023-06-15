@@ -23,7 +23,8 @@ public class Answer {
 
     private String content, urlImg;
 
-    @Id@GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name= "FK_QUESTION_ANSWER"))
@@ -31,7 +32,7 @@ public class Answer {
     @JsonIgnore
     private Question question;
 
-    @JoinColumn(name = "owner_id", foreignKey = @ForeignKey(name= "FK_USER_ANSWER"))
+    @JoinColumn(name = "publisher_id", foreignKey = @ForeignKey(name= "FK_USER_ANSWER"))
     @ManyToOne(cascade = CascadeType.MERGE)
     @JsonIgnore
     private User publisher;

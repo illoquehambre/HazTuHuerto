@@ -6,16 +6,201 @@
   <component name="ChangeListManager">
     <list default="true" id="56e6010e-259c-4707-94d9-8898e5bf4776" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/NoteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Answer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Cultivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Cultivation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Note.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Patch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Patch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/NoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/NoteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/Like.js" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/Like.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_front/src/components/UserProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../haz_tu_huerto_mobile_2/android/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/VegetableGarden.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/VegetableGarden.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/note/CreateNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/note/CreateNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/patch/CreatePatchCultivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/patch/CreatePatchCultivation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/question/CreateQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/question/CreateQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/user/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/user/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/vegetableGarden/CreateVegetableGarden.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/model/dto/vegetableGarden/CreateVegetableGarden.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/repository/AnswerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/repository/AnswerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/AnswerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/triana/salesianos/HazTuHuertoAPI/service/AnswerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/import.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages/errors.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages/errors.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Captura de pantalla (1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_000294.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_015531.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_019997.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_034697.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_036567.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_094697.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_102169.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_105049.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_128683.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_129500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_130251.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_134257.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_141645.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_151459.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_155788.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_163404.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_166857.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_169243.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_195130.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_196535.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_201565.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_232857.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_252995.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_266385.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_270431.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_273113.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_288257.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_288545.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_304563.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_377270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_379274.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_416875.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_422410.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_429441.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_490982.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_512212.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_513072.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_573621.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_593115.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_606641.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_618363.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_640771.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_682881.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_721500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_722345.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_745642.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_751061.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_756194.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_760390.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_765896.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_768307.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_769381.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_778138.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_780360.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_782491.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_796352.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_805537.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_806712.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_818434.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_825180.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_834291.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_845933.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_856252.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_872404.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_872805.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_888582.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_896365.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_896840.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_906616.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_908677.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_926499.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_981319.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_991952.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_998371.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_998615.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.10_999284.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_009336.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_036481.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_051751.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_057908.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_081359.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_095543.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_097530.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_098339.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_105056.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_105143.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_111807.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_120713.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_121469.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_148617.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_149804.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_150679.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_160200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_161038.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_161787.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_162499.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_163888.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_166772.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_183654.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_187156.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_188336.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_188778.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_194049.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_202922.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_203964.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_211357.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_239019.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_240665.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_259145.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_293056.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_299331.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_301522.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_310944.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_326544.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_433281.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_497634.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_498533.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_499368.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_503801.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_504813.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_507230.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_508180.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_509299.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_510409.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_511206.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_511849.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_538855.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_540589.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_540676.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_579588.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_591371.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_696560.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_697533.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_703977.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_705084.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_705209.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_706032.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_706807.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_741597.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_751816.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_775364.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_775610.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_783032.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_808540.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_818400.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_821543.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_832542.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_839373.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_841397.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_842245.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_843017.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_843680.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_845259.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_857817.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_869048.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_896906.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_936797.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_967467.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_980244.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_981309.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Imagen de WhatsApp 2023-04-17 a las 10.23.12_982173.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_009319.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_045349.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_073540.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_128018.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_209168.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_271270.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_458661.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_530145.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_804044.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_813172.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_844975.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_934769.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_936904.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_956210.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_958135.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/MG_202305_984948.null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Pasen.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

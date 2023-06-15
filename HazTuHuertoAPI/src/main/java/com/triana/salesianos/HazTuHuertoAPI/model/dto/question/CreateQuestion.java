@@ -18,7 +18,7 @@ public class CreateQuestion {
     @NotEmpty(message = "{createQuestion.title.notempty}")
     @Size(max = 50)
     private String title;
-    @Size(max = 1000, min = 100)
+    @Size(max = 1000, min = 50)
     @NotEmpty(message = "{createQuestion.content.notempty}")
     private String content;
     @URL

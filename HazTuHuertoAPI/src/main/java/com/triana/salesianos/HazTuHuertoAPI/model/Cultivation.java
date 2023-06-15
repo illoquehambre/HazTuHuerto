@@ -19,7 +19,7 @@ import java.util.List;
 public class Cultivation {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

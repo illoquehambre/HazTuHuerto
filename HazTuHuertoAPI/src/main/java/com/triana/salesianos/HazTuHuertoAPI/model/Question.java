@@ -25,7 +25,7 @@ public class Question {
     private String title, content, urlImg;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;//Hay que cambiarlo por un UUID??
 
     @ManyToOne
@@ -34,6 +34,7 @@ public class Question {
     private User publisher;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "created_at")
     @CreatedDate
     protected LocalDateTime createdAt;
 
