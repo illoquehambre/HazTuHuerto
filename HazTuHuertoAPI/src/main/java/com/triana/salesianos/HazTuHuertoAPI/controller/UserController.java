@@ -171,7 +171,7 @@ public class UserController {
     @Operation(summary = "This method do a login in a user account already created")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
-                    description = "Se ha creado una nueva aportacion",
+                    description = "Login exitoso",
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)),
                             examples = @ExampleObject(value = """
